@@ -5,7 +5,6 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta name="layout" content="main" />
         <g:set var="entityName" value="${message(code: 'team.label', default: 'Team')}" />
-        <g:javascript library="jquery" plugin="jquery" />
         <g:javascript src="utility.js" />
         <g:javascript src="teamscript.js" />
         <title>Manage Groups for ${projectInstance.name}</title>
@@ -13,7 +12,8 @@
         	li {
         		list-style-type: none;
         	}
-	        [draggable] {
+	        .draggable {
+	        	z-index: 1000;
 	        	cursor: move;
 	        }
 	        .dialog {
@@ -62,13 +62,13 @@
 	      <div class="message">${flash.message}</div>
 	      </g:if>
 	      	<div style="float: left;">
-	      		<div class="dialog" id="unassignedStudents">
+	      		<div class="dialog droppable" id="unassignedStudents">
 		      		<h2>Students not assigned to groups</h2>
 			 		<div title="Drag students to assign them to groups" id="studentList">
 			 			<g:if test="${courseHasStudents}">
 		 					<ul class="students" id="g0" style="min-height: 40px">
 		 						<g:each in="${unassignedStudents.sort() {it.name}}" var="student">
-		 							<li><span class="student" draggable="true" id="s${student.id}">${student.name}</span></li>
+		 							<li><span class="student draggable" id="s${student.id}">${student.name}</span></li>
 			 					</g:each>
 			 				</ul>
 		 				</g:if>
@@ -131,12 +131,12 @@
 	 		<div title="Drag students to change groups" id="groupArea">
 	 			<g:if test="${projectHasTeams}">
 	 				<g:each in="${projectInstance.teams.sort() {it.name}}" var="team">
-	 					<div class="group">
+	 					<div class="group droppable">
 	 						<img class="deleteButton" src="${resource(dir:'images',file:'delete.png')}" />
 	 						<div class="teamname">${team.name}</div>
 	 						<ul class="students" id="g${team.id}">
 	 							<g:each in="${team.memberships.sort() {it.member.name}}" var="membership">
-	 							<li><span class="student" draggable="true" id="s${membership.member.id}">${membership.member.name}</span></li>
+	 							<li><span class="student draggable" id="s${membership.member.id}">${membership.member.name}</span></li>
 	 							</g:each>
 	 						</ul>
 	 					</div>

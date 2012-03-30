@@ -1,72 +1,30 @@
-var draggedSpan = null;
-var parentUL = null;
+var defaultPosition = {left: 0, right: 0, top: 0, bottom: 0};
 
-function handleDragStart(e) {
-	draggedSpan = this;
-	parentUL = $(this).parent().parent();
+function handleDrop(e, ui) {
+	var student = ui.draggable;
+	var oldgroup_id = ui.draggable.closest("ul").attr("id");
+	var group_id = $(this).find("ul").attr("id");
+	var student_id = student.attr("id");
 	
-	var dt = e.originalEvent.dataTransfer;
-
-	dt.effectAllowed = 'move';
-  	dt.setData('text/html', $(this).parent().html());
-}
-			
-function handleDragOver(e) {
-	if (e.preventDefault) {
-		e.preventDefault(); // Necessary. Allows us to drop.
-	}
-
- 	e.originalEvent.dataTransfer.dropEffect = 'move'; 
-	return false;
-}
-
-function handleDragEnter(e) {
-	this.classList.add('over');
-}
-
-function handleDragLeave(e) {
-	this.classList.remove('over'); 
-}
-			
-function handleDrop(e) {
-	if (e.stopPropagation) {
-		e.stopPropagation(); // stops the browser from redirecting.
-  	}
-  	
-
-  
-	if (this != parentUL) {
-		$(this).append('<li>' + e.originalEvent.dataTransfer.getData('text/html') + '</li>');		
-		var newSpan = $(this).find('span').last();
-		newSpan.on({"dragstart": handleDragStart,
-			"dragend": handleDragEnd
-		});
+	if (oldgroup_id != group_id) {
+		$(this).find("ul").append(student.parent());
 		
-		$(draggedSpan).parent().remove();
-		
-		var group_id = $(this).attr("id");
-		var student_id = $(newSpan).attr("id");
-		var oldgroup_id = $(parentUL).attr("id");
- 	
 		jQuery.post("../team/changeMember/" , {g_id: group_id.substr(1), s_id: student_id.substr(1), o_id: oldgroup_id.substr(1)});
-		
+	
+		student.css(defaultPosition);
 		equalizeGroupHeights();
-	} 
-
-  return false;
-}
-
-function handleDragEnd(e) {
-	$("ul.students").removeClass('over');
+	} else {	
+		student.animate(defaultPosition);
+	}
 }
 
 function deleteGroup(event) {
 	var groupSpaceToDelete = $(this).parent();
 	var members = groupSpaceToDelete.find("li");
-	var length = members.length;
-	for ( var i = 0; i < length; i++ ) {
-		putStudentBack(members[i]);
-	}
+	
+	members.each(function(index, ele) {
+		putStudentBack(ele);
+	});
 	
 	// deleting group in database, also deletes memberships
 	var groupId = groupSpaceToDelete.find("ul").first().attr("id").substr(1);
@@ -85,24 +43,23 @@ function putStudentBack(student_li) {
 	$("#g0").append(student_li);
 }
 
-function setup() {		
-	$("span.student").on({"dragstart": handleDragStart,
-		"dragend": handleDragEnd
+function setup() {
+	$(".draggable").draggable({
+		revert: "invalid"
 	});
-	$("ul.students").on({"dragenter": handleDragEnter,
-		"dragover": handleDragOver,
-		"dragleave": handleDragLeave,
-		"drop": handleDrop
+	$(".droppable").droppable({
+		drop: handleDrop
 	});
-	$("img.deleteButton").on({"click": deleteGroup});
+
+	$("img.deleteButton").bind({ "click": deleteGroup });
 	
 	equalizeGroupHeights();
 	equalizeGroupWidths();
 }
 
 function equalizeGroupHeights() {
-	var maxULHeight = 0;
-	var minULHeight = 1000;
+	var maxULHeight = -Infinity;
+	var minULHeight = Infinity;
 	$("div.group ul.students").each(function() {
 		if (maxULHeight < $(this).height()) maxULHeight = $(this).height();
 	});

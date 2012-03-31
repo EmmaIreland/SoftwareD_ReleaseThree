@@ -63,7 +63,7 @@
                                   <label for="year"><g:message code="course.year.label" default="Year" /></label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: courseInstance, field: 'year', 'errors')}">
-                                    <g:textField name="year" value="${courseInstance?.year}" />
+                                    <g:select name="year" from="${courseInstance.constraints.year.inList}" value="${courseInstance?.year}" valueMessagePrefix="course.year" />
                                 </td>
                             </tr>
                         

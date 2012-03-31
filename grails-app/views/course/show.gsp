@@ -39,7 +39,7 @@
                         <tr class="prop">
                             <td valign="top" class="name"><g:message code="course.year.label" default="Year" /></td>
                             
-                            <td valign="top" class="value">${fieldValue(bean: courseInstance, field: "year")}</td>
+                            <td valign="top" class="value"><g:formatNumber number="${courseInstance.year}" groupingUsed="false"/></td>
                             
                         </tr>
                     

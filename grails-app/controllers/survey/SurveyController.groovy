@@ -1,5 +1,6 @@
 package survey
 import survey.questions.*
+import grails.converters.JSON
 
 class SurveyController {
 
@@ -65,17 +66,18 @@ class SurveyController {
         }
 	surveyInstance.addToQuestions(questionInstance)
 	surveyInstance.save(failOnError: true)
-	redirect(controller: "question", action: "create", params:[surveyid: params.surveyid])
+	render questionInstance as JSON
     }
     
     def show = {
         def surveyInstance = Survey.get(params.id)
+        def existingQuestions = Question.findAll()
         if (!surveyInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'survey.label', default: 'Survey'), params.id])}"
             redirect(action: "list")
         }
         else {
-            [surveyInstance: surveyInstance]
+            [surveyInstance: surveyInstance, existingQuestions: existingQuestions]
         }
     }
     

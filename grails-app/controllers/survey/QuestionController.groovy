@@ -13,24 +13,6 @@ class QuestionController {
         [questionInstanceList: Question.list(params), questionInstanceTotal: Question.count()]
     }
 
-    def create = {
-        def questionInstance = new Question()
-	def existingQuestions = Question.findAll()
-        questionInstance.properties = params
-        return [questionInstance: questionInstance, existingQuestions: existingQuestions]
-    }
-
-    def save = {
-        def questionInstance = new Question(params)
-        if (questionInstance.save(flush: true)) {
-            flash.message = "${message(code: 'default.created.message', args: [message(code: 'question.label', default: 'Question'), questionInstance.id])}"
-            redirect(action: "show", id: questionInstance.id)
-        }
-        else {
-            render(view: "create", model: [questionInstance: questionInstance])
-        }
-    }
-
     def show = {
         def questionInstance = Question.get(params.id)
         if (!questionInstance) {
@@ -91,6 +73,7 @@ class QuestionController {
                     break
                 }
             }
+            questionInstance.delete(flush: true)
         }
         render("Success.")
     }

@@ -328,3 +328,15 @@ th.desc a {
     background: transparent url(../images/skin/go_back.png) 5px 50% no-repeat;
     padding-left: 28px;
 }
+
+.deleteIcon {
+	position: relative;
+	top: 3px;
+	cursor:pointer
+}
+
+td.errors {
+	background: #fff3f3;
+    border: 1px solid red;
+    color: #cc0000;
+}

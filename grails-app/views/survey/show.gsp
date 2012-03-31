@@ -5,9 +5,83 @@
         <meta name="layout" content="main" />
         <g:set var="entityName" value="${message(code: 'survey.label', default: 'Survey')}" />
         <title><g:message code="default.show.label" args="[entityName]" /></title>
-        <g:javascript library="jquery" plugin="jquery" />
         <script type="text/javascript">
+        $(function() {
+        	// onLoad
+        	updateQuestionType($("#typeDropdown"));
+        	$(document).on("keyup", ".addOnChange", function(x) {
+                var ele = $(x.target);
+                if (ele.val().length > 0 && ele.next().length == 0) {
+                    ele.after("<br /><input type='text' name='" + ele.attr('name') + "' class='addOnChange' />");
+                }
+            });
+        });
 
+        function showQuestionFields() {
+            $("#newQuestionFields").show();
+        }
+
+        function addQuestion() {
+            if (validateNewQuestionForm()) {
+           		var ajaxData = $("#newQuestionForm").serialize();
+            	jQuery.post("../addQuestion/", ajaxData, function(response) {
+            		$("#newQuestionForm").parent().append("<span id='" + response.id + "'><br></span>");
+            		$("#" + response.id).append($(".deleteIcon").first().clone().show());
+            		$("#" + response.id).append(response.prompt);
+            	});
+            	$("#newQuestionFields").hide();
+            	clearNewQuestionFields();
+            }
+        }
+
+        function clearNewQuestionFields() {
+        	$("#newQuestionFields").find("[type='text']").val("");
+            $("#newQuestionFields").find("[type='text']").not("[id*='Prompt'], [id*='choice']").remove();
+            $("#newQuestionFields").find("br").remove();
+            $(".errors").hide();
+        }
+        
+        function updateQuestionType(dropdown) {
+        	var type = $(dropdown).val();
+        	$(".typeRow").hide();
+        	switch(type) {
+        		case "existing":
+        			$("#existingRow").show();
+        			break;
+        		case "checkbox":
+        			$(".checkboxRow").show();
+        			break;
+        		case "multipleChoice":
+        		    $(".multipleRow").show();
+        		    break;
+        		case "shortResponse":
+        		    $(".shortRow").show()
+        		    break;
+        		case "longResponse":
+        		    $(".longRow").show()
+        		    break;
+        	}
+        }
+
+        function validateNewQuestionForm() {
+            var visiblePromptValue = $("[name$='Prompt']").filter(":visible").val();
+            if (visiblePromptValue != null && visiblePromptValue.length < 1) {
+                $(".errors").html("Please enter a prompt.").show();
+                return false;
+            }
+
+            var visibleChoices = $("[name$='Choices']").filter(":visible");
+            var choicesLengths = visibleChoices.map(function() { return $(this).val().length; }).get();
+            // .get() returns a "real" JS array that we can use native functions on (e.g. every())
+            var allEmpty = choicesLengths.every(function(len) { return len < 1; });
+            if (allEmpty && visibleChoices.length > 0) {
+            	$(".errors").html("Please enter at least one valid choice.").show();
+                return false;
+            }
+            return true;
+        }
+
+        
 		function deleteQuestion(image) {
 			if (confirm("Are you sure you want to remove this question from the survey?")) {
 				questionId = $(image).parent().attr("id");
@@ -57,11 +131,92 @@
                         <tr class="prop">
                             <td valign="top" class="name"><g:message code="survey.question.label" default="Questions" /></td>
                             
-                            <td valign="top" class="value"><g:link controller="question" action="create" params="${['surveyid': surveyInstance.id]}">Add new question</g:link>
+                            <td valign="top" class="value"><a href="#" onclick="showQuestionFields();">Add new question</a>
+                            <form id="newQuestionForm">
+                            <input type="hidden" value="${surveyInstance?.id}" name="surveyid" />
+                            <table id="newQuestionFields" style="display:none">
+                            <tbody>
+                            <tr><td></td><td class="errors" style="display:none"></td></tr>
+                            <tr><td>Type</td><td> <select name="type" id="typeDropdown" onchange="updateQuestionType(this);">
+                                    <option value="existing">Add existing question</option>
+                                    <option value="checkbox">New checkbox question</option>
+                                    <option value="multipleChoice">New multiple choice question</option>
+                                    <option value="shortResponse">New short text question</option>
+                                    <option value="longResponse">New long text question</option>
+                            </select></td></tr>
+                            <tr class="prop typeRow" id="existingRow">
+                                <td valign="top" class="name">
+                                    <label for="name"><g:message code="question.type.label" default="Select a Question" /></label>
+                                </td>
+                                <td valign="top" class="value ${hasErrors(bean: personInstance, field: 'name', 'errors')}">
+                                    <g:select name="questionid" from="${existingQuestions}" optionKey="id"/>
+                                </td>
+                            </tr>
+                            
+                              <tr class="prop typeRow checkboxRow">
+                                <td valign="top" class="name">
+                                    <label for="prompt"><g:message code="checkboxQuestion.prompt.label" default="Prompt" /></label>
+                                </td>
+                                <td valign="top" class="value ${hasErrors(bean: checkboxQuestionInstance, field: 'prompt', 'errors')}">
+                                    <g:textField name="cbPrompt" value="${checkboxQuestionInstance?.prompt}" />
+                                </td>
+                            </tr>
+                            
+                            <tr class="prop typeRow checkboxRow">
+                                <td valign="top" class="name">
+                                    <label for="choices"><g:message code="checkboxQuestion.choices.label" default="Choices" /></label>
+                                </td>
+                                <td valign="top" class="value ${hasErrors(bean: checkboxQuestionInstance, field: 'prompt', 'errors')}">
+                                    <g:textField name="cbChoices" class="addOnChange" id="choice1" />
+                                </td>
+                            </tr>
+                            
+                             <tr class="prop typeRow multipleRow">
+                                <td valign="top" class="name">
+                                    <label for="prompt"><g:message code="multipleChoiceQuestion.prompt.label" default="Prompt" /></label>
+                                </td>
+                                <td valign="top" class="value ${hasErrors(bean: multipleChoiceQuestion, field: 'prompt', 'errors')}">
+                                    <g:textField name="mcPrompt" value="${multipleChoiceQuestion?.prompt}" />
+                                </td>
+                            </tr>
+                            
+                            <tr class="prop typeRow multipleRow">
+                                <td valign="top" class="name">
+                                    <label for="choices"><g:message code="multipleChoiceQuestion.choices.label" default="Choices" /></label>
+                                </td>
+                                <td valign="top" class="value ${hasErrors(bean: multipleChoiceQuestion, field: 'prompt', 'errors')}">
+                                    <g:textField name="mcChoices" class="addOnChange" id="choice1" />
+                                </td>
+                            </tr>
+                            
+                             <tr class="prop typeRow shortRow">
+                                <td valign="top" class="name">
+                                    <label for="prompt"><g:message code="shortTextQuestion.prompt.label" default="Prompt" /></label>
+                                </td>
+                                <td valign="top" class="value ${hasErrors(bean: shortTextQuestion, field: 'prompt', 'errors')}">
+                                    <g:textField name="stPrompt" value="${shortTextQuestion?.prompt}" />
+                                </td>
+                            </tr>
+                            
+                             <tr class="prop typeRow longRow">
+                                <td valign="top" class="name">
+                                    <label for="prompt"><g:message code="longTextQuestion.prompt.label" default="Prompt" /></label>
+                                </td>
+                                <td valign="top" class="value ${hasErrors(bean: longTextQuestion, field: 'prompt', 'errors')}">
+                                    <g:textField name="ltPrompt" value="${longTextQuestion?.prompt}" />
+                                </td>
+                            </tr>
+                            <tr><td><input type="button" value="Add Question" onclick="addQuestion()"></td><td></td></tr>
+                            </tbody>
+                            </table>
+                            </form>
+                            
+                            
+                            
                             <g:each in="${surveyInstance.questions}" var="question">
                             	
                             	<span id="${question.id}">
-                            		<br><img src="../../images/delete.png" style="position: relative; top: 3px; cursor:pointer" onclick="deleteQuestion(this)" /> ${question}
+                            		<br><img src="../../images/delete.png" class="deleteIcon" onclick="deleteQuestion(this)" /> ${question}
                           		</span>
                           	</g:each></td>
                         </tr>

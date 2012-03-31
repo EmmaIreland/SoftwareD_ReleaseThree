@@ -90,7 +90,7 @@ class CourseController {
         if (courseInstance) {
             try {
                 courseInstance.delete(flush: true)
-                flash.message = makeMessage('default.deleted.message', params.name)
+                flash.message = 'Course Deleted'
 				redirect(listMap)
             }
             catch (org.springframework.dao.DataIntegrityViolationException e) {

@@ -6,6 +6,18 @@
         <meta name="layout" content="main" />
         <g:set var="entityName" value="${message(code: 'course.label', default: 'Course')}" />
         <title><g:message code="default.show.label" args="[entityName]" /></title>
+        <g:javascript library="jquery" plugin="jquery" />
+        <script type="text/javascript">
+
+		function deletePerson(image) {
+			if (confirm("Are you sure you want to remove this person from this course?")) {
+				personId = $(image).parent().attr("id");
+				jQuery.post("../../enrollment/delete/" , {id: personId});
+				$(image).parent().remove();
+			}
+		}
+        
+        </script>
     </head>
     <body>
         <div class="nav">
@@ -55,13 +67,13 @@
                             
                             <td valign="top" style="text-align: left;" class="value">
                             	<g:link controller="enrollment" action="create" params="${['course.id': courseInstance.id] }">Add a student</g:link>
-                                <ul>
-                                <g:each in="${courseInstance.enrollments}" var="e">
-                                    <li><g:link controller="person" action="show" id="${e.person.id}">${e?.person?.encodeAsHTML()}</g:link></li>
+                                <g:each in="${courseInstance.enrollments}" var="p">
+                                    <span id="${p.id}">
+                            		    <br><img src="../../images/delete.png" style="position: relative; top: 3px; cursor:pointer" onclick="deletePerson(this)" />
+                            		    <g:link controller="person" action="show" id="${p.person.id}">${p.person}</g:link>
+                          		    </span>
                                 </g:each>
-                                </ul>
                             </td>
-                            
                         </tr>
                         <tr class="prop">
                             <td valign="top" class="name">Projects:</td>

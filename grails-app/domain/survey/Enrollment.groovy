@@ -8,6 +8,6 @@ class Enrollment {
     }
     
     String toString() {
-        "Course: ${course}, Student: ${person}"
+        person
     }
 }

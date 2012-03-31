@@ -10,7 +10,7 @@ class Membership {
     }
     
     String toString() {
-	"Group: ${team}, Member: ${member}"
+	member
     }
     
     static oneMembershipPerProject = { team, membership -> 

@@ -17,7 +17,7 @@ class EnrollmentTests extends GrailsUnitTestCase {
 	Course introToComputing = new Course(abbreviation:'CSCI 1001', name:'Intro to the Computing World', term:'Spring',year: 2012, owner: kkLamberty)
 	Enrollment kkInIntro = new Enrollment(course: introToComputing, person: kkLamberty)
 	assertTrue kkInIntro.validate()
-	assertEquals 'Course: Intro to the Computing World, Student: KK Lamberty', kkInIntro.toString()
+	assertEquals 'KK Lamberty', kkInIntro.toString()
 
 
     }

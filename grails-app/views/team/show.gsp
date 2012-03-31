@@ -30,12 +30,12 @@
                         </tr>
                     
                         <tr class="prop">
-                            <td valign="top" class="name"><g:message code="team.memberships.label" default="Memberships" /></td>
+                            <td valign="top" class="name"><g:message code="team.memberships.label" default="Members" /></td>
                             
                             <td valign="top" style="text-align: left;" class="value">
                                 <ul>
                                 <g:each in="${teamInstance.memberships}" var="m">
-                                    <li><g:link controller="membership" action="show" id="${m.id}">${m?.encodeAsHTML()}</g:link></li>
+                                    <li><g:link controller="person" action="show" id="${m.member.id}">${m?.encodeAsHTML()}</g:link></li>
                                 </g:each>
                                 </ul>
                             </td>

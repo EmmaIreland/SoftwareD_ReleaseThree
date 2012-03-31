@@ -97,20 +97,7 @@ class EnrollmentController {
 
     def delete = {
         def enrollmentInstance = Enrollment.get(params.id)
-        if (enrollmentInstance) {
-            try {
-                enrollmentInstance.delete(flush: true)
-                flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'enrollment.label', default: 'Enrollment'), params.id])}"
-                redirect(action: "list")
-            }
-            catch (org.springframework.dao.DataIntegrityViolationException e) {
-                flash.message = "${message(code: 'default.not.deleted.message', args: [message(code: 'enrollment.label', default: 'Enrollment'), params.id])}"
-                redirect(action: "show", id: params.id)
-            }
-        }
-        else {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'enrollment.label', default: 'Enrollment'), params.id])}"
-            redirect(action: "list")
-        }
+        enrollmentInstance.delete(flush: true)
+	render('Success')
     }
 }

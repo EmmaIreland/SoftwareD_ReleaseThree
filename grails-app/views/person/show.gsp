@@ -41,7 +41,7 @@
                             
                             <td valign="top" style="text-align: left;" class="value">
                                 <ul>
-                                <g:each in="${personInstance.enrollments}" var="e">
+                                <g:each in="${personInstance.enrollments.course}" var="e">
                                     <li><g:link controller="enrollment" action="show" id="${e.id}">${e?.encodeAsHTML()}</g:link></li>
                                 </g:each>
                                 </ul>
@@ -54,7 +54,7 @@
                             
                             <td valign="top" style="text-align: left;" class="value">
                                 <ul>
-                                <g:each in="${personInstance.memberships}" var="m">
+                                <g:each in="${personInstance.memberships.team}" var="m">
                                     <li><g:link controller="membership" action="show" id="${m.id}">${m?.encodeAsHTML()}</g:link></li>
                                 </g:each>
                                 </ul>

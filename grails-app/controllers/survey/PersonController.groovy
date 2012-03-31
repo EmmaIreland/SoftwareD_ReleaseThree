@@ -22,7 +22,7 @@ class PersonController {
     def save = {
         def personInstance = new Person(params)
         if (personInstance.save(flush: true)) {
-            flash.message = "${message(code: 'default.created.message', args: [message(code: 'person.label', default: 'Person'), personInstance.id])}"
+            flash.message = "${message(code: 'default.created.message', args: [message(code: 'person.label', default: 'Person'), personInstance.name])}"
             redirect(action: "show", id: personInstance.id)
         }
         else {

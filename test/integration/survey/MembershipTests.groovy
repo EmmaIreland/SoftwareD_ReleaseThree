@@ -13,7 +13,7 @@ class MembershipTests extends GrailsUnitTestCase {
 
     void testPersonHasOneTeamPerProject() {
 	Person owner = new Person(name:"WHo cares", email: "him@go.com").save(failOnError: true)
-	Course testCourse = new Course(name: "The Course", abbreviation: "CRSE 101", term: 'Fall', year: '2020', owner: owner).save(failOnError: true)
+	Course testCourse = new Course(name: "The Course", abbreviation: "CRSE 101", term: 'Fall', year: 2013, owner: owner).save(failOnError: true)
 	Project projectOne = new Project(name: "Project One", description: "Stuff happens", dueDate: new Date().next(), course: testCourse, teams:[]).save(failOnError: true)
 	Team teamOne = new Team(name: "Team One", project: projectOne).save(failOnError: true)
 	Team teamTwo = new Team(name: "Team Two", project: projectOne).save(failOnError: true)

@@ -4,9 +4,12 @@ class Course {
     String abbreviation
     String name
     String term
-    String year
+    int year
     
     private static final MINIMUM_YEAR = 2000
+    private static final MAXIMUM_YEAR = 2022
+    private static final String cYear = new Date().format('yyyy')
+    private static final int currentYear = Integer.parseInt(cYear)
     
     static hasMany = [enrollments:Enrollment, projects:Project]
     static belongsTo = [owner:Person]
@@ -15,13 +18,7 @@ class Course {
         abbreviation blank: false
         name blank: false
         term(blank: false, inList: [ 'Fall', 'Spring', 'May', 'Summer I', 'Summer II' ] )
-        year validator: { year, course ->
-            try {
-                Integer.parseInt(year) >= MINIMUM_YEAR
-            } catch ( e ) {
-                false
-            }
-        }
+	year(blank: false, inList: [ currentYear, currentYear + 1 ] )
     }
     
     String toString() {

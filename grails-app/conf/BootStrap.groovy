@@ -10,8 +10,8 @@ class BootStrap {
             Person nic = new Person(name: 'Nic McPhee', email: 'mcphee@morris.umn.edu').save(failOnError: true)
             Person kkLamberty = new Person(name: 'KK Lamberty', email: 'lamberty@morris.umn.edu').save(failOnError: true)
             
-            Course softwareDesign = new Course(abbreviation:'CSCI 3601', name:'Software Design', term:'Spring',year:'2012', owner: nic).save(failOnError: true)
-            Course introToComputing = new Course(abbreviation:'CSCI 1001', name:'Intro to the Computing World', term:'Spring',year:'2012', owner: kkLamberty).save(failOnError:true)
+            Course softwareDesign = new Course(abbreviation:'CSCI 3601', name:'Software Design', term:'Spring',year: 2012, owner: nic).save(failOnError: true)
+            Course introToComputing = new Course(abbreviation:'CSCI 1001', name:'Intro to the Computing World', term:'Spring',year: 2012, owner: kkLamberty).save(failOnError:true)
             
             def buildPerson = { person -> new Person(name: person[0] + ' ' + person[1], email: person[2]) }
             def enrollPerson = { person, course -> new Enrollment(person: person, course: course).save(failOnError: true) }

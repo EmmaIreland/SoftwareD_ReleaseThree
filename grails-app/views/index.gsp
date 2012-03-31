@@ -1,7 +1,7 @@
 <%@ page import="survey.Course" %>
 <html>
     <head>
-        <title>The Quintets</title>
+        <title>Cevin's Cyqulists</title>
         <meta name="layout" content="main" />
         <style type="text/css" media="screen">
 

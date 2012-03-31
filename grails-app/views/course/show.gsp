@@ -66,7 +66,7 @@
                         <tr class="prop">
                             <td valign="top" class="name">Projects:</td>
                             
-                            <td valign="top" style="text-align: left;" class="value">
+                            <td valign="top" class="value" class="uline"><g:link controller="project" action="create" params="${['course.id': courseInstance.id]}"><b>Create new Project</b></g:link>
                                 <ul>
                                 <g:each in="${courseInstance.projects}" var="p">
                                     <li><g:link controller="project" action="show" id="${p.id}">${p?.name?.encodeAsHTML()}</g:link></li>

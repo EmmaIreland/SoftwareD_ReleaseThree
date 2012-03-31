@@ -23,7 +23,8 @@ class CourseController {
     def save = {
         def courseInstance = new Course(params)
         if (courseInstance.save(flush: true)) {
-            redirect(action: "show", id: courseInstance.id)
+            flash.message = makeMessage('default.created.message', params.name)
+	    redirect(action: "show", id: courseInstance.id)
         }
         else {
             render(view: "create", model: courseMap(courseInstance))
@@ -33,7 +34,7 @@ class CourseController {
     def show = {
         def courseInstance = Course.get(params.id)
         if (!courseInstance) {
-            flash.message = makeMessage('default.not.found.message', params.id)
+            flash.message = makeMessage('default.not.found.message', params.name)
             redirect(listMap)
         }
         else {
@@ -49,7 +50,7 @@ class CourseController {
     def edit = {
         def courseInstance = Course.get(params.id)
         if (!courseInstance) {
-            flash.message = makeMessage('default.not.found.message', params.id)
+            flash.message = makeMessage('default.not.found.message', params.name)
             redirect(listMap)
         }
         else {
@@ -71,7 +72,7 @@ class CourseController {
             }
             courseInstance.properties = params
             if (!courseInstance.hasErrors() && courseInstance.save(flush: true)) {
-                flash.message = makeMessage('default.updated.message', params.id)
+                flash.message = makeMessage('default.updated.message', params.name)
                 redirect(action: "show", id: courseInstance.id)
             }
             else {
@@ -79,7 +80,7 @@ class CourseController {
             }
         }
         else {
-            flash.message = makeMessage('default.not.found.message', params.id)
+            flash.message = makeMessage('default.not.found.message', params.name)
             redirect(listMap)
         }
     }
@@ -89,16 +90,16 @@ class CourseController {
         if (courseInstance) {
             try {
                 courseInstance.delete(flush: true)
-                flash.message = makeMessage('default.deleted.message', params.id)
+                flash.message = makeMessage('default.deleted.message', params.name)
 				redirect(listMap)
             }
             catch (org.springframework.dao.DataIntegrityViolationException e) {
-                flash.message = makeMessage('default.not.deleted.message', params.id)
+                flash.message = makeMessage('default.not.deleted.message', params.name)
                 redirect(action: "show", id: params.id)
             }
         }
         else {
-            flash.message = makeMessage('default.not.found.message', params.id)
+            flash.message = makeMessage('default.not.found.message', params.name)
             redirect(listMap)
         }
     }	
@@ -108,7 +109,7 @@ class CourseController {
 	}
 
 	private getLabel() {
-		message(code: 'course.label', default: 'Course')
+		message(code: 'course.label', default: '')
 	}
 	
 	private courseMap(courseInstance) {

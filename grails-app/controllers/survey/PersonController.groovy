@@ -31,7 +31,7 @@ class PersonController {
 		assertEquals controller.request.message, controller.redirectArgs.action*/
         def personInstance = new Person(params)
         if (personInstance.save(flush: true)) {
-            flash.message = makeMessage('default.created.message', personInstance.name())
+            flash.message = makeMessage('default.created.message', personInstance.name)
             redirect(action: showString, id: personInstance.id)
         }
         else {

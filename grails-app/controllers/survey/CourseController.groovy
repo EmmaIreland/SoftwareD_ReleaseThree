@@ -2,11 +2,11 @@ package survey
 
 class CourseController {
 
-    static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
-	static listMap = [action: "list"]
+    static allowedMethods = [save: 'POST', update: 'POST', delete: 'POST']
+	static listMap = [action: 'list']
 
     def index = {
-        redirect(action: "list", params: params)
+        redirect(action: 'list', params: params)
     }
 
     def list = {
@@ -24,10 +24,10 @@ class CourseController {
         def courseInstance = new Course(params)
         if (courseInstance.save(flush: true)) {
             flash.message = makeMessage('default.created.message', params.name)
-	    redirect(action: "show", id: courseInstance.id)
+	    redirect(action: 'show', id: courseInstance.id)
         }
         else {
-            render(view: "create", model: courseMap(courseInstance))
+            render(view: 'create', model: courseMap(courseInstance))
         }
     }
 
@@ -65,18 +65,18 @@ class CourseController {
                 def version = params.version.toLong()
                 if (courseInstance.version > version) {
                     
-                    courseInstance.errors.rejectValue("version", "default.optimistic.locking.failure", [getLabel()] as Object[], "Another user has updated this Course while you were editing")
-                    render(view: "edit", model: courseMap(courseInstance))
+                    courseInstance.errors.rejectValue('version', 'default.optimistic.locking.failure', [getLabel()] as Object[], 'Another user has updated this Course while you were editing')
+                    render(view: 'edit', model: courseMap(courseInstance))
                     return
                 }
             }
             courseInstance.properties = params
             if (!courseInstance.hasErrors() && courseInstance.save(flush: true)) {
                 flash.message = makeMessage('default.updated.message', params.name)
-                redirect(action: "show", id: courseInstance.id)
+                redirect(action: 'show', id: courseInstance.id)
             }
             else {
-                render(view: "edit", model: courseMap(courseInstance))
+                render(view: 'edit', model: courseMap(courseInstance))
             }
         }
         else {
@@ -95,7 +95,7 @@ class CourseController {
             }
             catch (org.springframework.dao.DataIntegrityViolationException e) {
                 flash.message = makeMessage('default.not.deleted.message', params.name)
-                redirect(action: "show", id: params.id)
+                redirect(action: 'show', id: params.id)
             }
         }
         else {

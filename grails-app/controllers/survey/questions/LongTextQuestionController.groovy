@@ -2,10 +2,10 @@ package survey.questions
 
 class LongTextQuestionController {
 
-    static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
+    static allowedMethods = [save: 'POST', update: 'POST', delete: 'POST']
 
     def index = {
-        redirect(action: "list", params: params)
+        redirect(action: 'list', params: params)
     }
 
     def list = {
@@ -23,10 +23,10 @@ class LongTextQuestionController {
         def longTextQuestionInstance = new LongTextQuestion(params)
         if (longTextQuestionInstance.save(flush: true)) {
             flash.message = "${message(code: 'default.created.message', args: [message(code: 'longTextQuestion.label', default: 'LongTextQuestion'), longTextQuestionInstance.id])}"
-            redirect(action: "show", id: longTextQuestionInstance.id)
+            redirect(action: 'show', id: longTextQuestionInstance.id)
         }
         else {
-            render(view: "create", model: [longTextQuestionInstance: longTextQuestionInstance])
+            render(view: 'create', model: [longTextQuestionInstance: longTextQuestionInstance])
         }
     }
 
@@ -34,7 +34,7 @@ class LongTextQuestionController {
         def longTextQuestionInstance = LongTextQuestion.get(params.id)
         if (!longTextQuestionInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'longTextQuestion.label', default: 'LongTextQuestion'), params.id])}"
-            redirect(action: "list")
+            redirect(action: 'list')
         }
         else {
             [longTextQuestionInstance: longTextQuestionInstance]
@@ -45,7 +45,7 @@ class LongTextQuestionController {
         def longTextQuestionInstance = LongTextQuestion.get(params.id)
         if (!longTextQuestionInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'longTextQuestion.label', default: 'LongTextQuestion'), params.id])}"
-            redirect(action: "list")
+            redirect(action: 'list')
         }
         else {
             return [longTextQuestionInstance: longTextQuestionInstance]
@@ -59,23 +59,23 @@ class LongTextQuestionController {
                 def version = params.version.toLong()
                 if (longTextQuestionInstance.version > version) {
                     
-                    longTextQuestionInstance.errors.rejectValue("version", "default.optimistic.locking.failure", [message(code: 'longTextQuestion.label', default: 'LongTextQuestion')] as Object[], "Another user has updated this LongTextQuestion while you were editing")
-                    render(view: "edit", model: [longTextQuestionInstance: longTextQuestionInstance])
+                    longTextQuestionInstance.errors.rejectValue('version', 'default.optimistic.locking.failure', [message(code: 'longTextQuestion.label', default: 'LongTextQuestion')] as Object[], 'Another user has updated this LongTextQuestion while you were editing')
+                    render(view: 'edit', model: [longTextQuestionInstance: longTextQuestionInstance])
                     return
                 }
             }
             longTextQuestionInstance.properties = params
             if (!longTextQuestionInstance.hasErrors() && longTextQuestionInstance.save(flush: true)) {
                 flash.message = "${message(code: 'default.updated.message', args: [message(code: 'longTextQuestion.label', default: 'LongTextQuestion'), longTextQuestionInstance.id])}"
-                redirect(action: "show", id: longTextQuestionInstance.id)
+                redirect(action: 'show', id: longTextQuestionInstance.id)
             }
             else {
-                render(view: "edit", model: [longTextQuestionInstance: longTextQuestionInstance])
+                render(view: 'edit', model: [longTextQuestionInstance: longTextQuestionInstance])
             }
         }
         else {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'longTextQuestion.label', default: 'LongTextQuestion'), params.id])}"
-            redirect(action: "list")
+            redirect(action: 'list')
         }
     }
 
@@ -85,16 +85,16 @@ class LongTextQuestionController {
             try {
                 longTextQuestionInstance.delete(flush: true)
                 flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'longTextQuestion.label', default: 'LongTextQuestion'), params.id])}"
-                redirect(action: "list")
+                redirect(action: 'list')
             }
             catch (org.springframework.dao.DataIntegrityViolationException e) {
                 flash.message = "${message(code: 'default.not.deleted.message', args: [message(code: 'longTextQuestion.label', default: 'LongTextQuestion'), params.id])}"
-                redirect(action: "show", id: params.id)
+                redirect(action: 'show', id: params.id)
             }
         }
         else {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'longTextQuestion.label', default: 'LongTextQuestion'), params.id])}"
-            redirect(action: "list")
+            redirect(action: 'list')
         }
     }
 }

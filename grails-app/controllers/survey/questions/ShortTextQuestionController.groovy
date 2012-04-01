@@ -2,10 +2,10 @@ package survey.questions
 
 class ShortTextQuestionController {
 
-    static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
+    static allowedMethods = [save: 'POST', update: 'POST', delete: 'POST']
 
     def index = {
-        redirect(action: "list", params: params)
+        redirect(action: 'list', params: params)
     }
 
     def list = {
@@ -23,10 +23,10 @@ class ShortTextQuestionController {
         def shortTextQuestionInstance = new ShortTextQuestion(params)
         if (shortTextQuestionInstance.save(flush: true)) {
             flash.message = "${message(code: 'default.created.message', args: [message(code: 'shortTextQuestion.label', default: 'ShortTextQuestion'), shortTextQuestionInstance.id])}"
-            redirect(action: "show", id: shortTextQuestionInstance.id)
+            redirect(action: 'show', id: shortTextQuestionInstance.id)
         }
         else {
-            render(view: "create", model: [shortTextQuestionInstance: shortTextQuestionInstance])
+            render(view: 'create', model: [shortTextQuestionInstance: shortTextQuestionInstance])
         }
     }
 
@@ -34,7 +34,7 @@ class ShortTextQuestionController {
         def shortTextQuestionInstance = ShortTextQuestion.get(params.id)
         if (!shortTextQuestionInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'shortTextQuestion.label', default: 'ShortTextQuestion'), params.id])}"
-            redirect(action: "list")
+            redirect(action: 'list')
         }
         else {
             [shortTextQuestionInstance: shortTextQuestionInstance]
@@ -45,7 +45,7 @@ class ShortTextQuestionController {
         def shortTextQuestionInstance = ShortTextQuestion.get(params.id)
         if (!shortTextQuestionInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'shortTextQuestion.label', default: 'ShortTextQuestion'), params.id])}"
-            redirect(action: "list")
+            redirect(action: 'list')
         }
         else {
             return [shortTextQuestionInstance: shortTextQuestionInstance]
@@ -59,23 +59,23 @@ class ShortTextQuestionController {
                 def version = params.version.toLong()
                 if (shortTextQuestionInstance.version > version) {
                     
-                    shortTextQuestionInstance.errors.rejectValue("version", "default.optimistic.locking.failure", [message(code: 'shortTextQuestion.label', default: 'ShortTextQuestion')] as Object[], "Another user has updated this ShortTextQuestion while you were editing")
-                    render(view: "edit", model: [shortTextQuestionInstance: shortTextQuestionInstance])
+                    shortTextQuestionInstance.errors.rejectValue('version', 'default.optimistic.locking.failure', [message(code: 'shortTextQuestion.label', default: 'ShortTextQuestion')] as Object[], 'Another user has updated this ShortTextQuestion while you were editing')
+                    render(view: 'edit', model: [shortTextQuestionInstance: shortTextQuestionInstance])
                     return
                 }
             }
             shortTextQuestionInstance.properties = params
             if (!shortTextQuestionInstance.hasErrors() && shortTextQuestionInstance.save(flush: true)) {
                 flash.message = "${message(code: 'default.updated.message', args: [message(code: 'shortTextQuestion.label', default: 'ShortTextQuestion'), shortTextQuestionInstance.id])}"
-                redirect(action: "show", id: shortTextQuestionInstance.id)
+                redirect(action: 'show', id: shortTextQuestionInstance.id)
             }
             else {
-                render(view: "edit", model: [shortTextQuestionInstance: shortTextQuestionInstance])
+                render(view: 'edit', model: [shortTextQuestionInstance: shortTextQuestionInstance])
             }
         }
         else {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'shortTextQuestion.label', default: 'ShortTextQuestion'), params.id])}"
-            redirect(action: "list")
+            redirect(action: 'list')
         }
     }
 
@@ -85,16 +85,16 @@ class ShortTextQuestionController {
             try {
                 shortTextQuestionInstance.delete(flush: true)
                 flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'shortTextQuestion.label', default: 'ShortTextQuestion'), params.id])}"
-                redirect(action: "list")
+                redirect(action: 'list')
             }
             catch (org.springframework.dao.DataIntegrityViolationException e) {
                 flash.message = "${message(code: 'default.not.deleted.message', args: [message(code: 'shortTextQuestion.label', default: 'ShortTextQuestion'), params.id])}"
-                redirect(action: "show", id: params.id)
+                redirect(action: 'show', id: params.id)
             }
         }
         else {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'shortTextQuestion.label', default: 'ShortTextQuestion'), params.id])}"
-            redirect(action: "list")
+            redirect(action: 'list')
         }
     }
 }

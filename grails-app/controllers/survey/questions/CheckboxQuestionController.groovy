@@ -4,10 +4,10 @@ import survey.*
 
 class CheckboxQuestionController {
 
-    static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
+    static allowedMethods = [save: 'POST', update: 'POST', delete: 'POST']
 
     def index = {
-        redirect(action: "list", params: params)
+        redirect(action: 'list', params: params)
     }
 
     def list = {
@@ -26,10 +26,10 @@ class CheckboxQuestionController {
         def checkboxQuestionInstance = new CheckboxQuestion(params)
         if (checkboxQuestionInstance.save(flush: true)) {
             flash.message = "${message(code: 'default.created.message', args: [message(code: 'checkboxQuestion.label', default: 'CheckboxQuestion'), checkboxQuestionInstance.id])}"
-            redirect(action: "show", id: checkboxQuestionInstance.id)
+            redirect(action: 'show', id: checkboxQuestionInstance.id)
         }
         else {
-            render(view: "create", model: [checkboxQuestionInstance: checkboxQuestionInstance])
+            render(view: 'create', model: [checkboxQuestionInstance: checkboxQuestionInstance])
         }
     }
 
@@ -37,7 +37,7 @@ class CheckboxQuestionController {
         def checkboxQuestionInstance = CheckboxQuestion.get(params.id)
         if (!checkboxQuestionInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'checkboxQuestion.label', default: 'CheckboxQuestion'), params.id])}"
-            redirect(action: "list")
+            redirect(action: 'list')
         }
         else {
             [checkboxQuestionInstance: checkboxQuestionInstance]
@@ -48,7 +48,7 @@ class CheckboxQuestionController {
         def checkboxQuestionInstance = CheckboxQuestion.get(params.id)
         if (!checkboxQuestionInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'checkboxQuestion.label', default: 'CheckboxQuestion'), params.id])}"
-            redirect(action: "list")
+            redirect(action: 'list')
         }
         else {
             return [checkboxQuestionInstance: checkboxQuestionInstance]
@@ -62,23 +62,23 @@ class CheckboxQuestionController {
                 def version = params.version.toLong()
                 if (checkboxQuestionInstance.version > version) {
                     
-                    checkboxQuestionInstance.errors.rejectValue("version", "default.optimistic.locking.failure", [message(code: 'checkboxQuestion.label', default: 'CheckboxQuestion')] as Object[], "Another user has updated this CheckboxQuestion while you were editing")
-                    render(view: "edit", model: [checkboxQuestionInstance: checkboxQuestionInstance])
+                    checkboxQuestionInstance.errors.rejectValue('version', 'default.optimistic.locking.failure', [message(code: 'checkboxQuestion.label', default: 'CheckboxQuestion')] as Object[], 'Another user has updated this CheckboxQuestion while you were editing')
+                    render(view: 'edit', model: [checkboxQuestionInstance: checkboxQuestionInstance])
                     return
                 }
             }
             checkboxQuestionInstance.properties = params
             if (!checkboxQuestionInstance.hasErrors() && checkboxQuestionInstance.save(flush: true)) {
                 flash.message = "${message(code: 'default.updated.message', args: [message(code: 'checkboxQuestion.label', default: 'CheckboxQuestion'), checkboxQuestionInstance.id])}"
-                redirect(action: "show", id: checkboxQuestionInstance.id)
+                redirect(action: 'show', id: checkboxQuestionInstance.id)
             }
             else {
-                render(view: "edit", model: [checkboxQuestionInstance: checkboxQuestionInstance])
+                render(view: 'edit', model: [checkboxQuestionInstance: checkboxQuestionInstance])
             }
         }
         else {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'checkboxQuestion.label', default: 'CheckboxQuestion'), params.id])}"
-            redirect(action: "list")
+            redirect(action: 'list')
         }
     }
 
@@ -88,16 +88,16 @@ class CheckboxQuestionController {
             try {
                 checkboxQuestionInstance.delete(flush: true)
                 flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'checkboxQuestion.label', default: 'CheckboxQuestion'), params.id])}"
-                redirect(action: "list")
+                redirect(action: 'list')
             }
             catch (org.springframework.dao.DataIntegrityViolationException e) {
                 flash.message = "${message(code: 'default.not.deleted.message', args: [message(code: 'checkboxQuestion.label', default: 'CheckboxQuestion'), params.id])}"
-                redirect(action: "show", id: params.id)
+                redirect(action: 'show', id: params.id)
             }
         }
         else {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'checkboxQuestion.label', default: 'CheckboxQuestion'), params.id])}"
-            redirect(action: "list")
+            redirect(action: 'list')
         }
     }
 }

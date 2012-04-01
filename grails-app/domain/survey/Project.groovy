@@ -17,6 +17,6 @@ class Project {
     }
     
     String toString() {
-        name + " for " + course
+        name + ' for ' + course
     }
 }

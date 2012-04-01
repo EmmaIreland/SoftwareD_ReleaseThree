@@ -1,19 +1,19 @@
 // locations to search for config files that get merged into the main config
 // config files can either be Java properties files or ConfigSlurper scripts
 
-// grails.config.locations = [ "classpath:${appName}-config.properties",
-//                             "classpath:${appName}-config.groovy",
-//                             "file:${userHome}/.grails/${appName}-config.properties",
-//                             "file:${userHome}/.grails/${appName}-config.groovy"]
+// grails.config.locations = [ 'classpath:${appName}-config.properties',
+//                             'classpath:${appName}-config.groovy',
+//                             'file:${userHome}/.grails/${appName}-config.properties',
+//                             'file:${userHome}/.grails/${appName}-config.groovy']
 
-// if(System.properties["${appName}.config.location"]) {
-//    grails.config.locations << "file:" + System.properties["${appName}.config.location"]
+// if(System.properties['${appName}.config.location']) {
+//    grails.config.locations << 'file:' + System.properties['${appName}.config.location']
 // }
 
 grails.project.groupId = appName // change this to alter the default package name and Maven publishing destination
 grails.mime.file.extensions = true // enables the parsing of file extensions from URLs into the request format
 grails.mime.use.accept.header = false
-grails.views.javascript.library="jquery"
+grails.views.javascript.library='jquery'
 grails.mime.types = [ html: ['text/html','application/xhtml+xml'],
                       xml: ['text/xml', 'application/xml'],
                       text: 'text/plain',
@@ -32,9 +32,9 @@ grails.mime.types = [ html: ['text/html','application/xhtml+xml'],
 //grails.urlmapping.cache.maxsize = 1000
 
 // The default codec used to encode data with ${}
-grails.views.default.codec = "none" // none, html, base64
-grails.views.gsp.encoding = "UTF-8"
-grails.converters.encoding = "UTF-8"
+grails.views.default.codec = 'none' // none, html, base64
+grails.views.gsp.encoding = 'UTF-8'
+grails.converters.encoding = 'UTF-8'
 // enable Sitemesh preprocessing of GSP pages
 grails.views.gsp.sitemesh.preprocess = true
 // scaffolding templates configuration
@@ -55,13 +55,13 @@ grails.exceptionresolver.params.exclude = ['password']
 // set per-environment serverURL stem for creating absolute links
 environments {
     production {
-        grails.serverURL = "http://www.changeme.com"
+        grails.serverURL = 'http://www.changeme.com'
     }
     development {
-        grails.serverURL = "http://localhost:9042/${appName}"
+        grails.serverURL = 'http://localhost:9042/${appName}'
     }
     test {
-        grails.serverURL = "http://localhost:9042/${appName}"
+        grails.serverURL = 'http://localhost:9042/${appName}'
     }
 
 }

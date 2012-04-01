@@ -10,7 +10,7 @@ class ShortTextQuestion extends Question implements QuestionInterface {
 
     @Override
     public Object getTemplateName() {
-        "Short"
+        'Short'
     }
 
     @Override

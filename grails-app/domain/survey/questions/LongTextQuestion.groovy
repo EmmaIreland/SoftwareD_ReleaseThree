@@ -10,7 +10,7 @@ class LongTextQuestion extends Question implements QuestionInterface{
 
     @Override
     public Object getTemplateName() {
-        "Long"
+        'Long'
     }
 
     @Override

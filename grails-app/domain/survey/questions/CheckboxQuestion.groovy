@@ -11,7 +11,7 @@ class CheckboxQuestion extends Question implements QuestionInterface {
     
     @Override
     public Object getTemplateName() {
-	"Checkbox"	
+	'Checkbox'	
     }
     
     Question copyQuestion() {

@@ -12,7 +12,7 @@ class MultipleChoiceQuestion extends Question implements QuestionInterface{
 
     @Override
     public Object getTemplateName() {
-	"MultipleChoice"
+	'MultipleChoice'
     }
 
     

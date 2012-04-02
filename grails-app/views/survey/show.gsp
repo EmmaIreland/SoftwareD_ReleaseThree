@@ -5,6 +5,7 @@
         <meta name="layout" content="main" />
         <g:set var="entityName" value="${message(code: 'survey.label', default: 'Survey')}" />
         <title><g:message code="default.show.label" args="[entityName]" /></title>
+        <link rel="stylesheet" href="${resource(dir:'css',file:'new_question.css')}" />
         <script type="text/javascript">
         $(function() {
         	// onLoad
@@ -66,7 +67,8 @@
         function validateNewQuestionForm() {
             var visiblePromptValue = $("[name$='Prompt']").filter(":visible").val();
             if (visiblePromptValue != null && visiblePromptValue.length < 1) {
-                $(".errors").html("Please enter a prompt.").show();
+                $(".errors").html("Please enter a prompt.");
+                $(".errors").parent().show();
                 return false;
             }
 
@@ -76,6 +78,7 @@
             var allEmpty = choicesLengths.every(function(len) { return len < 1; });
             if (allEmpty && visibleChoices.length > 0) {
             	$(".errors").html("Please enter at least one valid choice.").show();
+                $(".errors").parent().show();
                 return false;
             }
             return true;
@@ -137,7 +140,7 @@
                             <input type="hidden" value="${surveyInstance?.id}" name="surveyid" />
                             <table id="newQuestionFields" style="display:none">
                             <tbody>
-                            <tr><td></td><td class="errors" style="display:none"></td></tr>
+                            <tr style="display:none"><td></td><td class="errors"></td></tr>
                             <tr><td>Type</td><td> <select name="type" id="typeDropdown" onchange="updateQuestionType(this);">
                                     <option value="existing">Add existing question</option>
                                     <option value="checkbox">New checkbox question</option>
@@ -217,7 +220,7 @@
                             <g:each in="${surveyInstance.questions}" var="question">
                             	
                             	<span id="${question.id}">
-                            		<br><img src="../../images/delete.png" class="deleteIcon" onclick="deleteQuestion(this)" /> ${question}
+                            		<img src="../../images/delete.png" class="deleteIcon" onclick="deleteQuestion(this)" /> ${question}
                           		</span>
                           	</g:each></td>
                         </tr>

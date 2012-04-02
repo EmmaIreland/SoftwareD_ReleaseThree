@@ -6,16 +6,15 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta name="layout" content="main" />
         <g:set var="entityName" value="${message(code: 'team.label', default: 'Team')}" />
-        <title><g:message code="default.edit.label" args="[entityName]" /></title>
+        <title><g:message code="Edit Group" args="[entityName]" /></title>
     </head>
     <body>
         <div class="nav">
             <span class="menuButton"><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></span>
-            <span class="menuButton"><g:link class="list" action="list"><g:message code="default.list.label" args="[entityName]" /></g:link></span>
-            <span class="menuButton"><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></span>
+            <span class="menuButton"><g:link class="list" action="list"><g:message code="Group List" args="[entityName]" /></g:link></span>
         </div>
         <div class="body">
-            <h1><g:message code="default.edit.label" args="[entityName]" /></h1>
+            <h1><g:message code="Edit Group" args="[entityName]" /></h1>
             <g:if test="${flash.message}">
             <div class="message">${flash.message}</div>
             </g:if>
@@ -48,20 +47,17 @@
                         </tr>
                         
                             <tr class="prop">
-                                <td valign="top" class="name">
-                                  <label for="memberships"><g:message code="team.memberships.label" default="Memberships" /></label>
-                                </td>
-                                <td valign="top" class="value ${hasErrors(bean: teamInstance, field: 'memberships', 'errors')}">
-                                    
-<ul>
-<g:each in="${teamInstance?.memberships?}" var="m">
-    <li><g:link controller="membership" action="show" id="${m.id}">${m?.encodeAsHTML()}</g:link></li>
-</g:each>
-</ul>
-<g:link controller="membership" action="create" params="['team.id': teamInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'membership.label', default: 'Membership')])}</g:link>
-
-                                </td>
-                            </tr>
+                            <td valign="top" class="name"><g:message code="team.memberships.label" default="Members" /></td>
+                            
+                            <td valign="top" style="text-align: left;" class="value"><g:link controller="team" action="list" params="${[project: teamInstance.project.id]}">Manage Students in Group</g:link>
+                                <ul>
+                                <g:each in="${teamInstance.memberships}" var="m">
+                                    <li><g:link controller="person" action="show" id="${m.member.id}">${m?.encodeAsHTML()}</g:link></li>
+                                </g:each>
+                                </ul>
+                            </td>
+                            
+                        </tr>
                         
                         </tbody>
                     </table>

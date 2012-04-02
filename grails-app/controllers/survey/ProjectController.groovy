@@ -29,6 +29,7 @@ class ProjectController {
     def save = {
         def projectInstance = new Project(params)
         if (projectInstance.save(flush: true)) {
+			flash.message = makeMessage('default.created.message', params.name)
             redirect(action: showString, id: projectInstance.id)
         }
         else {
@@ -90,7 +91,7 @@ class ProjectController {
         if (projectInstance) {
             try {
                 projectInstance.delete(flush: true)
-                flash.message = makeMessage('default.deleted.message', projectInstance.name)
+                flash.message = makeMessage('default.deleted.message', params.name)
                 redirect(action: listString)
             }
             catch (org.springframework.dao.DataIntegrityViolationException e) {

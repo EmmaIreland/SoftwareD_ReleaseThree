@@ -133,7 +133,11 @@
 	 				<g:each in="${projectInstance.teams.sort() {it.name}}" var="team">
 	 					<div class="group droppable">
 	 						<img class="deleteButton" src="${resource(dir:'images',file:'delete.png')}"  />
-	 						<div class="teamname">${team.name}</div>
+	 						
+	 						<div class="teamname">
+	 							<g:link action="edit" id="${team.id}">${fieldValue(bean: team, field: "name")}</g:link>
+	 						</div>
+	 						
 	 						<ul class="students" id="g${team.id}">
 	 							<g:each in="${team.memberships.sort() {it.member.name}}" var="membership">
 	 							<li><span class="student draggable" id="s${membership.member.id}">${membership.member.name}</span></li>

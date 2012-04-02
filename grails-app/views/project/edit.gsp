@@ -58,17 +58,6 @@
                                 </td>
                             </tr>
                         
-                            <tr class="prop">
-                            <td valign="top" class="name"><g:message code="project.teams.label" default="Teams" /></td>
-                            
-                            <td valign="top" style="text-align: left;" class="value"><g:link controller="team" action="list" params="${[project: projectInstance.id]}">Manage Teams</g:link>
-                                <ul>
-                                <g:each in="${projectInstance.teams}" var="t">
-                                    <li><g:link controller="team" action="show" id="${t.id}">${t?.encodeAsHTML()}</g:link></li>
-                                </g:each>
-                                </ul>
-                            </td>
-                        
                         </tbody>
                     </table>
                 </div>

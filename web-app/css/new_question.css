@@ -2,4 +2,19 @@
 	background: #eee;
 	color: #000;
 	margin: 10px 0px 10px 0px;
+	border-radius: 6px;
+}
+
+#newQuestionForm .errors {
+	margin: -2px 2px 0px 2px;
+	padding: 4px 6px 4px 6px;
+}
+
+#newQuestionForm #addQuestionButton {
+	border: 1px solid #ccc;
+	background: #eed;
+	border-radius: 4px;
+	padding: 1px 4px 0px 4px;
+	cursor: pointer;
+	padding: 2px 5px 2px 5px;
 }

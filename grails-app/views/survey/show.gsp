@@ -68,7 +68,7 @@
             var visiblePromptValue = $("[name$='Prompt']").filter(":visible").val();
             if (visiblePromptValue != null && visiblePromptValue.length < 1) {
                 $(".errors").html("Please enter a prompt.");
-                $(".errors").parent().show();
+                $(".errors").parent().parent().show();
                 return false;
             }
 
@@ -78,7 +78,7 @@
             var allEmpty = choicesLengths.every(function(len) { return len < 1; });
             if (allEmpty && visibleChoices.length > 0) {
             	$(".errors").html("Please enter at least one valid choice.").show();
-                $(".errors").parent().show();
+                $(".errors").parent().parent().show();
                 return false;
             }
             return true;
@@ -137,82 +137,82 @@
                             
                             <td valign="top" class="value"><trinkets:addButton id="addButton" name="addButton" onclick="showQuestionFields();" width="120px">Add new question</trinkets:addButton>
                             <form id="newQuestionForm">
-                            <input type="hidden" value="${surveyInstance?.id}" name="surveyid" />
-                            <table id="newQuestionFields" style="display:none">
-                            <tbody>
-                            <tr style="display:none"><td></td><td class="errors"></td></tr>
-                            <tr><td>Type</td><td> <select name="type" id="typeDropdown" onchange="updateQuestionType(this);">
-                                    <option value="existing">Add existing question</option>
-                                    <option value="checkbox">New checkbox question</option>
-                                    <option value="multipleChoice">New multiple choice question</option>
-                                    <option value="shortResponse">New short text question</option>
-                                    <option value="longResponse">New long text question</option>
-                            </select></td></tr>
-                            <tr class="prop typeRow" id="existingRow">
-                                <td valign="top" class="name">
-                                    <label for="name"><g:message code="question.type.label" default="Select a Question" /></label>
-                                </td>
-                                <td valign="top" class="value ${hasErrors(bean: personInstance, field: 'name', 'errors')}">
-                                    <g:select name="questionid" from="${existingQuestions}" optionKey="id"/>
-                                </td>
-                            </tr>
-                            
-                              <tr class="prop typeRow checkboxRow">
-                                <td valign="top" class="name">
-                                    <label for="prompt"><g:message code="checkboxQuestion.prompt.label" default="Prompt" /></label>
-                                </td>
-                                <td valign="top" class="value ${hasErrors(bean: checkboxQuestionInstance, field: 'prompt', 'errors')}">
-                                    <g:textField name="cbPrompt" value="${checkboxQuestionInstance?.prompt}" />
-                                </td>
-                            </tr>
-                            
-                            <tr class="prop typeRow checkboxRow">
-                                <td valign="top" class="name">
-                                    <label for="choices"><g:message code="checkboxQuestion.choices.label" default="Choices" /></label>
-                                </td>
-                                <td valign="top" class="value ${hasErrors(bean: checkboxQuestionInstance, field: 'prompt', 'errors')}">
-                                    <g:textField name="cbChoices" class="addOnChange" id="choice1" />
-                                </td>
-                            </tr>
-                            
-                             <tr class="prop typeRow multipleRow">
-                                <td valign="top" class="name">
-                                    <label for="prompt"><g:message code="multipleChoiceQuestion.prompt.label" default="Prompt" /></label>
-                                </td>
-                                <td valign="top" class="value ${hasErrors(bean: multipleChoiceQuestion, field: 'prompt', 'errors')}">
-                                    <g:textField name="mcPrompt" value="${multipleChoiceQuestion?.prompt}" />
-                                </td>
-                            </tr>
-                            
-                            <tr class="prop typeRow multipleRow">
-                                <td valign="top" class="name">
-                                    <label for="choices"><g:message code="multipleChoiceQuestion.choices.label" default="Choices" /></label>
-                                </td>
-                                <td valign="top" class="value ${hasErrors(bean: multipleChoiceQuestion, field: 'prompt', 'errors')}">
-                                    <g:textField name="mcChoices" class="addOnChange" id="choice1" />
-                                </td>
-                            </tr>
-                            
-                             <tr class="prop typeRow shortRow">
-                                <td valign="top" class="name">
-                                    <label for="prompt"><g:message code="shortTextQuestion.prompt.label" default="Prompt" /></label>
-                                </td>
-                                <td valign="top" class="value ${hasErrors(bean: shortTextQuestion, field: 'prompt', 'errors')}">
-                                    <g:textField name="stPrompt" value="${shortTextQuestion?.prompt}" />
-                                </td>
-                            </tr>
-                            
-                             <tr class="prop typeRow longRow">
-                                <td valign="top" class="name">
-                                    <label for="prompt"><g:message code="longTextQuestion.prompt.label" default="Prompt" /></label>
-                                </td>
-                                <td valign="top" class="value ${hasErrors(bean: longTextQuestion, field: 'prompt', 'errors')}">
-                                    <g:textField name="ltPrompt" value="${longTextQuestion?.prompt}" />
-                                </td>
-                            </tr>
-                            <tr><td><input type="button" value="Add Question" onclick="addQuestion()"></td><td></td></tr>
-                            </tbody>
-                            </table>
+                            	<input type="hidden" value="${surveyInstance?.id}" name="surveyid" />
+	                            <table id="newQuestionFields" style="display:none">
+	                            <tbody>
+		                            <tr style="display:none"><td colspan="2"><div class="errors"></div></td></tr>
+		                            <tr><td>Type</td><td> <select name="type" id="typeDropdown" onchange="updateQuestionType(this);">
+		                                    <option value="existing">Add existing question</option>
+		                                    <option value="checkbox">New checkbox question</option>
+		                                    <option value="multipleChoice">New multiple choice question</option>
+		                                    <option value="shortResponse">New short text question</option>
+		                                    <option value="longResponse">New long text question</option>
+		                            </select></td></tr>
+		                            <tr class="prop typeRow" id="existingRow">
+		                                <td valign="top" class="name">
+		                                    <label for="name"><g:message code="question.type.label" default="Select a Question" /></label>
+		                                </td>
+		                                <td valign="top" class="value ${hasErrors(bean: personInstance, field: 'name', 'errors')}">
+		                                    <g:select name="questionid" from="${existingQuestions}" optionKey="id"/>
+		                                </td>
+		                            </tr>
+		                            
+		                              <tr class="prop typeRow checkboxRow">
+		                                <td valign="top" class="name">
+		                                    <label for="prompt"><g:message code="checkboxQuestion.prompt.label" default="Prompt" /></label>
+		                                </td>
+		                                <td valign="top" class="value ${hasErrors(bean: checkboxQuestionInstance, field: 'prompt', 'errors')}">
+		                                    <g:textField name="cbPrompt" value="${checkboxQuestionInstance?.prompt}" />
+		                                </td>
+		                            </tr>
+		                            
+		                            <tr class="prop typeRow checkboxRow">
+		                                <td valign="top" class="name">
+		                                    <label for="choices"><g:message code="checkboxQuestion.choices.label" default="Choices" /></label>
+		                                </td>
+		                                <td valign="top" class="value ${hasErrors(bean: checkboxQuestionInstance, field: 'prompt', 'errors')}">
+		                                    <g:textField name="cbChoices" class="addOnChange" id="choice1" />
+		                                </td>
+		                            </tr>
+		                            
+		                             <tr class="prop typeRow multipleRow">
+		                                <td valign="top" class="name">
+		                                    <label for="prompt"><g:message code="multipleChoiceQuestion.prompt.label" default="Prompt" /></label>
+		                                </td>
+		                                <td valign="top" class="value ${hasErrors(bean: multipleChoiceQuestion, field: 'prompt', 'errors')}">
+		                                    <g:textField name="mcPrompt" value="${multipleChoiceQuestion?.prompt}" />
+		                                </td>
+		                            </tr>
+		                            
+		                            <tr class="prop typeRow multipleRow">
+		                                <td valign="top" class="name">
+		                                    <label for="choices"><g:message code="multipleChoiceQuestion.choices.label" default="Choices" /></label>
+		                                </td>
+		                                <td valign="top" class="value ${hasErrors(bean: multipleChoiceQuestion, field: 'prompt', 'errors')}">
+		                                    <g:textField name="mcChoices" class="addOnChange" id="choice1" />
+		                                </td>
+		                            </tr>
+		                            
+		                             <tr class="prop typeRow shortRow">
+		                                <td valign="top" class="name">
+		                                    <label for="prompt"><g:message code="shortTextQuestion.prompt.label" default="Prompt" /></label>
+		                                </td>
+		                                <td valign="top" class="value ${hasErrors(bean: shortTextQuestion, field: 'prompt', 'errors')}">
+		                                    <g:textField name="stPrompt" value="${shortTextQuestion?.prompt}" />
+		                                </td>
+		                            </tr>
+		                            
+		                             <tr class="prop typeRow longRow">
+		                                <td valign="top" class="name">
+		                                    <label for="prompt"><g:message code="longTextQuestion.prompt.label" default="Prompt" /></label>
+		                                </td>
+		                                <td valign="top" class="value ${hasErrors(bean: longTextQuestion, field: 'prompt', 'errors')}">
+		                                    <g:textField name="ltPrompt" value="${longTextQuestion?.prompt}" />
+		                                </td>
+		                            </tr>
+		                            <tr><td><input id="addQuestionButton" type="button" value="Add Question" onclick="addQuestion()"></td><td></td></tr>
+	                            </tbody>
+	                            </table>
                             </form>
                             
                             

@@ -6,7 +6,6 @@ class Course {
     String term
     int year
     SortedSet enrollments
-
     private static final String cYear = new Date().format('yyyy')
     private static final int currentYear = Integer.parseInt(cYear)
     

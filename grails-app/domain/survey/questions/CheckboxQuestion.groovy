@@ -3,6 +3,7 @@ package survey.questions
 import survey.*
 
 class CheckboxQuestion extends Question implements QuestionInterface {
+    List choices
     static hasMany = [choices: String]
     
     static constraints = {

@@ -70,6 +70,7 @@ class QuestionController {
         }
     }
 
+    
     def delete = {
         def questionInstance = Question.get(params.id)
         if (questionInstance) {

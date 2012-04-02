@@ -4,6 +4,7 @@ import survey.Question
 import survey.QuestionInterface
 
 class MultipleChoiceQuestion extends Question implements QuestionInterface{
+    List choices
     static hasMany = [choices: String]
 
     static constraints = {

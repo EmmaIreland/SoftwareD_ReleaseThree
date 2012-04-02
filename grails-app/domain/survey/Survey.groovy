@@ -3,7 +3,7 @@ package survey
 class Survey {
     String title
     Date dueDate
-    SortedSet questions
+    List questions
     static hasMany = [questions: Question]
     static belongsTo = [project: Project]
     

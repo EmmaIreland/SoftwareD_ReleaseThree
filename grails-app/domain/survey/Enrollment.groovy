@@ -1,6 +1,6 @@
 package survey
 
-class Enrollment implements Comparable {
+class Enrollment implements Comparable{
     static belongsTo = [course:Course, person:Person]
     static constraints = {
         course()
@@ -14,6 +14,5 @@ class Enrollment implements Comparable {
     @Override
     public int compareTo(Object o) {
 	person.name.compareTo(o.person.name)
-	
     }
 }

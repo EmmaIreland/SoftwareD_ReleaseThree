@@ -103,20 +103,13 @@
             <span class="menuButton"><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></span>
         </div>
         <div class="body">
-            <h1><g:message code="default.show.label" args="[entityName]" /></h1>
+            <h1>${surveyInstance.title}</h1>
             <g:if test="${flash.message}">
             <div class="message">${flash.message}</div>
             </g:if>
             <div class="dialog">
                 <table>
                     <tbody>
-                    
-                        <tr class="prop">
-                            <td valign="top" class="name"><g:message code="survey.title.label" default="Title" /></td>
-                            
-                            <td valign="top" class="value">${fieldValue(bean: surveyInstance, field: "title")}</td>
-                            
-                        </tr>
                     
                         <tr class="prop">
                             <td valign="top" class="name"><g:message code="survey.dueDate.label" default="Due Date" /></td>
@@ -218,10 +211,11 @@
                             
                             
                             <g:each in="${surveyInstance.questions}" var="question">
-                            	<br/>
                             	<span id="${question.id}">
-                            		<img src="../../images/delete.png" class="deleteIcon" onclick="deleteQuestion(this)" /> ${question}
+                            		<img src="../../images/delete.png" class="deleteIcon" onclick="deleteQuestion(this)" />
+                            			<g:link controller="question" action="show" id="${question.id}"> ${question}</g:link>
                           		</span>
+                          		<br/>
                           	</g:each></td>
                         </tr>
                     

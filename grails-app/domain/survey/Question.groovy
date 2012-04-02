@@ -1,7 +1,7 @@
 package survey
 import survey.questions.*
 
-class Question implements Comparable {
+class Question {
     String prompt
     Date dateCreated
     
@@ -22,12 +22,6 @@ class Question implements Comparable {
     def copyList(list) {
 	def newList = list.collect { it }
 	newList
-    }
-
-    @Override
-    public int compareTo(Object o) {
-	dateCreated.compareTo(o.dateCreated)
-
     }
 
     def getSurvey() {

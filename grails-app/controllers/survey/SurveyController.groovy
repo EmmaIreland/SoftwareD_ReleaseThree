@@ -3,11 +3,18 @@ import survey.questions.*
 import grails.converters.JSON
 
 class SurveyController {
+	
+	static post = 'POST'
+	def listString = 'list'
+	def editString = 'edit'
+	def createString = 'create'
+	def showString = 'show'
+	def defaultNotFoundMessage = 'default.not.found.message'
 
-    static allowedMethods = [save: 'POST', update: 'POST', delete: 'POST', preview: 'POST']
+    static allowedMethods = [save: post, update: post, delete: post, preview: post]
 
     def index = {
-       redirect(action: 'list', params: params)
+       redirect(action: listString, params: params)
     }
 
     def list = {
@@ -24,11 +31,11 @@ class SurveyController {
     def save = {
         def surveyInstance = new Survey(params)
         if (surveyInstance.save(flush: true)) {
-            flash.message = "${message(code: 'default.created.message', args: [message(code: 'survey.label', default: 'Survey'), surveyInstance.id])}"
-            redirect(action: 'show', id: surveyInstance.id)
+            flash.message = makeMessage('default.created.message', surveyInstance.id)
+            redirect(action: showString, id: surveyInstance.id)
         }
         else {
-            render(view: 'create', model: [surveyInstance: surveyInstance])
+            render(view: createString, model: [surveyInstance: surveyInstance])
         }
     }
     
@@ -73,8 +80,8 @@ class SurveyController {
         def surveyInstance = Survey.get(params.id)
         def existingQuestions = Question.findAll()
         if (!surveyInstance) {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'survey.label', default: 'Survey'), params.id])}"
-            redirect(action: 'list')
+            flash.message = makeMessage(defaultNotFoundMessage, params.id)
+            redirect(action: listString)
         }
         else {
             [surveyInstance: surveyInstance, existingQuestions: existingQuestions]
@@ -84,8 +91,8 @@ class SurveyController {
     def preview = {
         def surveyInstance = Survey.get(params.id)
         if (!surveyInstance) {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'survey.label', default: 'Survey'), params.id])}"
-            redirect(action: 'list')
+            flash.message = makeMessage(defaultNotFoundMessage, params.id)
+            redirect(action: listString)
         }
         else {
             [surveyInstance: surveyInstance]
@@ -95,8 +102,8 @@ class SurveyController {
     def edit = {
         def surveyInstance = Survey.get(params.id)
         if (!surveyInstance) {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'survey.label', default: 'Survey'), params.id])}"
-            redirect(action: 'list')
+            flash.message = makeMessage(defaultNotFoundMessage, params.id)
+            redirect(action: listString)
         }
         else {
             return [surveyInstance: surveyInstance]
@@ -111,22 +118,22 @@ class SurveyController {
                 if (surveyInstance.version > version) {
                     
                     surveyInstance.errors.rejectValue('version', 'default.optimistic.locking.failure', [message(code: 'survey.label', default: 'Survey')] as Object[], 'Another user has updated this Survey while you were editing')
-                    render(view: 'edit', model: [surveyInstance: surveyInstance])
+                    render(view: editString, model: [surveyInstance: surveyInstance])
                     return
                 }
             }
             surveyInstance.properties = params
             if (!surveyInstance.hasErrors() && surveyInstance.save(flush: true)) {
-                flash.message = "${message(code: 'default.updated.message', args: [message(code: 'survey.label', default: 'Survey'), surveyInstance.id])}"
-                redirect(action: 'show', id: surveyInstance.id)
+                flash.message = makeMessage('default.updated.message', surveyInstance.id)
+                redirect(action: showString, id: surveyInstance.id)
             }
             else {
-                render(view: 'edit', model: [surveyInstance: surveyInstance])
+                render(view: editString, model: [surveyInstance: surveyInstance])
             }
         }
         else {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'survey.label', default: 'Survey'), params.id])}"
-            redirect(action: 'list')
+            flash.message = makeMessage(defaultNotFoundMessage, params.id)
+            redirect(action: listString)
         }
     }
 
@@ -135,17 +142,26 @@ class SurveyController {
         if (surveyInstance) {
             try {
                 surveyInstance.delete(flush: true)
-                flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'survey.label', default: 'Survey'), params.id])}"
-                redirect(action: 'list')
+                flash.message = makeMessage('default.deleted.message', params.id)
+                redirect(action: listString)
             }
             catch (org.springframework.dao.DataIntegrityViolationException e) {
-                flash.message = "${message(code: 'default.not.deleted.message', args: [message(code: 'survey.label', default: 'Survey'), params.id])}"
-                redirect(action: 'show', id: params.id)
+                flash.message = makeMessage('default.not.deleted.message', params.id)
+                redirect(action: showString, id: params.id)
             }
         }
         else {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'survey.label', default: 'Survey'), params.id])}"
-            redirect(action: 'list')
+            flash.message = makeMessage(defaultNotFoundMessage, params.id)
+            redirect(action: listString)
         }
     }
+	
+	private makeMessage(code, surveyId) {
+		return "${message(code: code, args: [surveyLabel(), surveyId])}"
+	}
+ 
+	private surveyLabel() {
+		message(code: 'survey.label', default: 'Survey')
+	}
+	
 }

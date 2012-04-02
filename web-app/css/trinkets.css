@@ -1,0 +1,13 @@
+.addButton {
+	border: 1px solid #ccc;
+	background: #eed;
+	border-radius: 6px;
+	padding: 1px 4px 0px 4px;
+	cursor: pointer;
+}
+
+.addButton span {
+	position: relative;
+	bottom: 4px;
+	margin-left: 3px;
+}

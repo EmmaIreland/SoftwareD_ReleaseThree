@@ -135,7 +135,7 @@
                         <tr class="prop">
                             <td valign="top" class="name"><g:message code="survey.question.label" default="Questions" /></td>
                             
-                            <td valign="top" class="value"><a href="#" onclick="showQuestionFields();">Add new question</a>
+                            <td valign="top" class="value"><trinkets:addButton id="addButton" name="addButton" onclick="showQuestionFields();" width="120px">Add new question</trinkets:addButton>
                             <form id="newQuestionForm">
                             <input type="hidden" value="${surveyInstance?.id}" name="surveyid" />
                             <table id="newQuestionFields" style="display:none">

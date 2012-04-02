@@ -2,11 +2,16 @@ package survey
 
 class CourseController {
 
-    static allowedMethods = [save: 'POST', update: 'POST', delete: 'POST']
+	static def post = 'POST'
+	def listString = 'list'
+	def editString = 'edit'
+	def createString = 'create'
+	def showString = 'show'
+    static allowedMethods = [save: post, update: post, delete: post]
 	static listMap = [action: 'list']
 
     def index = {
-        redirect(action: 'list', params: params)
+        redirect(action: listString, params: params)
     }
 
     def list = {
@@ -24,10 +29,10 @@ class CourseController {
         def courseInstance = new Course(params)
         if (courseInstance.save(flush: true)) {
             flash.message = makeMessage('default.created.message', params.name)
-	    redirect(action: 'show', id: courseInstance.id)
+	    redirect(action: showString, id: courseInstance.id)
         }
         else {
-            render(view: 'create', model: courseMap(courseInstance))
+            render(view: createString, model: courseMap(courseInstance))
         }
     }
 
@@ -66,17 +71,17 @@ class CourseController {
                 if (courseInstance.version > version) {
                     
                     courseInstance.errors.rejectValue('version', 'default.optimistic.locking.failure', [getLabel()] as Object[], 'Another user has updated this Course while you were editing')
-                    render(view: 'edit', model: courseMap(courseInstance))
+                    render(view: editString, model: courseMap(courseInstance))
                     return
                 }
             }
             courseInstance.properties = params
             if (!courseInstance.hasErrors() && courseInstance.save(flush: true)) {
                 flash.message = makeMessage('default.updated.message', params.name)
-                redirect(action: 'show', id: courseInstance.id)
+                redirect(action: showString, id: courseInstance.id)
             }
             else {
-                render(view: 'edit', model: courseMap(courseInstance))
+                render(view: editString, model: courseMap(courseInstance))
             }
         }
         else {
@@ -95,7 +100,7 @@ class CourseController {
             }
             catch (org.springframework.dao.DataIntegrityViolationException e) {
                 flash.message = makeMessage('default.not.deleted.message', params.name)
-                redirect(action: 'show', id: params.id)
+                redirect(action: showString, id: params.id)
             }
         }
         else {

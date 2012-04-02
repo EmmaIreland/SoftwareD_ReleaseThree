@@ -16,11 +16,17 @@
         	<br>
         	<div id="appName"><a href="${createLink(uri: '/')}">Cevin's Cyqulists</a></div>
         	<div id="controllers">
-        		<div id="title">Controllers</div>
+        		<div id="title">Manage</div>
         		<div id="list">
-	        		<g:each var="c" in="${grailsApplication.controllerClasses.sort { it.fullName } }">
-	                	<li class="controller"><g:link controller="${c.logicalPropertyName}">${c.logicalPropertyName.capitalize()}</g:link></li>
-	                </g:each>
+	        		<ul>
+                          <li class="controller"><g:link controller="course">Courses</g:link></li>
+                          <li class="controller"><g:link controller="project">Projects</g:link></li>
+                          <li class="controller"><g:link controller="team">Teams</g:link></li>
+                          <li class="controller"><g:link controller="person">People</g:link></li>
+                          <li class="controller"><g:link controller="survey">Surveys</g:link></li>
+                          <li class="controller"><g:link controller="question">Questions</g:link></li>
+                          
+                </ul>
                 </div>
         	</div>
         </div>

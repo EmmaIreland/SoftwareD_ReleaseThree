@@ -44,26 +44,30 @@
                                 <td valign="top" class="name">
                                   <label for="course"><g:message code="project.course.label" default="Course" /></label>
                                 </td>
-                                <td valign="top" class="value ${hasErrors(bean: projectInstance, field: 'course', 'errors')}">
-                                    <g:select name="course.id" from="${survey.Course.list()}" optionKey="id" value="${projectInstance?.course?.id}"  />
+                            <td valign="top" class="value"><g:link controller="course" action="show" id="${projectInstance?.course?.id}">${projectInstance?.course?.encodeAsHTML()}</g:link></td>
+                                
+                                </td>
+                            </tr>
+                            
+                             <tr class="prop">
+                                <td valign="top" class="name">
+                                    <label for="description"><g:message code="project.dueDate.label" default="Due Date" /></label>
+                                </td>
+                                <td valign="top" class="value ${hasErrors(bean: projectInstance, field: 'dueDate', 'errors')}">
+                                    <g:datePicker name="dueDate" precision="day" value="${projectInstance?.dueDate}"  />
                                 </td>
                             </tr>
                         
                             <tr class="prop">
-                                <td valign="top" class="name">
-                                  <label for="teams"><g:message code="project.teams.label" default="Teams" /></label>
-                                </td>
-                                <td valign="top" class="value ${hasErrors(bean: projectInstance, field: 'teams', 'errors')}">
-                                    
-<ul>
-<g:each in="${projectInstance?.teams?}" var="t">
-    <li><g:link controller="team" action="show" id="${t.id}">${t?.encodeAsHTML()}</g:link></li>
-</g:each>
-</ul>
-<g:link controller="team" action="create" params="['project.id': projectInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'team.label', default: 'Team')])}</g:link>
-
-                                </td>
-                            </tr>
+                            <td valign="top" class="name"><g:message code="project.teams.label" default="Teams" /></td>
+                            
+                            <td valign="top" style="text-align: left;" class="value"><g:link controller="team" action="list" params="${[project: projectInstance.id]}">Manage Teams</g:link>
+                                <ul>
+                                <g:each in="${projectInstance.teams}" var="t">
+                                    <li><g:link controller="team" action="show" id="${t.id}">${t?.encodeAsHTML()}</g:link></li>
+                                </g:each>
+                                </ul>
+                            </td>
                         
                         </tbody>
                     </table>

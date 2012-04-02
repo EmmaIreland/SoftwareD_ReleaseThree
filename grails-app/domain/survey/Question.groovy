@@ -4,6 +4,8 @@ import survey.questions.*
 class Question implements Comparable {
     String prompt
     Date dateCreated
+    
+    static hasMany = [answers: Answer]
 
     static constraints = {
 	prompt(blank: false)

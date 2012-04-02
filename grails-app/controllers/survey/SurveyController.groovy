@@ -98,6 +98,46 @@ class SurveyController {
             [surveyInstance: surveyInstance]
         }
     }
+    
+    def submit = {    
+        def surveyInstance = Survey.get(params.id)
+        def personInstance = Person.get(params.personid)
+        if (!surveyInstance || !personInstance) {
+            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'survey.label', default: 'Survey'), params.id])}"
+            redirect(action: 'list')
+            return
+        }
+        def questionIds = params.keySet().findAll { isNumber(it) }
+        
+        questionIds.each {
+            def question = Question.get(it)
+            println params[it]
+            def answer = new Answer(response: params[it]).save(failOnError: true)
+            println answer
+        }
+        
+    }
+    
+    private isNumber(string) {
+        try {
+            string.toInteger()
+            true
+        } catch (NumberFormatException e) {
+            false
+        }
+    }
+    
+    def take = {
+        def surveyInstance = Survey.get(params.id)
+        def personInstance = Person.get(params.personid)
+        if (!surveyInstance || !personInstance) {
+            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'survey.label', default: 'Survey'), params.id])}"
+            redirect(action: 'list')
+        }
+        else {
+            [surveyInstance: surveyInstance, personInstance: personInstance]
+        }
+    }
 
     def edit = {
         def surveyInstance = Survey.get(params.id)

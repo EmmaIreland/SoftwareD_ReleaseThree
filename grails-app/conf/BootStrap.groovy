@@ -62,8 +62,6 @@ class BootStrap {
                 new Membership(team: teamHumble, member: softwareDesignPeople[i]).save(failOnError: true)
             } // TODO: make these for loops w/o duplication
             
-            CheckboxQuestion checkboxLoveThisCourse = new CheckboxQuestion(prompt: 'Why do you love this course?', choices: ['I just do', 'It is awesome', 'We get cookies']).save(failOnError: true)
-            ShortTextQuestion shortTextGroupDescription = new ShortTextQuestion(prompt: 'Describe your group experience').save(failOnError: true)
             Survey surveyReleaseOne = new Survey(title: 'Survey for Release One', dueDate: new Date().next(), questions: [], project: releaseOne).save(failOnError: true)
             
         }

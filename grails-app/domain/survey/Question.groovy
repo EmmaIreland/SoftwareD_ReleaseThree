@@ -8,23 +8,36 @@ class Question implements Comparable {
     static constraints = {
 	prompt(blank: false)
     }
-    
+
     def getAnswer(Person person) {
-        Answer.findByPersonAndQuestion(person, this)
+	Answer.findByPersonAndQuestion(person, this)
     }
-    
+
     String toString() {
-        prompt
+	prompt
     }
-    
+
     def copyList(list) {
-        def newList = list.collect { it }
-        newList
+	def newList = list.collect { it }
+	newList
     }
 
     @Override
     public int compareTo(Object o) {
 	dateCreated.compareTo(o.dateCreated)
-	
+
     }
+
+    def getSurvey() {
+	def allSurveys = Survey.findAll()
+
+	for(i in allSurveys){
+	    if(i.questions.contains(this)){
+		return i
+		break
+	    }
+	}
+
+    }
+
 }

@@ -14,7 +14,7 @@
             <span class="menuButton"><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></span>
         </div>
         <div class="body">
-            <h1><g:message code="default.show.label" args="[entityName]" /></h1>
+            <h1>${questionInstance.prompt}</h1>
             <g:if test="${flash.message}">
             <div class="message">${flash.message}</div>
             </g:if>
@@ -22,20 +22,31 @@
                 <table>
                     <tbody>
                     
-                        <tr class="prop">
-                            <td valign="top" class="name"><g:message code="question.id.label" default="Id" /></td>
+                          <tr class="prop">
+                            <td valign="top" class="name"><g:message code="question.class" default="Type" /></td>
                             
-                            <td valign="top" class="value">${fieldValue(bean: questionInstance, field: "id")}</td>
-                            
-                        </tr>
-                    
-                        <tr class="prop">
-                            <td valign="top" class="name"><g:message code="question.prompt.label" default="Prompt" /></td>
-                            
-                            <td valign="top" class="value">${fieldValue(bean: questionInstance, field: "prompt")}</td>
+                            <td valign="top" class="value">${questionInstance.getTemplateName()}</td>
                             
                         </tr>
-                    
+                        <g:if test="${(questionInstance.getTemplateName()) == 'Checkbox' | (questionInstance.getTemplateName()) == 'MultipleChoice'}"> 
+                        
+                         <tr class="prop">
+                           		<td valign="top" class="name"><g:message code="question.class" default="Choices" /></td>
+                           		<td valign="top" class="value">
+                           		 	<ul>
+                       					<g:each in="${questionInstance.choices}" var="c">
+                           		 			<li>${c}</li>
+                            
+                    					</g:each>
+                    				</ul>
+                    			</td>
+                    		</tr>
+                    	</g:if>
+                    	
+                    	<tr class="prop">
+                    		<td valign="top" class="name"><g:message code="question.class" default="Survey" /></td>
+                    		
+                    		<td valign="top" class="value"><g:link controller="survey" action="show" id="${questionInstance.getSurvey().id}">${questionInstance.getSurvey()}</g:link>
                     </tbody>
                 </table>
             </div>

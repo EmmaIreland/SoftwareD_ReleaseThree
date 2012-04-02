@@ -6,6 +6,18 @@
         <meta name="layout" content="main" />
         <g:set var="entityName" value="${message(code: 'project.label', default: 'Project')}" />
         <title><g:message code="default.show.label" args="[entityName]" /></title>
+        <g:javascript library="jquery" plugin="jquery" />
+        <script type="text/javascript">
+
+		function deleteSurvey(image) {
+			if (confirm("Are you sure you want to remove this survey from this project?")) {
+				surveyId = $(image).parent().attr("id");
+				jQuery.post("../../survey/delete/" , {id: surveyId});
+				$(image).parent().remove();
+			}
+		}
+        
+        </script>
     </head>
     <body>
         <div class="nav">
@@ -53,20 +65,20 @@
                                 </ul>
                             </td>
                             
-                        </tr>
-                        
-                        <tr class="prop">
-                            <td valign="top" class="name"><g:message code="project.survey.label" default="Surveys" /></td>
+                        </tr>                      
+                       
+                          <tr class="prop">
+                            <td valign="top" class="name">Surveys:</td>
                             
-                            <td valign="top" class="value"><g:link controller="survey" action="create" params="${['project.id': projectInstance.id]}">Create new Survey</g:link>
-                            <ul>
-                            <g:each in="${projectInstance.surveys}" var="survey">
-                            	<li><g:link controller="survey" action="show" id="${survey.id}">${survey?.encodeAsHTML()}</g:link></li>
-                            </g:each>
-                            </ul>
+                            <td valign="top" style="text-align: left;" class="value">
+                            	<g:link controller="survey" action="create" params="${['project.id': projectInstance.id] }">Create new Survey</g:link>
+                                <g:each in="${projectInstance.surveys}" var="p">
+                                    <span id="${p.id}">
+                            		    <br><img src="../../images/delete.png" style="position: relative; top: 3px; cursor:pointer" onclick="deleteSurvey(this)" />
+                            		    <g:link controller="survey" action="show" id="${p.id}">${p}</g:link>
+                          		    </span>
+                                </g:each>
                             </td>
-                          
-                          
                         </tr>
                     
                     </tbody>

@@ -1,6 +1,6 @@
 package survey
 
-class Membership {
+class Membership implements Comparable {
     static belongsTo = [team: Team, member: Person]
     
     static constraints = {
@@ -22,5 +22,10 @@ class Membership {
 	    }
 	}
 	duplicateNotFound
+    }
+    
+    @Override
+    public int compareTo(Object o) {
+	member.name.compareTo(o.member.name)
     }
 }

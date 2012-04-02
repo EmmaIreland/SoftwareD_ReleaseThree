@@ -5,7 +5,7 @@ class Course {
     String name
     String term
     int year
-    
+    SortedSet enrollments
     private static final MINIMUM_YEAR = 2000
     private static final MAXIMUM_YEAR = 2022
     private static final String cYear = new Date().format('yyyy')

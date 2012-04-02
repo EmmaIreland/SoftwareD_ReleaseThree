@@ -25,7 +25,7 @@ class EnrollmentControllerTests extends ControllerUnitTestCase {
 	Enrollment enrollment1 = new Enrollment(course: course1, person: person1)
 	mockDomain(Enrollment,[enrollment1])
 	
-	course1.enrollments = [enrollment1]
+	course1.enrollments = new TreeSet([enrollment1])
 	
 	controller.params.course = course1
 	def results = controller.create()

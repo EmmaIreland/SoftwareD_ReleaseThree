@@ -231,10 +231,11 @@
             <div class="buttons">
                 <g:form>
                     <g:hiddenField name="id" value="${surveyInstance?.id}" />
+                    <g:hiddenField name="personid" value="1" /> <!--  // TODO Change this to use the actual user ID -->
                     <span class="button"><g:actionSubmit class="edit" action="edit" value="${message(code: 'default.button.edit.label', default: 'Edit')}" /></span>
                     <span class="button"><g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" /></span>
                     <span class="button"><g:actionSubmit class="preview" action="preview" value="${message(code: 'default.button.preview.label', default: 'Preview')}"/></span>
-                
+                    <span class="button"><g:actionSubmit class="take" action="take" value="${message(code: 'default.button.take.label', default: 'Take')}"/></span>
                 </g:form>
             </div>
         </div>

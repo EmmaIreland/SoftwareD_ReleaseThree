@@ -5,8 +5,7 @@
 <meta name="layout" content="main" />
 <g:set var="entityName"
 	value="${message(code: 'survey.label', default: 'Survey')}" />
-<title><g:message code="default.preview.label" args="[entityName]" />
-</title>
+<title><g:message code="default.take.label" args="[entityName]" /></title>
 </head>
 <body>
 	<div class="nav">
@@ -24,8 +23,9 @@
 		</span>
 	</div>
 	<div class="body">
+	<g:form action="submit" id="${surveyInstance?.id}">
 		<h1>
-			<g:message code="default.preview.label" args="[entityName]" />
+			<g:message code="default.take.label" args="[entityName]" />
 		</h1>
 		<g:if test="${flash.message}">
 			<div class="message">
@@ -89,14 +89,16 @@
 			</table>
 		</div>
 		<div class="buttons">
-			<g:form action="show" id="${surveyInstance?.id }">
-				<g:hiddenField name="id" value="${surveyInstance?.id}" />
-				<span class="button"><g:actionSubmit class="show"
-						action="show"
-						value="${message(code: 'default.button.show.label', default: 'Back to survey edit')}"/>
+			
+				<g:hiddenField name="surveyid" value="${surveyInstance?.id}" />
+				<g:hiddenField name="personid" value="${personInstance?.id}" />
+				<span class="button"><g:actionSubmit class="submit"
+						action="submit"
+						value="${message(code: 'default.button.submit.label', default: 'Submit Survey')}"/>
 				</span>
-			</g:form>
+			
 		</div>
+		</g:form>
 	</div>
 </body>
 </html>

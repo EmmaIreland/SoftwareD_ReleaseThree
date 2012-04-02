@@ -41,13 +41,11 @@
                             </tr>
                         
                             <tr class="prop">
-                                <td valign="top" class="name">
-                                  <label for="project"><g:message code="team.project.label" default="Project" /></label>
-                                </td>
-                                <td valign="top" class="value ${hasErrors(bean: teamInstance, field: 'project', 'errors')}">
-                                    <g:select name="project.id" from="${survey.Project.list()}" optionKey="id" value="${teamInstance?.project?.id}" noSelection="['null': '']" />
-                                </td>
-                            </tr>
+                            <td valign="top" class="name"><g:message code="team.project.label" default="Project" /></td>
+                            
+                            <td valign="top" class="value">${fieldValue(bean: teamInstance, field: "project")}</td>
+                            
+                        </tr>
                         
                             <tr class="prop">
                                 <td valign="top" class="name">

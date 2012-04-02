@@ -11,7 +11,6 @@
         <div class="nav">
             <span class="menuButton"><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></span>
             <span class="menuButton"><g:link class="list" action="list"><g:message code="default.list.label" args="[entityName]" /></g:link></span>
-            <span class="menuButton"><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></span>
         </div>
         <div class="body">
             <h1>${teamInstance.name}</h1>
@@ -28,11 +27,12 @@
                             <td valign="top" class="value"><g:link controller="project" action="show" id="${teamInstance?.project?.id}">${teamInstance?.project?.encodeAsHTML()}</g:link></td>
                             
                         </tr>
-                    
+                        
+                        
                         <tr class="prop">
                             <td valign="top" class="name"><g:message code="team.memberships.label" default="Members" /></td>
                             
-                            <td valign="top" style="text-align: left;" class="value">
+                            <td valign="top" style="text-align: left;" class="value"><g:link controller="team" action="list" params="${[project: teamInstance.project.id]}">Manage Students in Team</g:link>
                                 <ul>
                                 <g:each in="${teamInstance.memberships}" var="m">
                                     <li><g:link controller="person" action="show" id="${m.member.id}">${m?.encodeAsHTML()}</g:link></li>

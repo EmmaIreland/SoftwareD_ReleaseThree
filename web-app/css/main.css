@@ -51,7 +51,11 @@ body {
 	padding-left: 0px;
 }
 
-#sideBarNav #controllers #list li {
+#sideBarNave #controllers #list ul {
+}
+
+#sideBarNav #controllers #list ul li {
+	margin-left: -15px;
 	list-style-type: none;
 }
 

@@ -1,6 +1,13 @@
 package survey
 
 class EnrollmentController {
+	
+	static def post = 'POST'
+	def listString = 'list'
+	def editString = 'edit'
+	def createString = 'create'
+	def showString = 'show'
+	def defaultNotFoundMessage = 'default.not.found.message'
 
     static allowedMethods = [save: 'POST', update: 'POST', delete: 'POST']
 
@@ -49,7 +56,7 @@ class EnrollmentController {
     def show = {
         def enrollmentInstance = Enrollment.get(params.id)
         if (!enrollmentInstance) {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'enrollment.label', default: 'Enrollment'), params.id])}"
+            flash.message = makeMessage(defaultNotFoundMessage, params.id)
             redirect(action: 'list')
         }
         else {
@@ -60,7 +67,7 @@ class EnrollmentController {
     def edit = {
         def enrollmentInstance = Enrollment.get(params.id)
         if (!enrollmentInstance) {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'enrollment.label', default: 'Enrollment'), params.id])}"
+            flash.message = makeMessage(defaultNotFoundMessage, params.id)
             redirect(action: 'list')
         }
         else {
@@ -82,7 +89,7 @@ class EnrollmentController {
             }
             enrollmentInstance.properties = params
             if (!enrollmentInstance.hasErrors() && enrollmentInstance.save(flush: true)) {
-                flash.message = "${message(code: 'default.updated.message', args: [message(code: 'enrollment.label', default: 'Enrollment'), enrollmentInstance.id])}"
+                flash.message = makeMessage('default.updated.message', enrollmentInstance.id)
                 redirect(action: 'show', id: enrollmentInstance.id)
             }
             else {
@@ -90,7 +97,7 @@ class EnrollmentController {
             }
         }
         else {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'enrollment.label', default: 'Enrollment'), params.id])}"
+            flash.message = makeMessage(defaultNotFoundMessage, params.id)
             redirect(action: 'list')
         }
     }
@@ -100,4 +107,12 @@ class EnrollmentController {
         enrollmentInstance.delete(flush: true)
 	render('Success')
     }
+	
+	private makeMessage(code, enrollmentId) {
+		return "${message(code: code, args: [enrollmentLabel(), enrollmentId])}"
+	}
+ 
+	private enrollmentLabel() {
+		message(code: 'enrollment.label', default: 'Enrollment')
+	}
 }

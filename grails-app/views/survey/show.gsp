@@ -25,7 +25,7 @@
             if (validateNewQuestionForm()) {
            		var ajaxData = $("#newQuestionForm").serialize();
             	jQuery.post("../addQuestion/", ajaxData, function(response) {
-            		$("#newQuestionForm").parent().append("<span id='" + response.id + "'><br></span>");
+            		$("#newQuestionForm").parent().append("<span id='" + response.id + "'><br> </span>");
             		$("#" + response.id).append($(".deleteIcon").first().clone().show());
             		$("#" + response.id).append(response.prompt);
             	});
@@ -93,6 +93,7 @@
         </script>
     </head>
     <body>
+    	<img src="../../images/delete.png" class="deleteIcon" onclick="deleteQuestion(this)" style="display:none" />
         <div class="nav">
             <span class="menuButton"><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></span>
             <span class="menuButton"><g:link class="list" action="list"><g:message code="default.list.label" args="[entityName]" /></g:link></span>

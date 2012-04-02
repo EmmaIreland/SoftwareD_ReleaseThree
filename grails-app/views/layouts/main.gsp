@@ -3,6 +3,7 @@
     <head>
         <title><g:layoutTitle default="The Quintets" /></title>
         <link rel="stylesheet" href="${resource(dir:'css',file:'main.css')}" />
+        <link rel="stylesheet" href="${resource(dir:'css',file:'trinkets.css')}" />
         <link rel="shortcut icon" href="${resource(dir:'images',file:'favicon.png')}" type="image/x-icon" />
         <r:require module="jquery"/>
         <r:require module="jquery-ui"/>

@@ -218,7 +218,7 @@
                             
                             
                             <g:each in="${surveyInstance.questions}" var="question">
-                            	
+                            	<br/>
                             	<span id="${question.id}">
                             		<img src="../../images/delete.png" class="deleteIcon" onclick="deleteQuestion(this)" /> ${question}
                           		</span>

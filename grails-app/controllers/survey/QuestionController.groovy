@@ -1,11 +1,18 @@
 package survey
 
 class QuestionController {
+	
+	static def post = 'POST'
+	def listString = 'list'
+	def editString = 'edit'
+	def createString = 'create'
+	def showString = 'show'
+	def defaultNotFoundMessage = 'default.not.found.message'
 
-    static allowedMethods = [save: 'POST', update: 'POST', delete: 'POST']
+    static allowedMethods = [save: post, update: post, delete: post]
 
     def index = {
-        redirect(action: 'list', params: params)
+        redirect(action: listString, params: params)
     }
 
     def list = {
@@ -16,8 +23,8 @@ class QuestionController {
     def show = {
         def questionInstance = Question.get(params.id)
         if (!questionInstance) {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'question.label', default: 'Question'), params.id])}"
-            redirect(action: 'list')
+            flash.message = makeMessage(defaultNotFoundMessage, params.id)
+            redirect(action: listString)
         }
         else {
             [questionInstance: questionInstance]
@@ -27,8 +34,8 @@ class QuestionController {
     def edit = {
         def questionInstance = Question.get(params.id)
         if (!questionInstance) {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'question.label', default: 'Question'), params.id])}"
-            redirect(action: 'list')
+            flash.message = makeMessage(defaultNotFoundMessage, params.id)
+            redirect(action: listString)
         }
         else {
             return [questionInstance: questionInstance]
@@ -43,22 +50,22 @@ class QuestionController {
                 if (questionInstance.version > version) {
                     
                     questionInstance.errors.rejectValue('version', 'default.optimistic.locking.failure', [message(code: 'question.label', default: 'Question')] as Object[], 'Another user has updated this Question while you were editing')
-                    render(view: 'edit', model: [questionInstance: questionInstance])
+                    render(view: editString, model: [questionInstance: questionInstance])
                     return
                 }
             }
             questionInstance.properties = params
             if (!questionInstance.hasErrors() && questionInstance.save(flush: true)) {
-                flash.message = "${message(code: 'default.updated.message', args: [message(code: 'question.label', default: 'Question'), questionInstance.id])}"
-                redirect(action: 'show', id: questionInstance.id)
+                flash.message = makeMessage('default.updated.message', questionInstance.id)
+                redirect(action: showString, id: questionInstance.id)
             }
             else {
-                render(view: 'edit', model: [questionInstance: questionInstance])
+                render(view: editString, model: [questionInstance: questionInstance])
             }
         }
         else {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'question.label', default: 'Question'), params.id])}"
-            redirect(action: 'list')
+            flash.message = makeMessage(defaultNotFoundMessage, params.id)
+            redirect(action: listString)
         }
     }
 
@@ -77,4 +84,13 @@ class QuestionController {
         }
         render('Success.')
     }
+	
+	private makeMessage(code, questionId) {
+		return "${message(code: code, args: [questionLabel(), questionId])}"
+	}
+ 
+	private questionLabel() {
+		message(code: 'question.label', default: 'Question')
+	}
+	
 }

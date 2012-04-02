@@ -19,6 +19,8 @@ function handleDrop(e, ui) {
 }
 
 function deleteGroup(event) {
+	if (confirm("Are you sure?")) {
+	
 	var groupSpaceToDelete = $(this).parent();
 	var members = groupSpaceToDelete.find("li");
 	
@@ -34,6 +36,7 @@ function deleteGroup(event) {
 	
 	if ($(".group").length < 1) {
 		$("#groupArea").html("<h2>No groups have been created for this project.</h2>");
+	}
 	}
 }
 

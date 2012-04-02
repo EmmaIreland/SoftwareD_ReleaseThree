@@ -60,7 +60,7 @@ class TeamController {
             def numGroups = Integer.parseInt(params.num_groups)
             def newGroups = []
             numGroups.times() {
-                newGroups << new Team(name: 'Group ${genericGroupNum++}', project: project).save(flush:true)
+                newGroups << new Team(name: "Group ${genericGroupNum++}", project: project).save(flush:true)
             }
             
             if (params.random == 'on') {

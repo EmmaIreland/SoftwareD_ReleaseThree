@@ -2,13 +2,20 @@ package survey
 
 
 class TeamController {
+	
+	static post = 'POST'
+	def listString = 'list'
+	def editString = 'edit'
+	def createString = 'create'
+	def showString = 'show'
+	def defaultNotFoundMessage = 'default.not.found.message'
 
-    static allowedMethods = [save: 'POST', update: 'POST', delete: 'POST', changeMember: 'POST']
+    static allowedMethods = [save: post, update: post, delete: post, changeMember: post]
 
     static int genericGroupNum = 1
     
     def index = {
-        redirect(action: 'list', params: params)
+        redirect(action: listString, params: params)
     }
 
     def list = {
@@ -47,10 +54,10 @@ class TeamController {
     def save = {
         def teamInstance = new Team(params)
         if (teamInstance.save(flush: true)) {
-            redirect(action: 'list', params: [project: teamInstance.project.id])
+            redirect(action: listString, params: [project: teamInstance.project.id])
         }
         else {
-            render(view: 'create', model: [teamInstance: teamInstance])
+            render(view: createString, model: [teamInstance: teamInstance])
         }
     }
     
@@ -79,14 +86,14 @@ class TeamController {
                 }
             }
         }
-        redirect(action: 'list', params: [project: project.id])
+        redirect(action: listString, params: [project: project.id])
     }
 
     def show = {
         def teamInstance = Team.get(params.id)
         if (!teamInstance) {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'team.label', default: 'Team'), params.id])}"
-            redirect(action: 'list')
+            flash.message = makeMessage(defaultNotFoundMessage, params.id)
+            redirect(action: listString)
         }
         else {
             [teamInstance: teamInstance]
@@ -96,8 +103,8 @@ class TeamController {
     def edit = {
         def teamInstance = Team.get(params.id)
         if (!teamInstance) {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'team.label', default: 'Team'), params.id])}"
-            redirect(action: 'list')
+            flash.message = makeMessage(defaultNotFoundMessage, params.id)
+            redirect(action: listString)
         }
         else {
             return [teamInstance: teamInstance]
@@ -112,22 +119,22 @@ class TeamController {
                 if (teamInstance.version > version) {
                     
                     teamInstance.errors.rejectValue('version', 'default.optimistic.locking.failure', [message(code: 'team.label', default: 'Team')] as Object[], 'Another user has updated this Team while you were editing')
-                    render(view: 'edit', model: [teamInstance: teamInstance])
+                    render(view: editString, model: [teamInstance: teamInstance])
                     return
                 }
             }
             teamInstance.properties = params
             if (!teamInstance.hasErrors() && teamInstance.save(flush: true)) {
-                flash.message = "${message(code: 'default.updated.message', args: [message(code: 'team.label', default: 'Team'), teamInstance.id])}"
-                redirect(action: 'show', id: teamInstance.id)
+                flash.message = makeMessage('default.updated.message', teamInstance.id)
+                redirect(action: showString, id: teamInstance.id)
             }
             else {
-                render(view: 'edit', model: [teamInstance: teamInstance])
+                render(view: editString, model: [teamInstance: teamInstance])
             }
         }
         else {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'team.label', default: 'Team'), params.id])}"
-            redirect(action: 'list')
+            flash.message = makeMessage(defaultNotFoundMessage, params.id)
+            redirect(action: listString)
         }
     }
 
@@ -155,4 +162,12 @@ class TeamController {
        
         render('')
     }
+	
+	private makeMessage(code, teamId) {
+		return "${message(code: code, args: [teamLabel(), teamId])}"
+	}
+ 
+	private teamLabel() {
+		message(code: 'team.label', default: 'Team')
+	}
 }

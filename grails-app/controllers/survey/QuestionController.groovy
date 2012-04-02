@@ -2,7 +2,7 @@ package survey
 
 class QuestionController {
 	
-	static def post = 'POST'
+	static post = 'POST'
 	def listString = 'list'
 	def editString = 'edit'
 	def createString = 'create'

@@ -2,7 +2,7 @@ package survey
 
 class CourseController {
 
-	static def post = 'POST'
+	static post = 'POST'
 	def listString = 'list'
 	def editString = 'edit'
 	def createString = 'create'
@@ -70,7 +70,7 @@ class CourseController {
                 def version = params.version.toLong()
                 if (courseInstance.version > version) {
                     
-                    courseInstance.errors.rejectValue('version', 'default.optimistic.locking.failure', [getLabel()] as Object[], 'Another user has updated this Course while you were editing')
+                    courseInstance.errors.rejectValue('version', 'default.optimistic.locking.failure', [label] as Object[], 'Another user has updated this Course while you were editing')
                     render(view: editString, model: courseMap(courseInstance))
                     return
                 }
@@ -110,7 +110,7 @@ class CourseController {
     }	
 	
 	private makeMessage(code, instanceId) {
-		"${message(code: code, args: [getLabel(), instanceId])}"
+		"${message(code: code, args: [label, instanceId])}"
 	}
 
 	private getLabel() {

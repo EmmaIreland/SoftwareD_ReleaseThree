@@ -27,8 +27,7 @@ class EnrollmentController {
         if (params.course?.id) {
             
             def course = Course.get(params.course.id)
-            availableStudents = availableStudents - course.enrollments*.person
-	
+            availableStudents = availableStudents - course.enrollments*.person - course.owner
         }	
         
         enrollmentInstance.properties = params

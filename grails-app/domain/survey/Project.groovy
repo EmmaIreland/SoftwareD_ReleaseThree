@@ -11,7 +11,7 @@ class Project {
         name(blank: false)
 	description()
         course()
-	dueDate(validator: { dueDate -> dueDate.after(new Date()) } )
+	dueDate(validator: { dueDate -> dueDate.after(new Date().previous()) } )
         teams()
         surveys()
     }

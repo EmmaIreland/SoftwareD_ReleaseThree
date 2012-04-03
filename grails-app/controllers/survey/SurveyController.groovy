@@ -31,7 +31,7 @@ class SurveyController {
     def save = {
         def surveyInstance = new Survey(params)
         if (surveyInstance.save(flush: true)) {
-            flash.message = makeMessage('default.created.message', surveyInstance.id)
+            flash.message = makeMessage('default.created.message', surveyInstance.title)
             redirect(action: showString, id: surveyInstance.id)
         }
         else {
@@ -164,7 +164,7 @@ class SurveyController {
             }
             surveyInstance.properties = params
             if (!surveyInstance.hasErrors() && surveyInstance.save(flush: true)) {
-                flash.message = makeMessage('default.updated.message', surveyInstance.id)
+                flash.message = makeMessage('default.updated.message', surveyInstance.title)
                 redirect(action: showString, id: surveyInstance.id)
             }
             else {
@@ -182,7 +182,7 @@ class SurveyController {
         if (surveyInstance) {
             try {
                 surveyInstance.delete(flush: true)
-                flash.message = makeMessage('default.deleted.message', params.id)
+                flash.message = makeMessage('default.deleted.message', surveyInstance.title)
                 redirect(action: listString)
             }
             catch (org.springframework.dao.DataIntegrityViolationException e) {

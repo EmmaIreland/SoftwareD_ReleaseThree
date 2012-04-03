@@ -39,6 +39,15 @@
                                     <g:textField name="name" value="${projectInstance?.name}" />
                                 </td>
                             </tr>
+                            
+                            <tr class="prop">
+                                <td valign="top" class="name">
+                                    <label for="description"><g:message code="project.description.label" default="Description" /></label>
+                                </td>
+                                <td valign="top" class="value ${hasErrors(bean: projectInstance, field: 'description', 'errors')}">
+                                    <g:textArea name="description" value="${projectInstance?.description}" />
+                                </td>
+                            </tr>
                         
                             <tr class="prop">
                                 <td valign="top" class="name">

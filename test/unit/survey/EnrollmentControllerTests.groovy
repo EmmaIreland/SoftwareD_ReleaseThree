@@ -30,8 +30,8 @@ class EnrollmentControllerTests extends ControllerUnitTestCase {
 	controller.params.course = course1
 	def results = controller.create()
 	assertNotNull results	
-	assertTrue results.availableStudents.containsAll([person2, person3,owner])
-	assertEquals 3, results.availableStudents.size()
+	assertTrue results.availableStudents.containsAll([person2, person3])
+	assertEquals 2, results.availableStudents.size()
 	
 
     }

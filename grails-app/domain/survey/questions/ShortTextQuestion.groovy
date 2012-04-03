@@ -3,15 +3,12 @@ package survey.questions
 import survey.*
 
 class ShortTextQuestion extends Question implements QuestionInterface {
+	final Object templateName = 'Short'
     static hasMany = [responses: Answer]
-    
+
     static constraints = {
     }
 
-    @Override
-    public Object getTemplateName() {
-        'Short'
-    }
 
     @Override
     public Object getAnswer(Person person) {

@@ -4,16 +4,12 @@ import survey.Question
 import survey.QuestionInterface
 
 class MultipleChoiceQuestion extends Question implements QuestionInterface{
+	final Object templateName = 'MultipleChoice'
     List choices
     static hasMany = [choices: String]
 
     static constraints = {
         choices(validator: { choices -> !choices.isEmpty() })
-    }
-
-    @Override
-    public Object getTemplateName() {
-	'MultipleChoice'
     }
 
     

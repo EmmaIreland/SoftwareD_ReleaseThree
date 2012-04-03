@@ -25,10 +25,10 @@
                           <tr class="prop">
                             <td valign="top" class="name"><g:message code="question.class" default="Type" /></td>
                             
-                            <td valign="top" class="value">${questionInstance.getTemplateName()}</td>
+                            <td valign="top" class="value">${questionInstance.templateName}</td>
                             
                         </tr>
-                        <g:if test="${(questionInstance.getTemplateName()) == 'Checkbox' | (questionInstance.getTemplateName()) == 'MultipleChoice'}"> 
+                        <g:if test="${(questionInstance.templateName) == 'Checkbox' | (questionInstance.templateName) == 'MultipleChoice'}"> 
                         
                          <tr class="prop">
                            		<td valign="top" class="name"><g:message code="question.class" default="Choices" /></td>

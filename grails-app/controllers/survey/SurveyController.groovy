@@ -103,14 +103,13 @@ class SurveyController {
         def surveyInstance = Survey.get(params.id)
         def personInstance = Person.get(params.personid)
         if (!surveyInstance || !personInstance) {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'survey.label', default: 'Survey'), params.id])}"
-            redirect(action: 'list')
+            flash.message = makeMessage(defaultNotFoundMessage, params.id)
+            redirect(action: listString)
             return
         }
         def questionIds = params.keySet().findAll { isNumber(it) }
         
         questionIds.each {
-            def question = Question.get(it)
             println params[it]
             def answer = new Answer(response: params[it]).save(failOnError: true)
             println answer
@@ -131,8 +130,8 @@ class SurveyController {
         def surveyInstance = Survey.get(params.id)
         def personInstance = Person.get(params.personid)
         if (!surveyInstance || !personInstance) {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'survey.label', default: 'Survey'), params.id])}"
-            redirect(action: 'list')
+            flash.message = makeMessage(defaultNotFoundMessage, params.id)
+            redirect(action: listString)
         }
         else {
             [surveyInstance: surveyInstance, personInstance: personInstance]

@@ -20,6 +20,9 @@ class SurveyTests extends GrailsUnitTestCase {
 	assertTrue testSurvey.validate()
 	
 	Survey testSurvey2 = new Survey(title: "title", dueDate: today, questions: [question], project: Project.get(1)).save(validate: false)
-	assertFalse testSurvey2.validate()
+	assertTrue testSurvey2.validate()
+	
+	Survey testSurvey3 = new Survey(title: "title", dueDate: today.previous(), questions: [question], project: Project.get(1)).save(validate: false)
+	assertFalse testSurvey3.validate()
     }
 }

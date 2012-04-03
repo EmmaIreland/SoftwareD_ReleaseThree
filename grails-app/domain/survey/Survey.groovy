@@ -9,7 +9,7 @@ class Survey {
     
     static constraints = {
 	title(blank: false)
-	dueDate(validator: { dueDate -> dueDate.after(new Date()) } )
+	dueDate(validator: { dueDate -> dueDate.after(new Date().previous()) } )
 	questions(nullable: true)
 	project()
     }

@@ -22,7 +22,7 @@
         			<ul>
 	                    <li class="controller"><g:link controller="course">Courses</g:link></li>
 	                    <li class="controller"><g:link controller="project">Projects</g:link></li>
-	                    <li class="controller"><g:link controller="team">Teams</g:link></li>
+	                    <li class="controller"><g:link controller="team">Groups</g:link></li>
 	                    <li class="controller"><g:link controller="person">People</g:link></li>
 	                    <li class="controller"><g:link controller="survey">Surveys</g:link></li>
 	                    <li class="controller"><g:link controller="question">Questions</g:link></li>

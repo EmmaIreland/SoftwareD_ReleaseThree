@@ -101,6 +101,55 @@
                     <span class="button"><g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" /></span>
                 </g:form>
             </div>
+            
+            <br></br>
+         <h1>${courseInstance.toString()} Projects</h1>
+		<div class="list">
+			<table>
+				<thead>
+					<tr>
+
+						<g:sortableColumn property="name"
+							title="${message(code: 'course.project.label', default: 'Projects')}" />
+
+						<th><g:message code="course.project.description.label"
+								default="Project Description" /></th>
+								
+						<th><g:message code="course.project.groups.label"
+								default="Groups Assigned to Project" /></th>
+								
+					</tr>
+				</thead>
+				<tbody>
+					<g:each in="${courseInstance.projects}" status="i" var="k">
+						<tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
+
+							<td><g:link controller="project" action="show" id="${k.id}">
+									${k?.encodeAsHTML()}
+								</g:link>
+							</td>
+							
+							<td valign="top" class="value">
+								${fieldValue(bean: k, field: "description")}
+							</td>
+
+							<td valign="top" style="text-align: left;" class="value">
+								<ul>
+									<g:each in="${k.teams}" var="s">
+
+										<li><g:link controller="team" action="show" id="${s.id}">${s?.encodeAsHTML()}</g:link></li>
+									</g:each>
+								</ul>
+							</td>			
+						</tr>
+					</g:each>
+				</tbody>
+			</table>
+			<div class="buttons">						
+				<span class="menuButton"><g:link class="create" controller="project" action="create" params="${['course.id': courseInstance.id]}"><g:message code="Add Projects" args="[entityName]"/></g:link>
+				</span>
+			</div>
+            
         </div>
     </body>
 </html>

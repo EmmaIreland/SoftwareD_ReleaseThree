@@ -56,11 +56,11 @@
                                 <td valign="top" class="value ${hasErrors(bean: personInstance, field: 'enrollments', 'errors')}">
                                     
 <ul>
-<g:each in="${personInstance?.enrollments?}" var="e">
-    <li><g:link controller="enrollment" action="show" id="${e.id}">${e?.encodeAsHTML()}</g:link></li>
+<g:each in="${personInstance?.enrollments?.course}" var="e">
+    <li><g:link controller="course" action="show" id="${e.id}">${e?.encodeAsHTML()}</g:link></li>
 </g:each>
 </ul>
-<g:link controller="enrollment" action="create" params="['person.id': personInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'enrollment.label', default: 'Enrollment')])}</g:link>
+
 
                                 </td>
                             </tr>
@@ -72,11 +72,11 @@
                                 <td valign="top" class="value ${hasErrors(bean: personInstance, field: 'memberships', 'errors')}">
                                     
 <ul>
-<g:each in="${personInstance?.memberships?}" var="m">
-    <li><g:link controller="membership" action="show" id="${m.id}">${m?.encodeAsHTML()}</g:link></li>
+<g:each in="${personInstance?.memberships?.team}" var="m">
+    <li><g:link controller="team" action="show" id="${m.id}">${m?.encodeAsHTML()}</g:link></li>
 </g:each>
 </ul>
-<g:link controller="membership" action="create" params="['person.id': personInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'membership.label', default: 'Membership')])}</g:link>
+
 
                                 </td>
                             </tr>
@@ -92,7 +92,7 @@
     <li><g:link controller="course" action="show" id="${o.id}">${o?.encodeAsHTML()}</g:link></li>
 </g:each>
 </ul>
-<g:link controller="course" action="create" params="['person.id': personInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'course.label', default: 'Course')])}</g:link>
+
 
                                 </td>
                             </tr>

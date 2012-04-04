@@ -328,6 +328,14 @@ th.desc a {
     background: transparent url(../images/skin/preview_survey.png) 5px 50% no-repeat;
     padding-left: 28px;
 }
+.buttons input.submit {
+    background: transparent url(../images/skin/submit_survey.png) 5px 50% no-repeat;
+    padding-left: 28px;
+}
+.buttons input.take {
+    background: transparent url(../images/skin/take_survey.png) 5px 50% no-repeat;
+    padding-left: 28px;
+}
 .buttons input.show {
     background: transparent url(../images/skin/go_back.png) 5px 50% no-repeat;
     padding-left: 28px;

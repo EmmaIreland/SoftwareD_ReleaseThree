@@ -78,7 +78,7 @@
 
 						<td valign="top" class="value">
 							<g:each in="${surveyInstance.questions}" var="question">
-								<g:render template="${question.getTemplateName()}"
+								<g:render template="questionDisplay"
 									bean="${question}" var="question" />
 							</g:each>
 						</td>

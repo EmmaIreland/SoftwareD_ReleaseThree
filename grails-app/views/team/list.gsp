@@ -31,13 +31,25 @@
 			<g:each in="${teamInstanceList}" var="m">
 				<h3>
 					<a href="#">${m.name}</a>
+
 				</h3>
 				<div>
 					<ul>
 						<g:each in="${m.memberships}" var="i">
+						
 							<li><g:link controller="person" action="show" id="${i.member.id}">${i?.encodeAsHTML()}</g:link></li>
 							</g:each>
 					</ul>
+					<div>
+					<br></br>
+						<b>Comments:</b>
+						<br></br>
+						<a href="#">${m.comments}</a>
+					</div>
+					<div>
+					<br></br>
+						<span class="button"><g:link class="edit" controller="team" action="edit" id="${m.id}">${'Edit Group'}</g:link></span>
+					</div>	
 				</div>
 			</g:each>				
 		</div>

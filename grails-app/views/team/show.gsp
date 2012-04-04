@@ -28,6 +28,13 @@
                             
                         </tr>
                         
+                       <tr class="prop">
+                            <td valign="top" class="name"><g:message code="team.comments.label" default="Comments" /></td>
+                             
+                             <td valign="top" class="value">${fieldValue(bean: teamInstance, field: "comments")}</td>
+                                                        
+                        </tr>
+                        
                         
                         <tr class="prop">
                             <td valign="top" class="name"><g:message code="team.memberships.label" default="Members" /></td>
@@ -48,7 +55,7 @@
             <div class="buttons">
                 <g:form>
                     <g:hiddenField name="id" value="${teamInstance?.id}" />
-                    <span class="button"><g:actionSubmit class="edit" action="edit" value="${message(code: 'default.button.edit.label', default: 'Edit')}" /></span>
+                    <span class="button"><g:actionSubmit class=edit action="edit" value="${message(code: 'default.button.edit.label', default: 'Edit')}" /></span>
                     <span class="button"><g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" /></span>
                 </g:form>
             </div>

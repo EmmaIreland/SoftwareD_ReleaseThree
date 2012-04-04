@@ -12,8 +12,10 @@
 
 	<script>
 	$(function() {
-		$( "#accordion" ).accordion({
+		$( ".accordion" ).each(function(index, ele){
+			$(ele).accordion({
 			collapsible: true
+			});
 		});
 	});
 	</script>
@@ -24,8 +26,8 @@
 					code="default.home.label" /> </a> </span>
 	</div>
 	<div class="body">
-		<div id="accordion">
-			<g:each in="${teamInstanceList}" var="m">
+		<g:each in="${teamInstanceList}" var="m">
+			<div class="accordion">
 				<h3>
 					<a href="#">
 						${m.name}
@@ -64,10 +66,10 @@
 							</g:link>
 						</span>
 					</div>
-	
+	</div>
 				</div>
 			</g:each>
-		</div>
+		
 
 	</div>
 </body>

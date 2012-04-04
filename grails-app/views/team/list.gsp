@@ -34,35 +34,35 @@
 				</h3>			
 				<div>
 					<div>
-						<div>
-							
-							<b>Project:</b> 
-							<br></br>
-								<ul>
-									<g:link controller="project" action="show" id="${m.project.id}">${m?.project.name.encodeAsHTML()}</g:link>
-								</ul>
-						</div>					
-					
-					<br></br>
-						 <span class="button"><g:link class="edit" controller="team" action="edit" id="${m.id}">${'Edit Group'}
-							</g:link>
-						</span>
+						<b>Project:</b> 
+						<br></br>
+							<ul>
+								<g:link controller="project" action="show" id="${m.project.id}">${m?.project.name.encodeAsHTML()}</g:link>
+							</ul>
 					</div>
 					<br></br>
 					<b>Students in ${m.name}:</b> 
-							<br></br>
-					<ul>
-						<g:each in="${m.memberships}" var="i">
-							<ul>
-							<li><g:link controller="person" action="show" id="${i.member.id}"> ${i?.encodeAsHTML()}</g:link> </li>
-							</ul>
-						</g:each>
-					</ul>
+					<br></br>
+						<ul>
+							<g:each in="${m.memberships}" var="i">
+								<ul>
+								<li><g:link controller="person" action="show" id="${i.member.id}"> ${i?.encodeAsHTML()}</g:link> </li>
+								</ul>
+							</g:each>
+						</ul>
+					
+					
 					<div>
 						<br></br> <b>Comments:</b> <br></br> 
 							<ul>
 								${m.comments}
 							</ul>
+					</div>
+					<br></br>
+					<div style="text-align: right;">
+						<span class="button"><g:link class="edit" controller="team" action="edit" id="${m.id}">${'Edit Group'}
+							</g:link>
+						</span>
 					</div>
 	
 				</div>

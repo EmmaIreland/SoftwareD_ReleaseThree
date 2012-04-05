@@ -13,8 +13,9 @@ class AnswerTests extends GrailsUnitTestCase {
     }
 
     void testGetAnswer() {
-	CheckboxQuestion question1 = new CheckboxQuestion(prompt: "What is your name?", choices: ["stuff"]).save(failOnError: true)
-	Answer answer1 = new Answer(response: "Nic McPhee", person: Person.get(1), question: question1).save(failOnError: true)
-	assertEquals question1.getAnswer(Person.get(1)), answer1
+	Person nic = new Person(name: 'Nic McPhee', email: 'mcphee@umn.edu').save(failOnError: true)
+        CheckboxQuestion question1 = new CheckboxQuestion(prompt: "What is your name?", choices: ["stuff"]).save(failOnError: true)
+	Answer answer1 = new Answer(response: "Nic McPhee", person: nic, question: question1).save(failOnError: true)
+	assertEquals question1.getAnswer(nic), answer1
     }
 }

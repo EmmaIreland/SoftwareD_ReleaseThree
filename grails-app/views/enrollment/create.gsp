@@ -5,6 +5,17 @@
         <meta name="layout" content="main" />
         <g:set var="entityName" value="${message(code: 'enrollment.label', default: 'Enrollment')}" />
         <title><g:message code="default.create.label" args="[entityName]" /></title>
+        <script type="text/javascript">
+
+		function deletePerson(image) {
+			if (confirm("Are you sure you want to remove this person from this course?")) {
+				personId = $(image).parent().attr("id");
+				jQuery.post("../../enrollment/delete/" , {id: personId});
+				$(image).parent().remove();
+			}
+		}
+        
+        </script>
     </head>
     <body>
         <div class="nav">
@@ -32,12 +43,13 @@
                                         <td valign="top" class="name">
                                                 <label for="course">${enrollmentInstance.course.enrollments ? "Students already enrolled:" : "No students are enrolled yet" }</label>
                                         </td>
-                                                <td valign="top" class="value">
-                                                <ul>
-                                                        <g:each in="${enrollmentInstance.course.enrollments.sort({it.person.name})}" var= "e">
-                                                        <li>${e.person.name}</li>
-                                                        </g:each>
-                                                </ul>
+                                        <td valign="top" class="value">
+	                                            <g:each in="${enrollmentInstance.course.enrollments.sort({it.person.name})}" var= "e">
+	                                           		<span id="${e.id}">
+	                		    						<br><img src="${resource(dir:'images',file:'delete.png')}" style="position: relative; top: 3px; cursor:pointer" onclick="deletePerson(this)" />
+	                		    						<g:link controller="person" action="show" id="${e.person.id}">${e.person}</g:link>
+	              		    						</span>
+	                                            </g:each>
                                         </td>
                                         <input type="hidden" name="course.id" value="${enrollmentInstance?.course?.id}"/>
                                 </g:if>

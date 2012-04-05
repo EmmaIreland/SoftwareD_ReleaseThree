@@ -69,7 +69,7 @@
                             	<g:link controller="enrollment" action="create" params="${['course.id': courseInstance.id] }">Add a student</g:link>
                                 <g:each in="${courseInstance.enrollments}" var="p">
                                     <span id="${p.id}">
-                            		    <br><img src="../../images/delete.png" style="position: relative; top: 3px; cursor:pointer" onclick="deletePerson(this)" />
+                            		    <br><img src="${resource(dir:'images',file:'delete.png')}" style="position: relative; top: 3px; cursor:pointer" onclick="deletePerson(this)" />
                             		    <g:link controller="person" action="show" id="${p.person.id}">${p.person}</g:link>
                           		    </span>
                                 </g:each>

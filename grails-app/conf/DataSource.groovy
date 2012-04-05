@@ -19,13 +19,13 @@ environments {
     }
     test {
         dataSource {
-            dbCreate = 'update'
+            dbCreate = 'create-drop'
             url = 'jdbc:hsqldb:mem:testDb'
         }
     }
     production {
         dataSource {
-            dbCreate = 'create-drop'
+            dbCreate = 'update'
             url = 'jdbc:hsqldb:file:cevinsCyqulistsDb;shutdown=true'
         }
     }

@@ -24,4 +24,10 @@ class CourseTests extends GrailsUnitTestCase {
 	assertFalse programmingLanguages.validate()
 	assertEquals 'inList', programmingLanguages.errors['term'] 
     }
+    void testToString(){
+        Person elena = new Person (name: 'Elena', email: 'elenam@morris.umn.edu')
+        Course programmingLanguages = new Course(abbreviation: 'CSci 4651', name: 'Programming Languages', term: 'Spring', year: '2012', owner: elena)
+        assertEquals programmingLanguages.toString(), programmingLanguages.name
+        
+    }
 }

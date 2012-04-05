@@ -17,7 +17,6 @@
 	        	cursor: move;
 	        }
 	        .dialog {
-	    		width: 360px;
 	    		margin-bottom: 10px;
 	    	}
 	    	.group {

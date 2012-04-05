@@ -1,7 +1,5 @@
 package survey
 
-import org.codehaus.groovy.grails.validation.BlankConstraint;
-
 import grails.plugin.spock.*
 
 class QuestionSpec extends UnitSpec {
@@ -35,9 +33,11 @@ class QuestionSpec extends UnitSpec {
             question1.toString() == 'A/S/L?'
     }
     def 'Test copyList'(){
-        def testList = question1.list()
+        def testList1 = question1.list()
+        def testList2 = question1.list()
         expect:
-            question1.copyList(testList) == testList
+            question1.copyList(testList1) == testList1
+            blankPrompt.copyList(testList2) == testList2
         
     }
     def 'Test getSurvey'(){

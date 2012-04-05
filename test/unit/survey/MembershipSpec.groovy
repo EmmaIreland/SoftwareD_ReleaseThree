@@ -42,4 +42,24 @@ class MembershipSpec extends UnitSpec {
               compareMe.compareTo(mattInOne) == 10
         
     }
+    def 'Test toString'() {
+        Membership mattInOne = new Membership(team: teamOne, member: matt)
+        when: mockDomain(Membership, [mattInOne])
+        
+        then: mattInOne.toString() == matt.name
+            
+    }
+    def 'Test oneMembershipPerProject'() {
+        Membership mattInOne = new Membership(team: teamOne, member: matt)
+        Membership imInvalid = new Membership(team: teamOne, member: matt)
+        Membership compareMe = new Membership(team: teamOne, member: owner)
+        
+        when: 
+            mockDomain(Person, [matt, owner])
+            mockDomain(Team, [teamOne])
+            mockDomain(Project, [projectOne])
+            mockDomain(Membership, [mattInOne, compareMe, imInvalid])
+        
+        then: imInvalid.validate() == false
+    }
 }

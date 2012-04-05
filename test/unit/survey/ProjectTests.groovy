@@ -28,4 +28,12 @@ class ProjectTests extends GrailsUnitTestCase {
 	assertEquals 'validator', releaseOne.errors['dueDate']
     }
     
+    void testToString(){
+        Person elena = new Person (name: 'Elena', email: 'elenam@morris.umn.edu')
+        Course programmingLanguages = new Course(abbreviation: 'CSci 4651', name: 'Programming Languages', term: 'Spring', year: 2012, owner: elena)
+        Project releaseOne = new Project(name: 'Release One', description: 'Students do cool things', course: programmingLanguages, dueDate: new Date().previous())
+        
+        assertEquals releaseOne.toString(), 'Release One for Programming Languages'
+    }
+    
 }

@@ -14,6 +14,7 @@
 	$(function() {
 		$( ".accordion" ).each(function(index, ele){
 			$(ele).accordion({
+			active: false,	
 			collapsible: true
 			});
 		});

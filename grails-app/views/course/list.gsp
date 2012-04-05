@@ -62,8 +62,7 @@
 					<div style="text-align: left;" class="value">
 						<g:link	controller="enrollment" action="create"	params="${['course.id': course.id] }">Add a student</g:link>
 							<g:each in="${course.enrollments}" var="p">
-								<ul>
-								<ul>
+								<ul><ul>
 									<li><g:link controller="person" action="show" id="${p.person.id}">	${p.person}	</g:link></li>
 								</ul></ul>
 							</g:each>

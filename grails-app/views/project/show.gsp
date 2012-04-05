@@ -6,7 +6,7 @@
         <meta name="layout" content="main" />
         <g:set var="entityName" value="${message(code: 'project.label', default: 'Project')}" />
         <title><g:message code="default.show.label" args="[entityName]" /></title>
-        <g:javascript library="jquery" plugin="jquery" />
+
         <script type="text/javascript">
 
 		function deleteSurvey(image) {
@@ -18,6 +18,13 @@
 		}
         
         </script>
+        
+        <script>
+	$(function() {
+		$( "#tabs" ).tabs();
+	});
+	</script>
+        
     </head>
     <body>
         <div class="nav">
@@ -52,20 +59,7 @@
                         	
                         	<td valign="top" class="value"><g:formatDate date="${projectInstance?.dueDate}" format="MMMMM d, yyyy" /></td>
                         	
-                        </tr>
-                        
-                        <tr class="prop">
-                            <td valign="top" class="name"><g:message code="project.teams.label" default="Teams" /></td>
-                            
-                            <td valign="top" style="text-align: left;" class="value"><g:link controller="team" action="list" params="${[project: projectInstance.id]}">Manage Teams</g:link>
-                                <ul>
-                                <g:each in="${projectInstance.teams}" var="t">
-                                    <li><g:link controller="team" action="show" id="${t.id}">${t?.encodeAsHTML()}</g:link></li>
-                                </g:each>
-                                </ul>
-                            </td>
-                            
-                        </tr>                      
+                        </tr>                 
                        
                           <tr class="prop">
                             <td valign="top" class="name">Surveys:</td>
@@ -91,6 +85,52 @@
                     <span class="button"><g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" /></span>
                 </g:form>
             </div>
+            
+            <br></br>
+            <br></br>
+            
+            
+            <g:if test="${projectInstance.teams.size() != 0}">
+           	 	<h1>Groups in ${projectInstance.name}:</h1>
+           	 	<div class="demo">
+					<div id="tabs">
+						<ul>
+							<g:each in="${projectInstance.teams.sort{it.name}}" var="team">
+								<li><a href="#${team.id}">${team.name}</a></li>
+							</g:each>
+						</ul>
+					
+						<g:each in="${projectInstance.teams}" var="team">
+							<div id="${team.id}">
+								<h2>Comments:</h2>
+								<p>${team.comments}</p>
+								<br></br>
+							
+								<h2>Members:</h2>
+								
+								<g:each in="${team.memberships.member}" var="student">
+									<ul> <ul>
+										<li><g:link controller="person" action="show" id="${student.id}">${student?.encodeAsHTML()}</g:link></li>
+									</ul></ul>
+								</g:each>
+							
+								<br></br>
+								<g:link controller="team" action="list" params="${[project: projectInstance.id]}">Manage Members</g:link>
+								<div style="text-align: right;">
+									<g:link class="edit" controller="team" action="edit" id="${team.id}"><h2>${'Edit Team'}</h2></g:link>
+									
+								</div>
+							</div>
+							
+						</g:each>
+					</div>
+				</div>
+			</g:if>	
+			<g:else>
+				<h2><g:link controller="team" action="list" params="${[project: projectInstance.id]}">No groups made. Click here to add groups</g:link></h2>
+			</g:else>
+			
+            
         </div>
     </body>
 </html>

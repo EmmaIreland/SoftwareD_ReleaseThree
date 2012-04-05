@@ -20,10 +20,10 @@
         </script>
         
         <script>
-	$(function() {
-		$( "#tabs" ).tabs();
-	});
-	</script>
+		$(function() {
+			$( "#tabs" ).tabs();
+		});
+		</script>
         
     </head>
     <body>
@@ -115,9 +115,9 @@
 								</g:each>
 							
 								<br></br>
-								<g:link controller="team" action="list" params="${[project: projectInstance.id]}">Manage Members</g:link>
+								<g:link controller="team" action="list" params="${[project: projectInstance.id]}"><h3>Manage Members</h3></g:link>
 								<div style="text-align: right;">
-									<g:link class="edit" controller="team" action="edit" id="${team.id}"><h2>${'Edit Team'}</h2></g:link>
+									<g:link class="edit" controller="team" action="edit" id="${team.id}"><h2>${'Edit Group'}</h2></g:link>
 									
 								</div>
 							</div>

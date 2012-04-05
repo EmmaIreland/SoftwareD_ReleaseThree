@@ -146,7 +146,7 @@
 		                                    <label for="name"><g:message code="question.type.label" default="Select a Question" /></label>
 		                                </td>
 		                                <td valign="top" class="value ${hasErrors(bean: personInstance, field: 'name', 'errors')}">
-		                                    <g:select name="questionid" from="${existingQuestions}" optionKey="id"/>
+		                                    <g:select style="max-width: 240px" name="questionid" from="${existingQuestions}" optionKey="id"/>
 		                                </td>
 		                            </tr>
 		                            

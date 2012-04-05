@@ -8,8 +8,14 @@
 	value="${message(code: 'team.label', default: 'Team')}" />
 <title><g:message code="Group List" args="[entityName]" /></title>
 </head>
-<body>
 
+
+
+
+<body>
+	
+
+	
 	<script>
 	$(function() {
 		$( ".accordion" ).each(function(index, ele){
@@ -20,12 +26,19 @@
 		});
 	});
 	</script>
+	
 
 	<div class="nav">
 		<span class="menuButton"><a class="home"
 			href="${createLink(uri: '/')}"><g:message
 					code="default.home.label" /> </a> </span>
+					
 	</div>
+	
+	<div class="body">
+		<h1>Groups</h1>					
+	</div>
+	<br></br>
 	<div class="body">
 		<g:each in="${teamInstanceList}" var="m">
 			<div class="accordion">

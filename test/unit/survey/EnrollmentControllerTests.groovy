@@ -86,4 +86,18 @@ class EnrollmentControllerTests extends ControllerUnitTestCase {
         controller.params.id = null
         assertEquals controller.request.message, null
     }
+    
+    void testDeleteByPerson() {
+        Person owner = new Person(name: 'Nic McPhee', email: 'mcphee@morris.umn.edu')
+        Person student = new Person(name: 'Steve Simon', email: 'simon@says.org')
+        mockDomain(Person, [owner, student])
+        Course course = new Course(owner: owner, name: "Software Design", abbreviation: 'CSCI 3601')
+        mockDomain(Course, [course])
+        Enrollment enrollment = new Enrollment(course:course, person: student)
+        mockDomain(Enrollment, [enrollment])
+        controller.params.personId = student.id
+        controller.params.courseId = course.id
+        controller.deleteByPerson()
+        assertNull Enrollment.findByPerson(student)
+    }
 }

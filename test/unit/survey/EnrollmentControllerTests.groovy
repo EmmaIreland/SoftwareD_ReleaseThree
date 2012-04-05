@@ -97,6 +97,7 @@ class EnrollmentControllerTests extends ControllerUnitTestCase {
         mockDomain(Enrollment, [enrollment])
         controller.params.personId = student.id
         controller.params.courseId = course.id
+        assertNotNull Enrollment.findByPerson(student)
         controller.deleteByPerson()
         assertNull Enrollment.findByPerson(student)
     }

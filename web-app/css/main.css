@@ -299,6 +299,7 @@ th.desc a {
     overflow: hidden;
     padding: 0;
     border-radius: 0px 0px 6px 6px;
+    width: 480px;
 }
 
 .buttons input {

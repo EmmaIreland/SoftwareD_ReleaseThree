@@ -9,20 +9,21 @@ class TeamSpec extends UnitSpec {
     Person steve = new Person(name: 'steve', email: 'steve@steve.com')
     Enrollment bobEnrollment = new Enrollment(person: bob, course: softwareD)
     Project project = new Project(name: 'Lab 1', course: softwareD)
-    Team testTeam = new Team(name:'Team!', memberships:[])
-    Membership bobInTeam = new Membership()
-    
+    Membership bobInTeam = new Membership(team: testTeam, member: bob)
+    Team testTeam = new Team(name:'Team!', project: project)
     def setup() {
         mockDomain(Person, [mcPhee, bob, steve])
         mockDomain(Course, [softwareD])
         mockDomain(Project, [project])
         mockDomain(Enrollment, [bobEnrollment])
         mockDomain(Team, [testTeam])
-        mockDomain(Membership, [])
+        mockDomain(Membership, [bobInTeam])
         mockForConstraintsTests(Team)
     }
 
-    def 'Test Valid Members'() {
+    def 'Test toString'() {
+        expect: testTeam.toString() == testTeam.name
+                
         
     }
 }

@@ -12,6 +12,7 @@ class Enrollment implements Comparable{
     }
     
     @Override
+    //This is only used for sorting names in a list.
     public int compareTo(Object o) {
 	person.name.compareTo(o.person.name)
     }

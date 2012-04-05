@@ -62,7 +62,10 @@ class BootStrap {
                 new Membership(team: teamHumble, member: softwareDesignPeople[i]).save(failOnError: true)
             } // TODO: make these for loops w/o duplication
                         
-            Survey surveyReleaseOne = new Survey(title: 'Survey for Release One', dueDate: new Date().next(), questions: [], project: releaseOne).save(failOnError: true)
+	    ShortTextQuestion whatStoriesFinished = new ShortTextQuestion(prompt:"What stories did you complete?").save(failOnError: true)
+	    MultipleChoiceQuestion teamGrade = new MultipleChoiceQuestion(prompt:"What grade would you give your group?", choices:["A", "B", "C", "D", "F"]).save(failOnError: true)
+	    LongTextQuestion desribeExperience = new LongTextQuestion(prompt:"Describe your group experience:").save(failOnError: true)
+            Survey surveyReleaseOne = new Survey(title: 'Survey for Release One', dueDate: new Date().next(), questions: [whatStoriesFinished, teamGrade, desribeExperience], project: releaseOne).save(failOnError: true)
             
             def scootsSurveyQuestions = [
                 new LongTextQuestion(prompt: 'So, tell me \'bout yerself.'),

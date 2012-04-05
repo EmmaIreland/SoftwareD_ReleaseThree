@@ -145,9 +145,14 @@
 					</g:each>
 				</tbody>
 			</table>
-			<div class="buttons">						
-				<span class="menuButton"><g:link class="create" controller="project" action="create" params="${['course.id': courseInstance.id]}"><g:message code="Add Projects" args="[entityName]"/></g:link>
-				</span>
+			<div class="buttons">
+				<g:form>
+                    <span class="button">
+                    	<g:link class="create" controller="project" action="create" params="${['course.id': courseInstance.id]}">
+                    		<input class="add" value="Add Projects"/>
+                    	</g:link>
+                    </span>
+                </g:form>
 			</div>
             
         </div>

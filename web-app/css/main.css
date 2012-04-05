@@ -312,6 +312,10 @@ th.desc a {
     overflow: visible;
     padding: 2px 6px;
 }
+.buttons input.add {
+    background: transparent url(../images/skin/database_add.png) 5px 50% no-repeat;
+    padding-left: 28px;
+}
 .buttons input.delete {
     background: transparent url(../images/skin/database_delete.png) 5px 50% no-repeat;
     padding-left: 28px;

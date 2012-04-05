@@ -93,7 +93,7 @@
 				<g:hiddenField name="personid" value="${personInstance?.id}" />
 				<span class="button"><g:actionSubmit class="submit"
 						action="submit"
-						value="${message(code: 'default.button.submit.label', default: 'Submit Survey')}"/>
+						value="${message(code: 'default.button.submit.label', default: 'Submit Survey')}" onclick="alert('Thanks for your submission')"/>
 				</span>
 			
 		</div>

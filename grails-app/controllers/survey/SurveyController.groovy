@@ -115,7 +115,7 @@ class SurveyController {
             def serverResponse = params["" + question.id]
             createAnswer(question, personInstance, serverResponse)
         }
-        redirect(action: list)
+        redirect(controller: "person", action: "show", id:personInstance.id)
     }
 
     private createAnswer(question, person, serverResponse) {

@@ -61,9 +61,21 @@ class BootStrap {
             for (i in 6..10) {
                 new Membership(team: teamHumble, member: softwareDesignPeople[i]).save(failOnError: true)
             } // TODO: make these for loops w/o duplication
-            
+                        
             Survey surveyReleaseOne = new Survey(title: 'Survey for Release One', dueDate: new Date().next(), questions: [], project: releaseOne).save(failOnError: true)
             
+            def scootsSurveyQuestions = [
+                new LongTextQuestion(prompt: 'So, tell me \'bout yerself.'),
+                new CheckboxQuestion(prompt: 'Are you a boy or a girl?', choices: ['Boy', 'Girl', 'Other']),
+                new LongTextQuestion(prompt: 'And how d\'you feel \'bout that?'),
+                new ShortTextQuestion(prompt: 'If you were an animal, what animal would you be?'),
+                new MultipleChoiceQuestion(prompt: 'What\'s your favorite range in the visible light spectrum? (Choices are given by wavelength in nm.)',
+                    choices: ['380-450 (violet)', '450-475 (blue)', '476-495 (cyan)', '495-570 (green)', '570-590 (yellow)', '590-620 (orange)', '620-750 (red)', '760+ (infrared)']),
+                new ShortTextQuestion(prompt: 'What is your favorite vowel-less word?'),
+                new LongTextQuestion(prompt: 'Tell me a story.'),
+                new CheckboxQuestion(prompt: 'Do you love me?', choices: ['Yes', 'More than yes (wink, wink)'])
+            ]
+            Survey scootsSurvey = new Survey(title: 'Scoot\'s Finest Survey', dueDate: new Date().next(), questions: scootsSurveyQuestions, project: releaseOne).save(failOnError: true)
         }
     }
     

@@ -13,7 +13,7 @@
     </head>
     <body>
         <div id="sideBarNav">
-        	<a href="${createLink(uri: '/')}"><img id="appLogo" src="${resource(dir:'images',file:'quintets_logo.png')}" alt="Grails" border="0" /></a>
+        	<a href="${createLink(uri: '/')}"><img id="appLogo" src="${resource(dir:'images',file:'Cevin_logo.png')}" alt="Grails" border="0" /></a>
         	<br>
         	<div id="appName"><a href="${createLink(uri: '/')}">Cevin's Cyqulists</a></div>
         	<div id="controllers">

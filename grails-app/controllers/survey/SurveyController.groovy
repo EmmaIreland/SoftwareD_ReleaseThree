@@ -1,20 +1,21 @@
 package survey
+import survey.answers.*
 import survey.questions.*
 import grails.converters.JSON
 
 class SurveyController {
-	
-	static post = 'POST'
-	def listString = 'list'
-	def editString = 'edit'
-	def createString = 'create'
-	def showString = 'show'
-	def defaultNotFoundMessage = 'default.not.found.message'
+
+    static post = 'POST'
+    def listString = 'list'
+    def editString = 'edit'
+    def createString = 'create'
+    def showString = 'show'
+    def defaultNotFoundMessage = 'default.not.found.message'
 
     static allowedMethods = [save: post, update: post, delete: post, preview: post]
 
     def index = {
-       redirect(action: listString, params: params)
+        redirect(action: listString, params: params)
     }
 
     def list = {
@@ -38,7 +39,7 @@ class SurveyController {
             render(view: createString, model: [surveyInstance: surveyInstance])
         }
     }
-    
+
     private removeEmptyElements(def input) {
         def list = input as List
         list.retainAll{
@@ -48,10 +49,10 @@ class SurveyController {
     }
 
     def addQuestion = {
-	def surveyInstance = Survey.get(params.surveyid)
+        def surveyInstance = Survey.get(params.surveyid)
         def surveyType = params.type
         def questionInstance
-        
+
         switch(surveyType){
             case 'existing':
                 questionInstance = Question.get(params.questionid).copyQuestion()
@@ -71,11 +72,11 @@ class SurveyController {
                 questionInstance = new LongTextQuestion(prompt: params.ltPrompt).save(failOnError: true)
                 break
         }
-	surveyInstance.addToQuestions(questionInstance)
-	surveyInstance.save(failOnError: true)
-	render questionInstance as JSON
+        surveyInstance.addToQuestions(questionInstance)
+        surveyInstance.save(failOnError: true)
+        render questionInstance as JSON
     }
-    
+
     def show = {
         def surveyInstance = Survey.get(params.id)
         def existingQuestions = Question.findAll()
@@ -87,7 +88,7 @@ class SurveyController {
             [surveyInstance: surveyInstance, existingQuestions: existingQuestions]
         }
     }
-    
+
     def preview = {
         def surveyInstance = Survey.get(params.id)
         if (!surveyInstance) {
@@ -98,8 +99,8 @@ class SurveyController {
             [surveyInstance: surveyInstance]
         }
     }
-    
-    def submit = {    
+
+    def submit = {
         def surveyInstance = Survey.get(params.id)
         def personInstance = Person.get(params.personid)
         if (!surveyInstance || !personInstance) {
@@ -107,16 +108,55 @@ class SurveyController {
             redirect(action: listString)
             return
         }
+        def questions = surveyInstance.questions
         def questionIds = params.keySet().findAll { isNumber(it) }
-        
-        questionIds.each {
-            println params[it]
-            def answer = new Answer(response: params[it]).save(failOnError: true)
-            println answer
+
+        questions.each { question ->
+            def serverResponse = params["" + question.id]
+            createAnswer(question, personInstance, serverResponse)
         }
-        
+        redirect(action: list)
     }
-    
+
+    private createAnswer(question, person, serverResponse) {
+        def answer
+        switch(question.templateName) {
+            case 'Long':
+            case 'Short':
+                answer = new TextAnswer(response: serverResponse, person: person, question: question).save(failOnError: true)
+                break
+            case 'MultipleChoice':
+                answer = new MultipleChoiceAnswer(responseIndex: serverResponse, person: person, question: question).save(failOnError: true)
+                break
+            case 'Checkbox':
+                def responseMap = [:]
+                println "the serverResponse class is" + serverResponse.class
+                if (serverResponse instanceof String) {
+                    serverResponse = [serverResponse]
+                } else {
+                    serverResponse = serverResponse as List
+                }
+
+                question.choices.eachWithIndex { choice, index ->
+                    
+
+                responseMap[index] = serverResponse.contains(index)
+                }
+                println("About to create a CheckboxAnswer")
+                answer = new CheckboxAnswer(responses: responseMap, person: person, question: question)
+                println("Constructed the CheckboxAnswer")
+                answer.save(failOnError: true)
+                println("Saved the CheckboxAnswer")
+                break
+            default:
+                println("We reached the default case in createAnswer")
+                break
+        }
+        println("We've left the switch")
+        println answer
+        println("We've printed the answer")
+    }
+
     private isNumber(string) {
         try {
             string.toInteger()
@@ -125,7 +165,7 @@ class SurveyController {
             false
         }
     }
-    
+
     def take = {
         def surveyInstance = Survey.get(params.id)
         def personInstance = Person.get(params.personid)
@@ -155,7 +195,7 @@ class SurveyController {
             if (params.version) {
                 def version = params.version.toLong()
                 if (surveyInstance.version > version) {
-                    
+
                     surveyInstance.errors.rejectValue('version', 'default.optimistic.locking.failure', [message(code: 'survey.label', default: 'Survey')] as Object[], 'Another user has updated this Survey while you were editing')
                     render(view: editString, model: [surveyInstance: surveyInstance])
                     return
@@ -194,13 +234,13 @@ class SurveyController {
             redirect(action: listString)
         }
     }
-	
-	private makeMessage(code, surveyId) {
-		return "${message(code: code, args: [surveyLabel(), surveyId])}"
-	}
- 
-	private surveyLabel() {
-		message(code: 'survey.label', default: 'Survey')
-	}
-	
+
+    private makeMessage(code, surveyId) {
+        return "${message(code: code, args: [surveyLabel(), surveyId])}"
+    }
+
+    private surveyLabel() {
+        message(code: 'survey.label', default: 'Survey')
+    }
+
 }

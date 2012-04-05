@@ -4,7 +4,7 @@ import survey.Question
 import survey.QuestionInterface
 
 class MultipleChoiceQuestion extends Question implements QuestionInterface{
-	final Object templateName = 'MultipleChoice'
+    final Object templateName = 'MultipleChoice'
     List choices
     static hasMany = [choices: String]
 

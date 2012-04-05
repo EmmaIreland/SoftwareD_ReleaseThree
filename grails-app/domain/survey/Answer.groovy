@@ -5,8 +5,4 @@ class Answer {
     
     static constraints = {
     }
-    
-    String toString() {
-	"" // TODO Fix this
-    }
 }

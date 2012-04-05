@@ -2,13 +2,13 @@ package survey.answers
 
 import survey.*
 
-class MultipleChoiceAnswer extends Answer {
-    int responseIndex
+class TextAnswer extends Answer {
+    String response
 
     static constraints = {
     }
     
     String toString() {
-        question.choices[responseIndex]
+        response
     }
 }

@@ -8,4 +8,14 @@ class CheckboxAnswer extends Answer {
 
     static constraints = {
     }
+    
+    String toString() {
+        def toReturn = "Checkbox: "
+        responses.each { key, value ->
+            if (value) {
+                toReturn += question.choices[key] + " "
+            }
+        }
+        toReturn
+    }
 }

@@ -3,13 +3,11 @@ package survey.questions
 import survey.*
 
 class LongTextQuestion extends Question implements QuestionInterface{
-	final Object templateName = 'Long'
+    final Object templateName = 'Long'
     static hasMany = [responses: Answer]
     
     static constraints = {
     }
-
-
 
     @Override
     public Object getAnswer(Person person) {

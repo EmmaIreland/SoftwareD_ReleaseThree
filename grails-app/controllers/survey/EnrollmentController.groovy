@@ -1,13 +1,13 @@
 package survey
 
 class EnrollmentController {
-	
-	static post = 'POST'
-	def listString = 'list'
-	def editString = 'edit'
-	def createString = 'create'
-	def showString = 'show'
-	def defaultNotFoundMessage = 'default.not.found.message'
+
+    static post = 'POST'
+    def listString = 'list'
+    def editString = 'edit'
+    def createString = 'create'
+    def showString = 'show'
+    def defaultNotFoundMessage = 'default.not.found.message'
 
     static allowedMethods = [save: 'POST', update: 'POST', delete: 'POST']
 
@@ -23,15 +23,14 @@ class EnrollmentController {
     def create = {
         def enrollmentInstance = new Enrollment()
         def availableStudents = Person.list()
-	
+
         if (params.course?.id) {
-            
             def course = Course.get(params.course.id)
             availableStudents = availableStudents - course.enrollments*.person - course.owner
-        }	
-        
+        }
+
         enrollmentInstance.properties = params
-        
+
         return [enrollmentInstance: enrollmentInstance, availableStudents: availableStudents.sort {it.name}, hasAvailableStudents: (availableStudents.size() > 0)]
     }
 
@@ -39,9 +38,9 @@ class EnrollmentController {
         def personInstance
         if (params?.name != null) {
             personInstance = new Person(params)
-	    personInstance.save(flush: true)
+            personInstance.save(flush: true)
         }
-        
+
         def enrollmentInstance = personInstance ? new Enrollment(person: personInstance, course: Course.get(params.course.id)) : new Enrollment(params)
         if (enrollmentInstance.save(flush: true)) {
             redirect(controller: 'enrollment', action: createString, params:['course.id': enrollmentInstance.course.id])
@@ -80,7 +79,7 @@ class EnrollmentController {
             if (params.version) {
                 def version = params.version.toLong()
                 if (enrollmentInstance.version > version) {
-                    
+
                     enrollmentInstance.errors.rejectValue('version', 'default.optimistic.locking.failure', [message(code: 'enrollment.label', default: 'Enrollment')] as Object[], 'Another user has updated this Enrollment while you were editing')
                     render(view: editString, model: [enrollmentInstance: enrollmentInstance])
                     return
@@ -104,14 +103,14 @@ class EnrollmentController {
     def delete = {
         def enrollmentInstance = Enrollment.get(params.id)
         enrollmentInstance.delete(flush: true)
-	render('Success')
+        render('Success')
     }
-	
-	private makeMessage(code, enrollmentId) {
-		return "${message(code: code, args: [enrollmentLabel(), enrollmentId])}"
-	}
- 
-	private enrollmentLabel() {
-		message(code: 'enrollment.label', default: 'Enrollment')
-	}
+
+    private makeMessage(code, enrollmentId) {
+        return "${message(code: code, args: [enrollmentLabel(), enrollmentId])}"
+    }
+
+    private enrollmentLabel() {
+        message(code: 'enrollment.label', default: 'Enrollment')
+    }
 }

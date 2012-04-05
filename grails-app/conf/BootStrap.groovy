@@ -62,7 +62,7 @@ class BootStrap {
                 new Membership(team: teamHumble, member: softwareDesignPeople[i]).save(failOnError: true)
             } // TODO: make these for loops w/o duplication
             
-            //Survey surveyReleaseOne = new Survey(title: 'Survey for Release One', dueDate: new Date().next(), questions: [], project: releaseOne).save(failOnError: true)
+            Survey surveyReleaseOne = new Survey(title: 'Survey for Release One', dueDate: new Date().next(), questions: [], project: releaseOne).save(failOnError: true)
             
         }
     }

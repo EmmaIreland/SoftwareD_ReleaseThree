@@ -12,7 +12,6 @@ class EnrollmentControllerTests extends ControllerUnitTestCase {
     }
 
     void testAvailableStudents() {
-	
 	Person person1 = new Person(name: "Eric", email: "sup@sup.com")
 	Person person2 = new Person(name: "Joe", email: "sup@sup.com")
 	Person person3 = new Person(name: "Mike", email: "sup@sup.com")
@@ -29,12 +28,12 @@ class EnrollmentControllerTests extends ControllerUnitTestCase {
 	
 	controller.params.course = course1
 	def results = controller.create()
-	assertNotNull results	
+	assertNotNull results
 	assertTrue results.availableStudents.containsAll([person2, person3])
+        println results.availableStudents
 	assertEquals 2, results.availableStudents.size()
-	
-
     }
+    
     void testSaveStudents() {  
         
         Person owner = new Person(name: "Kate", email: "sup@sup.com")

@@ -10,8 +10,13 @@
 		function deletePerson(image) {
 			if (confirm("Are you sure you want to remove this person from this course?")) {
 				personId = $(image).parent().attr("id");
-				jQuery.post("../../enrollment/delete/" , {id: personId});
+				personName = $(image).next().html();
+				
+				jQuery.post("deleteByPerson/" , {personId: personId, courseId: ${enrollmentInstance?.course?.id}});
 				$(image).parent().remove();
+				
+				newStudentOption = $('<option></option>').val(personId).html(personName);
+				$("#availableStudents").append(newStudentOption);
 			}
 		}
         
@@ -45,7 +50,7 @@
                                         </td>
                                         <td valign="top" class="value">
 	                                            <g:each in="${enrollmentInstance.course.enrollments.sort({it.person.name})}" var= "e">
-	                                           		<span id="${e.id}">
+	                                           		<span id="${e.person.id}">
 	                		    						<br><img src="${resource(dir:'images',file:'delete.png')}" style="position: relative; top: 3px; cursor:pointer" onclick="deletePerson(this)" />
 	                		    						<g:link controller="person" action="show" id="${e.person.id}">${e.person}</g:link>
 	              		    						</span>
@@ -68,7 +73,7 @@
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: enrollmentInstance, field: 'person', 'errors')}">
                                         <g:if test="${hasAvailableStudents}">                             
-                                                                        <g:select name="person.id" from="${availableStudents}" optionKey="id" value="${enrollmentInstance?.person?.id}"  />
+                                                                        <g:select id="availableStudents" name="person.id" from="${availableStudents}" optionKey="id" value="${enrollmentInstance?.person?.id}"  />
                                         </g:if>
                                         <g:else>
                                                 No unenrolled students

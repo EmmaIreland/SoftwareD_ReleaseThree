@@ -105,6 +105,12 @@ class EnrollmentController {
         enrollmentInstance.delete(flush: true)
         render('Success')
     }
+    
+    def deleteByPerson = {
+        def course = Course.get(params.courseId)
+        def person = Person.get(params.personId)
+        Enrollment.findByCourseAndPerson(course, person).delete(flush: true)
+    }
 
     private makeMessage(code, enrollmentId) {
         return "${message(code: code, args: [enrollmentLabel(), enrollmentId])}"

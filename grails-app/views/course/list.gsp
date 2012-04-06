@@ -12,7 +12,7 @@
 	$(function() {
 		$( "#tabs" ).tabs();
 	});
-	</script>
+</script>
 
 </head>
 <body>
@@ -25,15 +25,9 @@
 			</g:link> </span>
 	</div>
 
-
-
-
-
 	<div class="body">
 
 		<h1>Courses</h1>
-
-
 
 		<div id="tabs">
 
@@ -86,10 +80,15 @@
 				</div>
 			</g:each>
 		</div>
+		
+		<br/>
+		<trinkets:collapsibleDiv title="Lorem Ipsum">
+			Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut volutpat felis sit amet urna fringilla lobortis. Phasellus et nibh velit. Sed rutrum egestas est. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Praesent interdum molestie pulvinar. Pellentesque lobortis lectus nibh. Proin non libero bibendum tellus tempus luctus. Nunc mollis imperdiet vulputate. Morbi purus dolor, aliquet vitae rhoncus a, vestibulum ac arcu. Quisque in nulla eget nisi posuere aliquam eget ultrices enim. Pellentesque ultricies, lacus at auctor cursus, arcu enim lobortis leo, eget mattis dolor mi at arcu. Aliquam erat volutpat. Ut commodo rhoncus eros, at.
+		</trinkets:collapsibleDiv>
+		<trinkets:collapsibleDiv title="Some Div">Some Text</trinkets:collapsibleDiv>
+		<trinkets:collapsibleDiv title="Some Div">Some Text</trinkets:collapsibleDiv>
 
 	</div>
-
-
 
 </body>
 </html>

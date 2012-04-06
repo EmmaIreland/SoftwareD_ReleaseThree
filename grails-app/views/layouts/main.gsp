@@ -10,6 +10,7 @@
         <r:layoutResources/>
         <g:layoutHead />
         <g:javascript library="application" />
+        <g:javascript src="trinkets.js" />
     </head>
     <body>
         <div id="sideBarNav">

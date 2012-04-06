@@ -1,3 +1,5 @@
+/* Add Button */
+
 .addButton {
 	border: 1px solid #ccc;
 	background: #eed;
@@ -10,4 +12,46 @@
 	position: relative;
 	bottom: 4px;
 	margin-left: 3px;
+}
+
+/* Collapsible Div */
+
+.collapsibleDiv {
+	width: 480px;
+}
+
+.collapsibleDiv .header {
+	color: #eee;
+	font-weight: bold;
+	font-size: 12px;
+	padding: 2px 6px 2px 22px;
+	position: relative;
+	margin-bottom: 4px;
+	cursor: pointer;
+}
+
+.collapsibleDiv.expanded .header {
+	background: #a22f2f url(../images/trinkets/arrow-down.png) 3px 50% no-repeat;
+	border-radius: 6px 6px 0px 0px;
+	margin-bottom: 0px;
+}
+
+.collapsibleDiv.collapsed .header {
+	background: #666 url(../images/trinkets/arrow-right.png) 3px 50% no-repeat;
+	border-radius: 6px;
+}
+
+.collapsibleDiv .content {
+	background: #ccc;
+	border-radius: 0px 0px 6px 6px;
+	padding: 6px 8px 6px 8px;
+}
+
+.collapsibleDiv.collapsed .content {
+	display: none;
+}
+
+.collapsibleDiv.expanded .content {
+	display: block;
+	margin-bottom: 4px;
 }

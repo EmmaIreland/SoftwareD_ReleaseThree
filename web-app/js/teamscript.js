@@ -68,7 +68,7 @@ function equalizeGroupHeights() {
 	});
 	
 	$("div.group ul.students").each(function() {
-		$(this).parent().height(maxULHeight+22);
+		$(this).height(maxULHeight);
 	});
 }
 

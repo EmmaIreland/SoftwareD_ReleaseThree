@@ -58,10 +58,10 @@
                    		<span class="button"><g:submitButton name="create" class="save" value="Add" /></span>
                		</div>
            		</g:form>
-	 			<div class="dialog" id="addmultiplegroups" style="clear: left">
-	 				<g:form action="addmany">
+	 			
+ 				<g:form action="addmany">
+ 					<div class="dialog" id="addmultiplegroups" style="clear: left">
 	 					<h2>Add multiple generically-named groups:</h2>
-	 					<div class="dialog">
 	 					<table>
 	 						<tbody>
 	 							<g:hiddenField name="project.id" value="${projectInstance.id}" />
@@ -79,12 +79,12 @@
 	 							</tr>
 	 						</tbody>
 	 					</table>
-	 					</div>
-	 					<div class="buttons">
-                    		<span class="button"><g:submitButton name="create" class="save" value="Add" /></span>
-                		</div>
-	 				</g:form>
-	 			</div>
+ 					</div>
+ 					<div class="buttons">
+                   		<span class="button"><g:submitButton name="create" class="save" value="Add" /></span>
+               		</div>
+ 				</g:form>
+	 			
 	 		</div>
 	 		<div title="Drag students to change groups" id="groupArea">
 	 			<g:if test="${projectHasTeams}">

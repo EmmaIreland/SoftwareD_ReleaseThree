@@ -68,14 +68,14 @@ function equalizeGroupHeights() {
 	});
 	
 	$("div.group ul.students").each(function() {
-		$(this).parent().height(maxULHeight + 35);
+		$(this).parent().height(maxULHeight+22);
 	});
 }
 
 function equalizeGroupWidths() {
-	var groupWidths = $.makeArray($(".group")).map(getInnerWidth);
-	var studentWidths = $.makeArray($(".student")).map(getInnerWidth);
-	$(".group").css("width", Math.max(arrMax(groupWidths), arrMax(studentWidths)));
+//	var groupWidths = $.makeArray($(".group")).map(getInnerWidth);
+//	var studentWidths = $.makeArray($(".student")).map(getInnerWidth);
+//	$(".group").css("width", Math.max(arrMax(groupWidths), arrMax(studentWidths)));
 }
 
 function getInnerWidth(x) {

@@ -98,7 +98,7 @@
 	 						
 	 						<ul class="students" id="g${team.id}">
 	 							<g:each in="${team.memberships.sort() {it.member.name}}" var="membership">
-	 							<li><span class="student draggable" id="s${membership.member.id}">${membership.member.name}</span></li>
+	 								<li><span class="student draggable" id="s${membership.member.id}">${membership.member.name}</span></li>
 	 							</g:each>
 	 						</ul>
 	 					</div>

@@ -10,8 +10,8 @@
         <r:use module="jquery-validate"/>
         <r:layoutResources/>
         <r:layoutResources disposition="defer"/>
-        <g:javascript src="trinkets.js" />
         <g:layoutHead />
+        <g:javascript src="trinkets.js" />
     </head>
     <body>
         <div id="sideBarNav">

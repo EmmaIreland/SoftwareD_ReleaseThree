@@ -65,8 +65,8 @@ class BootStrap {
 	    ShortTextQuestion whatStoriesFinished = new ShortTextQuestion(prompt:"What stories did you complete?").save(failOnError: true)
 	    MultipleChoiceQuestion teamGrade = new MultipleChoiceQuestion(prompt:"What grade would you give your group?", choices:["A", "B", "C", "D", "F"]).save(failOnError: true)
 	    LongTextQuestion desribeExperience = new LongTextQuestion(prompt:"Describe your group experience:").save(failOnError: true)
-            Survey surveyReleaseOne = new Survey(title: 'Survey for Release One', dueDate: new Date().next(), questions: [whatStoriesFinished, teamGrade, desribeExperience], project: releaseOne).save(failOnError: true)
-            
+		
+           
             def scootsSurveyQuestions = [
                 new LongTextQuestion(prompt: 'So, tell me \'bout yerself.'),
                 new CheckboxQuestion(prompt: 'Are you a boy or a girl?', choices: ['Boy', 'Girl', 'Other']),
@@ -78,7 +78,12 @@ class BootStrap {
                 new LongTextQuestion(prompt: 'Tell me a story.'),
                 new CheckboxQuestion(prompt: 'Do you love me?', choices: ['Yes', 'More than yes (wink, wink)'])
             ]
-            Survey scootsSurvey = new Survey(title: 'Scoot\'s Finest Survey', dueDate: new Date().next(), questions: scootsSurveyQuestions, project: releaseOne).save(failOnError: true)
+			
+			Survey surveyReleaseOne = new Survey(title: 'Survey for Release One', dueDate: new Date().next(), questions: [whatStoriesFinished, teamGrade, desribeExperience], project: releaseOne)
+			Survey scootsSurvey = new Survey(title: 'Scoot\'s Finest Survey', dueDate: new Date().next(), questions: scootsSurveyQuestions, project: releaseOne)
+			
+			surveyReleaseOne.save(failOnError: true)
+			scootsSurvey.save(failOnError: true)
         }
     }
     

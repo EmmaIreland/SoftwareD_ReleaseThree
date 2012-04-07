@@ -109,7 +109,7 @@ class SurveyController {
 	    return
 	}
 	def questions = surveyInstance.questions
-	def questionIds = params.keySet().findAll { isNumber(it) }
+	
 
 	questions.each { question ->
 	    def serverResponse = params["" + question.id]

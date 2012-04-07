@@ -28,7 +28,7 @@
             	jQuery.post("../addQuestion/", ajaxData, function(response) {
             		$("#newQuestionForm").parent().append("<span id='" + response.id + "'><br> </span>");
             		$("#" + response.id).append($(".deleteIcon").first().clone().show());
-            		$("#" + response.id).append(response.prompt);
+            		$("#" + response.id).append('<a href="../../question/show/' + response.id + '"> ' + response.prompt + '</a>');
             	});
             	$("#newQuestionFields").hide();
             	clearNewQuestionFields();

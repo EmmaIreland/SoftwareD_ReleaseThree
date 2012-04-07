@@ -7,14 +7,11 @@
 	value="${message(code: 'survey.label', default: 'Survey')}" />
 <title><g:message code="default.take.label" args="[entityName]" />
 </title>
-<script>
+<g:javascript>
 	$(function() {
 		$("[name='takeForm']").validate({
 			errorPlacement: function(error, element) {
 				error.insertAfter(element);  // default jquery.validation action.
-				$('label.error').filter(':visible').each(function() {
-					$(this).css('display', 'block');
-				});
 			}, submitHandler: function(form) {
 				alert('Thanks for your submission');
 				form.submit();
@@ -22,7 +19,7 @@
 			
 		});
 	});
-</script>
+</g:javascript>
 </head>
 <body>
 	<div class="nav">

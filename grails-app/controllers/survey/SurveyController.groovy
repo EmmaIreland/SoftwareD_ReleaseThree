@@ -153,14 +153,6 @@ class SurveyController {
 	}
     }
 
-    private isNumber(string) {
-	try {
-	    string.toInteger()
-	    true
-	} catch (NumberFormatException e) {
-	    false
-	}
-    }
 
     def take = {
 	def surveyInstance = Survey.get(params.id)

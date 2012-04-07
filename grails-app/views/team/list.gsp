@@ -11,18 +11,6 @@
 
 <body>
 
-	<script>
-	$(function() {
-		$( ".accordion" ).each(function(index, ele){
-			$(ele).accordion({
-			active: false,	
-			collapsible: true
-			});
-		});
-	});
-	</script>
-
-
 	<div class="nav">
 		<span class="menuButton"><a class="home"
 			href="${createLink(uri: '/')}"><g:message
@@ -32,9 +20,6 @@
 
 	<div class="body">
 		<h1>Groups</h1>
-	</div>
-	<br></br>
-	<div class="body">
 		<g:each in="${teamInstanceList}" var="m">
 
 			<trinkets:collapsibleDiv title="${m.name}">

@@ -300,6 +300,7 @@ th.desc a {
     padding: 0;
     border-radius: 0px 0px 6px 6px;
     width: 480px;
+    margin-bottom: 10px;
 }
 
 .buttons input {

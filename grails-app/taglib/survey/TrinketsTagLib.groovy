@@ -24,6 +24,16 @@ class TrinketsTagLib {
    }
    
    /**
+    * Renders and empty buttons bar (under dialog for consistent look)
+    */
+   def emptyButtonsBar = { attrs, body ->
+       out << """<div class="buttons">
+<span class="button"><input type="button" class="fakeButton"/></span>
+</div>
+"""
+   }
+   
+   /**
     * Renders a div that can be collapsed
     * 
     * @attr title REQUIRED : text that is show when collapsed

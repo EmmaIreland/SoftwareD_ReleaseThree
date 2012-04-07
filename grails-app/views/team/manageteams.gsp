@@ -8,47 +8,7 @@
         <g:javascript src="utility.js" />
         <g:javascript src="teamscript.js" />
         <title>Manage Groups for ${projectInstance.name}</title>
-        <style>
-        	li {
-        		list-style-type: none;
-        	}
-	        .draggable {
-	        	z-index: 1000;
-	        	cursor: move;
-	        }
-	        .dialog {
-	    		margin-bottom: 10px;
-	    	}
-	    	.group {
-	    		float: left;
-	    		background: #ccc;
-	        	padding: 6px 8px 0px 8px;
-	        	margin: 0px 0px 10px 10px;
-	    		position: relative;
-	    		border-radius: 6px 0px 6px 6px;
-	    	}
-	    	.group .deleteButton {
-	    		position: absolute;
-	    		right: -6px;
-	    		top: -6px;
-	    		cursor: pointer
-	    	}
-	    	.group .teamname {
-	    		font-size: 12px;
-	    		font-weight: bold;
-	    		padding-bottom: 4px;
-	    	}
-	    	.group ul.students {
-	    		padding: 2px;
-	    		min-height: 20px;
-	    		background-color: #eee;
-	    		border-radius: 4px;
-	    	}
-	    	#groupArea {
-	    		float: left;
-				width: 360px;
-	    	}
-        </style>
+        <link rel="stylesheet" href="${resource(dir:'css',file:'manageteams.css')}" />
     </head>
 
 	  <body>
@@ -76,29 +36,28 @@
 		 				</g:else>
 		 			</div>
 	 			</div>
- 				<div class="dialog" id="addgroup" style="clear: left;">
-	 				<g:form action="save">
-            			<h2>Add new named group to this project:</h2>
-                		<div class="dialog">
-                    	<table>
-                        	<tbody>
-                        		<g:hiddenField name="project.id" value="${projectInstance.id}" />
-                            	<tr class="prop">
-                                	<td valign="top" class="name">
-                                    	<label for="name"><g:message code="team.name.label" default="Name" /></label>
-                                	</td>
-                                	<td valign="top" class="value ${hasErrors(bean: teamInstance, field: 'name', 'errors')}">
-                                    	<g:textField name="name" value="${teamInstance?.name}" />
-                               		</td>
-                            	</tr>                       
-                        	</tbody>
-                    	</table>
-                		</div>
-                		<div class="buttons">
-                    		<span class="button"><g:submitButton name="create" class="save" value="Add" /></span>
-                		</div>
-            		</g:form>
-	 			</div>
+	 			<trinkets:emptyButtonsBar />
+ 				<g:form action="save">
+               		<div class="dialog" id="addgroup" style="clear: left;">
+	           			<h2>Add new named group to this project:</h2>
+	                   	<table>
+	                       	<tbody>
+	                       		<g:hiddenField name="project.id" value="${projectInstance.id}" />
+	                           	<tr class="prop">
+	                               	<td valign="top" class="name">
+	                                   	<label for="name"><g:message code="team.name.label" default="Name" /></label>
+	                               	</td>
+	                               	<td valign="top" class="value ${hasErrors(bean: teamInstance, field: 'name', 'errors')}">
+	                                   	<g:textField name="name" value="${teamInstance?.name}" />
+	                              		</td>
+	                           	</tr>                       
+	                       	</tbody>
+	                   	</table>
+               		</div>
+               		<div class="buttons">
+                   		<span class="button"><g:submitButton name="create" class="save" value="Add" /></span>
+               		</div>
+           		</g:form>
 	 			<div class="dialog" id="addmultiplegroups" style="clear: left">
 	 				<g:form action="addmany">
 	 					<h2>Add multiple generically-named groups:</h2>

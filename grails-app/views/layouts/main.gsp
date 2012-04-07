@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title><g:layoutTitle default="The Quintets" /></title>
+        <title><g:layoutTitle default="Cevin's Cyqulists" /></title>
         <link rel="stylesheet" href="${resource(dir:'css',file:'main.css')}" />
         <link rel="stylesheet" href="${resource(dir:'css',file:'trinkets.css')}" />
         <link rel="shortcut icon" href="${resource(dir:'images',file:'favicon.png')}" type="image/x-icon" />
@@ -10,8 +10,8 @@
         <r:use module="jquery-validate"/>
         <r:layoutResources/>
         <r:layoutResources disposition="defer"/>
-        <g:layoutHead />
         <g:javascript src="trinkets.js" />
+        <g:layoutHead />
     </head>
     <body>
         <div id="sideBarNav">

@@ -357,3 +357,10 @@ td.errors {
     border: 1px solid red;
     color: #cc0000;
 }
+
+/*This is for jquery validation*/
+.error {
+	color: red;
+	font-weight: bold;
+	font-size: 1.2em;
+}

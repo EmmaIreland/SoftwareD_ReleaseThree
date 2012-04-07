@@ -1,2 +1,2 @@
-<textarea name="${question.id}"></textarea>
+<textarea name="${question.id}" class="required"></textarea>
 <br>

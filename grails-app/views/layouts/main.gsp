@@ -7,9 +7,10 @@
         <link rel="shortcut icon" href="${resource(dir:'images',file:'favicon.png')}" type="image/x-icon" />
         <r:require module="jquery"/>
         <r:require module="jquery-ui"/>
+        <r:use module="jquery-validate"/>
         <r:layoutResources/>
+        <r:layoutResources disposition="defer"/>
         <g:layoutHead />
-        <g:javascript library="application" />
         <g:javascript src="trinkets.js" />
     </head>
     <body>

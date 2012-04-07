@@ -89,3 +89,9 @@ log4j = {
 
     warn   'org.mortbay.log'
 }
+
+// Added by the JQuery Validation plugin:
+jqueryValidation.packed = true
+jqueryValidation.cdn = false  // false or "microsoft"
+jqueryValidation.additionalMethods = false
+

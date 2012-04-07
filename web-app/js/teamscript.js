@@ -46,7 +46,7 @@ function putStudentBack(student_li) {
 	$("#g0").append(student_li);
 }
 
-function setup() {
+function setupTeamManagement() {
 	$(".draggable").draggable({
 		revert: "invalid"
 	});
@@ -84,5 +84,5 @@ function getInnerWidth(x) {
 
 $(function() {
 	// on page load
-	setup();
+	setupTeamManagement();
 });

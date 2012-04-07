@@ -6,11 +6,11 @@ function toggleCollapse(event) {
 	}
 }
 
-function setup() {
+function setupTrinkets() {
 	$(".collapsibleDiv").bind({ "click": toggleCollapse });
 }
 
 $(function() {
 	// on page load
-	setup();
+	setupTrinkets();
 });

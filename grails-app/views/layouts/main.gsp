@@ -9,9 +9,9 @@
         <r:require module="jquery-ui"/>
         <r:use module="jquery-validate"/>
         <r:layoutResources/>
+        <g:javascript src="trinkets.js" />
         <r:layoutResources disposition="defer"/>
         <g:layoutHead />
-        <g:javascript src="trinkets.js" />
     </head>
     <body>
         <div id="sideBarNav">

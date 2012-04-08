@@ -1,4 +1,3 @@
-
 <%@ page import="survey.Person" %>
 <html>
     <head>

@@ -109,17 +109,29 @@ class PersonController {
         }
     }
 
-    def login = {
+    def sendLogin = {
         def email = params.email
         def password = params.password
+        
+        println 'got here'
         
         def person = authenticationService.validateLogin(email, password)
         if ( person ) {
             authenticationService.loginPerson(person)
             redirect(uri: '/')
         } else {
-            render(view: login, model: [loginStatus: 'failed'])
+            println 'got to else'
+            redirect(action: login, params: [loginStatus: 'failed'])
         }
+    }
+    
+    def login = {
+        [loginStatus: params.loginStatus]
+    }
+    
+    def logout = {
+        authenticationService.logout()
+        render(view: login, model: [loginStatus: 'logout'])
     }
     
     private makeMessage(code, personId) {

@@ -44,7 +44,7 @@
 
 					<h2>Enrolled Students:</h2>
 					<div style="text-align: left;" class="value">
-						<g:link controller="enrollment" action="create" params="${['course.id': course.id] }">Add a student</g:link>
+						<g:link controller="enrollment" action="create" params="${['course.id': course.id] }">Add or Remove a student</g:link>
 						<g:each in="${course.enrollments}" var="p">
 							<ul>
 								<ul>

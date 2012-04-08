@@ -2,12 +2,14 @@ package survey
 
 class PersonController {
 	
-	static post = 'POST'
-	def listString = 'list'
-	def editString = 'edit'
-	def createString = 'create'
-	def showString = 'show'
-	def defaultNotFoundMessage = 'default.not.found.message'
+    static post = 'POST'
+    def listString = 'list'
+    def editString = 'edit'
+    def createString = 'create'
+    def showString = 'show'
+    def defaultNotFoundMessage = 'default.not.found.message'
+    
+    def authenticationService
 
     static allowedMethods = [save: post, update: post, delete: post]
 
@@ -106,12 +108,25 @@ class PersonController {
             redirect(action: listString)
         }
     }
-	
-	private makeMessage(code, personId) {
-		return "${message(code: code, args: [personLabel(), personId])}"
-	}
- 
-	private personLabel() {
-		message(code: 'person.label', default: 'Person')
-	}
+
+    def login = {
+        def email = params.email
+        def password = params.password
+        
+        def person = authenticationService.validateLogin(email, password)
+        if ( person ) {
+            authenticationService.loginPerson(person)
+            redirect(uri: '/')
+        } else {
+            render(view: login, model: [loginStatus: 'failed'])
+        }
+    }
+    
+    private makeMessage(code, personId) {
+        return "${message(code: code, args: [personLabel(), personId])}"
+    }
+
+    private personLabel() {
+        message(code: 'person.label', default: 'Person')
+    }
 }

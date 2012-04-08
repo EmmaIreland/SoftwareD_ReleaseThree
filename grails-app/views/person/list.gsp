@@ -19,22 +19,51 @@
             </g:if>
             <div class="list">
                 <table>
-                    <thead>
-                        <tr>                        
-                            <g:sortableColumn property="name" title="${message(code: 'person.name.label', default: 'Name')}" />
-                        
-                            <g:sortableColumn property="email" title="${message(code: 'person.email.label', default: 'Email')}" />
-                        
-                        </tr>
-                    </thead>
+                    
                     <tbody>
                     <g:each in="${personInstanceList}" status="i" var="personInstance">
                         <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
-                        
-                            <td><g:link action="show" id="${personInstance.id}">${fieldValue(bean: personInstance, field: "name")}</g:link></td>
-                        
-                            <td>${fieldValue(bean: personInstance, field: "email")}</td>
-                        
+                        	<trinkets:collapsibleDiv title="${personInstance.name}">
+                        		
+                        		Email: ${fieldValue(bean: personInstance, field: "email")}
+
+                            	<div id="${personInstance.enrollments.course}">
+                            		<br>
+                            		<h4>Enrollments</h4>
+                            			<g:each in="${personInstance.enrollments.course}" var="e">
+                              		      	<ul>
+                             		       		<ul>
+                              		      			<li><g:link controller="course" action="show" id="${e.id}">${e?.encodeAsHTML()}</g:link></li>
+                              		      		</ul>
+                                  		  	</ul>
+                                		</g:each>
+                                </div>
+   
+   								<div id="${personInstance.memberships.team}">
+   									<br>
+                                		<h4>Memberships</h4>
+                                			<g:each in="${personInstance.memberships.team}" var="m">
+                                				<ul>
+                             		       			<ul>
+                              		      				<li><g:link controller="team" action="show" id="${m.id}">${m?.encodeAsHTML()}</g:link></li>
+                              		      			</ul>
+                              		      		</ul>
+                                			</g:each>
+                                </div>
+                                
+                                <div id="${personInstance.ownedCourses}">
+   									<br>
+                                		<h4>Owned Courses</h4>
+                                			<g:each in="${personInstance.ownedCourses}" var="o">
+                                				<ul>
+                             		       			<ul>
+                              		      				<li><g:link controller="course" action="show" id="${o.id}">${o?.encodeAsHTML()}</g:link></li>
+                              		      			</ul>
+                              		      		</ul>
+                                			</g:each>
+                                </div>
+                                
+                        	</trinkets:collapsibleDiv>
                         </tr>
                     </g:each>
                     </tbody>

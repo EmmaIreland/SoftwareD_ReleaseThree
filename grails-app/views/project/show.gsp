@@ -81,10 +81,6 @@
                 </g:form>
             </div>
             
-            <br></br>
-            <br></br>
-            
-            
             <g:if test="${projectInstance.teams.size() != 0}">
            	 	<h1>Groups in ${projectInstance.name}:</h1>
            	 	<div class="demo">

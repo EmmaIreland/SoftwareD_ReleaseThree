@@ -22,7 +22,7 @@
 	<div class="body">
 
 		<h1>Courses</h1>
-
+ 		<g:if test="${courseInstanceList.size() != 0}">
 		<g:each in="${courseInstanceList}" var="course">
 			<trinkets:collapsibleDiv title="${course.abbreviation}">
 
@@ -85,7 +85,10 @@
 				</div>
 			</trinkets:collapsibleDiv>
 		</g:each>
-
+		</g:if>
+		<g:else>
+				<h2><g:link controller="course" action="create" params="${[course: courseInstance]}">No courses made. Click here to create a new course.</g:link></h2>
+		</g:else>
 	</div>
 
 </body>

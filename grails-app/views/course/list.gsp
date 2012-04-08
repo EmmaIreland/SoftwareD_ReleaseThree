@@ -28,11 +28,11 @@
 
 				<div id="${course.id}">
 					<br>
+					<h2>
 					<g:link action="show" id="${course.id}">
-						<h2>
 							${fieldValue(bean: course, field: "abbreviation")}:${fieldValue(bean: course, field: "name")}
-						</h2>
 					</g:link>
+					</h2>
 					<h3>
 						${fieldValue(bean: course, field: "term")}
 						${course.year}

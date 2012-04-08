@@ -19,7 +19,7 @@
         	<br>
         	<div id="appName"><a href="${createLink(uri: '/')}">Cevin's Cyqulists</a></div>
         	<div id="controllers">
-        		<div id="title">Manage</div>
+        		<div id="title">View</div>
         		<div id="list">
         			<ul>
 	                    <li class="controller"><g:link controller="course">Courses</g:link></li>

@@ -3,11 +3,6 @@
     <head>
         <title>Cevin's Cyqulists</title>
         <meta name="layout" content="main" />
-        <style type="text/css" media="screen">
-
-
-
-        </style>
     </head>
     <body>
  

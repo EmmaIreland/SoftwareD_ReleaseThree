@@ -24,5 +24,5 @@ class AuthenticationService {
     // TODO Use a real hash algorithm
     def hashPassword(String password) {
     	password + '*'
-    }	
+    }
 }

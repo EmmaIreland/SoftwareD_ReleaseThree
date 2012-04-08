@@ -7,6 +7,8 @@ class Person {
     Boolean isAdmin = false
     static hasMany = [ownedCourses:Course, enrollments:Enrollment, memberships: Membership, answers: Answer]
     
+    def authenticationService
+    
     static constraints = {
         name(blank: false)
         email(email: true, blank:false, unique: true)
@@ -15,5 +17,13 @@ class Person {
     
     String toString() {
         name
+    }
+    
+    def beforeInsert() {
+        this.password = authenticationService.hashPassword(this.password)
+    }
+    
+    def beforeUpdate() {
+        this.password = authenticationService.hashPassword(this.password)
     }
 }

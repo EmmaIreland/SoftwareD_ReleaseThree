@@ -20,10 +20,16 @@ class Person {
     }
     
     def beforeInsert() {
-        this.password = authenticationService.hashPassword(this.password)
+        // TODO fix
+        if (this.password) {
+            this.password = authenticationService.hashPassword(this.password)
+        }
     }
     
     def beforeUpdate() {
-        this.password = authenticationService.hashPassword(this.password)
+        // TODO fix
+        if (this.password) {
+            this.password = authenticationService.hashPassword(this.password)
+        }
     }
 }

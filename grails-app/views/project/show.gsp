@@ -19,11 +19,6 @@
         
         </script>
         
-        <script>
-		$(function() {
-			$( "#tabs" ).tabs();
-		});
-		</script>
         
     </head>
     <body>
@@ -93,14 +88,10 @@
             <g:if test="${projectInstance.teams.size() != 0}">
            	 	<h1>Groups in ${projectInstance.name}:</h1>
            	 	<div class="demo">
-					<div id="tabs">
-						<ul>
-							<g:each in="${projectInstance.teams.sort{it.name}}" var="team">
-								<li><a href="#${team.id}">${team.name}</a></li>
-							</g:each>
-						</ul>
 					
-						<g:each in="${projectInstance.teams}" var="team">
+						<g:each in="${projectInstance.teams.sort{it.name}}" var="team">
+							<trinkets:collapsibleDiv title="${team.name}">
+		
 							<div id="${team.id}">
 								<h2>Comments:</h2>
 								<p>${team.comments}</p>
@@ -121,10 +112,10 @@
 									
 								</div>
 							</div>
-							
+							</trinkets:collapsibleDiv>
 						</g:each>
 					</div>
-				</div>
+				
 			</g:if>	
 			<g:else>
 				<h2><g:link controller="team" action="list" params="${[project: projectInstance.id]}">No groups made. Click here to add groups</g:link></h2>

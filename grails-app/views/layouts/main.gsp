@@ -31,6 +31,14 @@
                     </ul>
                 </div>
         	</div>
+        	<div id="login">
+        		<g:if test="${session['user']}">
+        			<g:link controller='person' action='logout'>Logout</g:link>
+        		</g:if>
+        		<g:else>
+        			<g:link controller='person' action='login'>Login</g:link>
+        		</g:else>
+        	</div>
         </div>
         <div style="float: left">
         	<g:layoutBody />

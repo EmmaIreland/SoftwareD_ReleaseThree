@@ -32,7 +32,7 @@
 									<label for="password"><g:message code="person.password.label" default="Password" /></label>
 								</td>
 								<td valign="top" class="value">
-									<g:textField name="password" />
+									<g:passwordField name="password" />
 								</td>
 							</tr>
 						</tbody>

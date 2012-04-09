@@ -113,14 +113,11 @@ class PersonController {
         def email = params.email
         def password = params.password
         
-        println 'got here'
-        
         def person = authenticationService.validateLogin(email, password)
         if ( person ) {
             authenticationService.loginPerson(person)
             redirect(uri: '/')
         } else {
-            println 'got to else'
             redirect(action: login, params: [loginStatus: 'failed'])
         }
     }
@@ -130,8 +127,9 @@ class PersonController {
     }
     
     def logout = {
+        println 'got to logout'
         authenticationService.logout()
-        render(view: login, model: [loginStatus: 'logout'])
+        redirect(action: login, params: [loginStatus: 'loggedOut'])
     }
     
     private makeMessage(code, personId) {

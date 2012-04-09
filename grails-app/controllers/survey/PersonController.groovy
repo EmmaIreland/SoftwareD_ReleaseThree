@@ -118,16 +118,15 @@ class PersonController {
             authenticationService.loginPerson(person)
             redirect(uri: '/')
         } else {
-            redirect(action: login, params: [loginStatus: 'failed'])
+            redirect(action: login, params: [loginStatus: 'failed', enteredEmail: email])
         }
     }
     
     def login = {
-        [loginStatus: params.loginStatus]
+        [loginStatus: params.loginStatus, enteredEmail: params.enteredEmail]
     }
     
     def logout = {
-        println 'got to logout'
         authenticationService.logout()
         redirect(action: login, params: [loginStatus: 'loggedOut'])
     }

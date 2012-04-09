@@ -14,17 +14,24 @@
         <span class="menuButton"><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></span>
     </div>
 	<div class="body">
-		<h1>Login<g:if test="${loginStatus == 'failed'}"> Failed</g:if></h1>
+		<h1>Login</h1>
 		<g:form method="post">
 			<div class="dialog">
 					<table>
 						<tbody>
+							<g:if test="${loginStatus == 'failed'}">
+								<tr>
+									<td colspan="2">
+										<span style="color: #f00">The given email and password combination is invalid.</span>
+									</td>
+								</tr>
+							</g:if>
 							<tr class="prop">
 								<td valign="top" class="name">
 									<label for="email"><g:message code="person.email.label" default="Email" /></label>
 								</td>
 								<td valign="top" class="value">
-									<g:textField name="email" />
+									<g:textField name="email" value="${enteredEmail}" />
 								</td>
 							</tr>
 							<tr class="prop">

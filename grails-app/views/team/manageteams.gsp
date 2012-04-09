@@ -21,8 +21,8 @@
 	      <div class="message">${flash.message}</div>
 	      </g:if>
 	      	<div style="float: left;">
+	      		<h2>Students not assigned to groups</h2>
 	      		<div class="dialog droppable" id="unassignedStudents">
-		      		<h2>Students not assigned to groups</h2>
 			 		<div title="Drag students to assign them to groups" id="studentList">
 			 			<g:if test="${courseHasStudents}">
 		 					<ul class="students" id="g0" style="min-height: 40px">
@@ -38,8 +38,8 @@
 	 			</div>
 	 			<trinkets:emptyButtonsBar />
  				<g:form action="save">
+	           		<h2>Add new named group to this project:</h2>
                		<div class="dialog" id="addgroup" style="clear: left;">
-	           			<h2>Add new named group to this project:</h2>
 	                   	<table>
 	                       	<tbody>
 	                       		<g:hiddenField name="project.id" value="${projectInstance.id}" />
@@ -60,8 +60,8 @@
            		</g:form>
 	 			
  				<g:form action="addmany">
+ 					<h2>Add multiple generically-named groups:</h2>
  					<div class="dialog" id="addmultiplegroups" style="clear: left">
-	 					<h2>Add multiple generically-named groups:</h2>
 	 					<table>
 	 						<tbody>
 	 							<g:hiddenField name="project.id" value="${projectInstance.id}" />

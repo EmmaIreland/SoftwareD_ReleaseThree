@@ -356,6 +356,10 @@ th.desc a {
     background: transparent url(../images/skin/go_back.png) 5px 50% no-repeat;
     padding-left: 28px;
 }
+.buttons input.sendLogin {
+    background: transparent url(../images/skin/login.png) 5px 50% no-repeat;
+    padding-left: 28px;
+}
 
 .deleteIcon {
 	position: relative;

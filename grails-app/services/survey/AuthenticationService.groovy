@@ -1,9 +1,11 @@
 package survey
 
+import org.springframework.web.context.request.RequestContextHolder
+
 class AuthenticationService {
-
+    
     static transactional = true
-
+    
     def serviceMethod() {
 
     }
@@ -14,10 +16,12 @@ class AuthenticationService {
     }
     
     def loginPerson(Person person) {
+        def session = RequestContextHolder.currentRequestAttributes().getSession()
 	session['user'] = person.id
     }
     
     def logout() {
+        def session = RequestContextHolder.currentRequestAttributes().getSession()
 	session.invalidate()
     }
     

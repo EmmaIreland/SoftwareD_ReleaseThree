@@ -1,3 +1,4 @@
+<%@ page import="survey.Person"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -33,6 +34,14 @@
         	</div>
         	<div id="login">
         		<g:if test="${session['user']}">
+        			<g:set var='loggedInUser' value="${Person.get(session['user'])}" />
+        			You are logged in as:
+        			<br/>
+        			<g:link controller='person' action='show' id="${session['user']}">
+        				${fieldValue(bean: loggedInUser, field: "name")}
+        				<g:if test="${loggedInUser.isAdmin}">+</g:if>
+        			</g:link>
+        			<br/><br/>
         			<g:link controller='person' action='logout'>Logout</g:link>
         		</g:if>
         		<g:else>

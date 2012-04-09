@@ -14,7 +14,7 @@ body {
 #sideBarNav {
 	float: left;
 	padding:10px 20px 20px 0px;
-	background-color: #666;
+	background-color: #555;
 	border-radius: 0px 0px 20px 0px;
 }
 
@@ -37,11 +37,11 @@ body {
 }
 
 #sideBarNav #controllers a {
-	color: #aaa;
+	color: #bbb;
 }
 
 #sideBarNav #controllers #title {
-	color: #bbb;
+	color: #ccc;
 	font-size: 14px;
 	font-weight: bold;
 	padding: 12px 0px 4px 0px;
@@ -57,6 +57,16 @@ body {
 #sideBarNav #controllers #list ul li {
 	margin-left: -15px;
 	list-style-type: none;
+}
+
+#sideBarNav #login {
+	color: #ccc;
+	font-size: 12px;
+	padding: 12px 0px 0px 14px;
+}
+
+#sideBarNav #login a {
+	color: #bbb;
 }
 
 a:link, a:visited {

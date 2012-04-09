@@ -7,6 +7,7 @@ class BootStrap {
     def init = { servletContext ->
         
         if (Person.count() == 0) { //GrailsUtil.environment != 'production') {
+            Person admin = new Person(name: 'Sid Anderson', password: 'shiboleet', email: 'sid@anderson.net', isAdmin: true).save(failOnError: true)
             Person nic = new Person(name: 'Nic McPhee', password: 'thomas', email: 'mcphee@morris.umn.edu').save(failOnError: true)
             Person kkLamberty = new Person(name: 'KK Lamberty', password: 'spencer', email: 'lamberty@morris.umn.edu').save(failOnError: true)
             

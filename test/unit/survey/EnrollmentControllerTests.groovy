@@ -30,7 +30,6 @@ class EnrollmentControllerTests extends ControllerUnitTestCase {
 	def results = controller.create()
 	assertNotNull results
 	assertTrue results.availableStudents.containsAll([person2, person3])
-        println results.availableStudents
 	assertEquals 2, results.availableStudents.size()
     }
     

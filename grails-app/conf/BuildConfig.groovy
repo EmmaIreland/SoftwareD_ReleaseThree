@@ -32,7 +32,7 @@ grails.project.dependency.resolution = {
 
         // runtime 'mysql:mysql-connector-java:5.1.13'
 		
-		test "org.spockframework:spock-grails-support:0.6-groovy-1.7"
+		//test "org.spockframework:spock-grails-support:0.6-groovy-1.7"
 		
 		test("org.seleniumhq.selenium:selenium-htmlunit-driver:$seleniumVersion") {
 			exclude "xml-apis"
@@ -49,6 +49,6 @@ grails.project.dependency.resolution = {
         test ":hibernate:$grailsVersion"
 
         test ":geb:$gebVersion"
-        test ":spock:0.5-groovy-1.7"
+        //test ":spock:0.5-groovy-1.7"
   }
 }

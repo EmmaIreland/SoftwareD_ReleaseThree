@@ -3,7 +3,7 @@ package survey
 import grails.plugin.spock.*
 
 class PersonSpec extends UnitSpec {
-	Person matt = new Person(name: 'Matt', email: 'cats@gmail.com')
+	Person matt = new Person(name: 'Matt', email: 'cats@gmail.com', password:'poopcats')
 	
 	def setup() {
 		mockForConstraintsTests(Person)

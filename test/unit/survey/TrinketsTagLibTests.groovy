@@ -34,7 +34,16 @@ class TrinketsTagLibTests extends TagLibUnitTestCase {
     
     void testEmptyButtonsBar() {
         TrinketsTagLib ttl = new TrinketsTagLib()
+        
         def results = ttl.emptyButtonsBar([:], {""})
         assertEquals results, ttl.out
     }
+/*    
+    void testAddButton() {
+        TrinketsTagLib ttl = new TrinketsTagLib()
+        def results = ttl.addButton([width:'240px'], [resource(dir:'images', file:'add.png')])
+        println results
+        assertEquals results, 'stuff'
+    }
+*/
 }

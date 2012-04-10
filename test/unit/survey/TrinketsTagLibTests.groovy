@@ -21,7 +21,6 @@ class TrinketsTagLibTests extends TagLibUnitTestCase {
         TrinketsTagLib ttl = new TrinketsTagLib()
         
         def results = ttl.collapsibleDiv([title:'title', collapsed:'true'], {""})
-        println results.class
         assertEquals results, ttl.out
     }
     void testIfNullBlank() {
@@ -31,5 +30,11 @@ class TrinketsTagLibTests extends TagLibUnitTestCase {
         results = ttl.ifNullBlank(null)
         assertEquals results, ''
        
+    }
+    
+    void testEmptyButtonsBar() {
+        TrinketsTagLib ttl = new TrinketsTagLib()
+        def results = ttl.emptyButtonsBar([:], {""})
+        assertEquals results, ttl.out
     }
 }

@@ -25,8 +25,7 @@ class AuthenticationService {
 	session.invalidate()
     }
     
-    // TODO Use a real hash algorithm
     def hashPassword(String password) {
-    	password + '*'
+    	password.encodeAsMD5()
     }
 }

@@ -137,7 +137,7 @@
 								<ul>
 									<g:each in="${k.teams}" var="s">
 
-										<li><g:link controller="team" action="show" id="${s.id}">${s?.encodeAsHTML()}</g:link></li>
+										<li>${s.name}</li>
 									</g:each>
 								</ul>
 							</td>			

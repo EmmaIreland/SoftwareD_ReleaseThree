@@ -4,7 +4,7 @@ import pages.*
 import pages.HomePage
 import pages.CourseCreatePage
 import pages.CourseListPage
-
+import pages.PersonListPage
 
 class HomePageSpec extends GebReportingSpec {
 
@@ -33,5 +33,24 @@ class HomePageSpec extends GebReportingSpec {
 	then:
 	at CourseCreatePage
 	}
+    
+    def "can reach the person list page"(){
+	when:
+	to HomePage
+	peopleButton().click()
+	
+	then:
+	at PersonListPage
+	
+    }
+    
+    def ""(){
+	when: 
+	to HomePage
+	questionsButton().click()
+	
+	then:
+	at 
+    }
     
 }

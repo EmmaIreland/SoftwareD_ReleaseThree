@@ -29,8 +29,6 @@ class PersonController {
     }
 
     def save = {
-/*		controller.params.id = 100
-		assertEquals controller.request.message, controller.redirectArgs.action*/
         def personInstance = new Person(params)
         if (personInstance.save(flush: true)) {
             flash.message = makeMessage('default.created.message', personInstance.name)
@@ -69,7 +67,6 @@ class PersonController {
             if (params.version) {
                 def version = params.version.toLong()
                 if (personInstance.version > version) {
-                    
                     personInstance.errors.rejectValue('version', 'default.optimistic.locking.failure', [message(code: 'person.label', default: 'Person')] as Object[], 'Another user has updated this Person while you were editing')
                     render(view: editString, model: [personInstance: personInstance])
                     return

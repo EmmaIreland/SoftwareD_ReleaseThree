@@ -21,7 +21,7 @@ class TrinketsTagLibTests extends TagLibUnitTestCase {
         TrinketsTagLib ttl = new TrinketsTagLib()
         
         ttl.collapsibleDiv([title:'title', collapsed:'true'], {""})
-        //regex below matches the proper format of the div tag that should be printed.
+        //RegEx below matches the proper format of the div tag that should be printed.
         def expected = /<div.*><div.*>.*<\/div><div.*\/><\/div><\/div>/
         assertTrue out.toString().matches(expected)
     }

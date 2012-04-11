@@ -20,9 +20,12 @@ class TrinketsTagLibTests extends TagLibUnitTestCase {
     void testCollapsibleDiv() {
         TrinketsTagLib ttl = new TrinketsTagLib()
         
-        def results = ttl.collapsibleDiv([title:'title', collapsed:'true'], {""})
-        assertEquals results, ttl.out
+        ttl.collapsibleDiv([title:'title', collapsed:'true'], {""})
+        //regex below matches the proper format of the div tag that should be printed.
+        def expected = /<div.*><div.*>.*<\/div><div.*\/><\/div><\/div>/
+        assertTrue out.toString().matches(expected)
     }
+    
     void testIfNullBlank() {
         TrinketsTagLib ttl = new TrinketsTagLib()
         def results = ttl.ifNullBlank('thing')
@@ -38,12 +41,4 @@ class TrinketsTagLibTests extends TagLibUnitTestCase {
         def results = ttl.emptyButtonsBar([:], {""})
         assertEquals results, ttl.out
     }
-/*    
-    void testAddButton() {
-        TrinketsTagLib ttl = new TrinketsTagLib()
-        def results = ttl.addButton([width:'240px'], [resource(dir:'images', file:'add.png')])
-        println results
-        assertEquals results, 'stuff'
-    }
-*/
 }

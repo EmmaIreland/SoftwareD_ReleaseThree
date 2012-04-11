@@ -10,12 +10,14 @@ class HomePage extends Page {
     }
     
     static content = { 
-		coursesButton() { $("a", text: "Courses") }
+		coursesButton(to: CourseListPage) { $("a", text: "Courses") }
 		projectsButton() { $("a", text: "Projects") }
 		peopleButton() { $("a", text: "People") }
 		groupsButton() { $("a", text: "Groups") }
 		surveysButton() { $("a", text: "Surveys")}
 		questionsButton() { $("a", text: "Questions")}
+		
+		courseCreateLink(to: CourseCreatePage) { $("a", text: "Make course") }
 		
     }
 }

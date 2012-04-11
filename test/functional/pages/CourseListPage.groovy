@@ -1,7 +1,6 @@
 package pages
 
 import geb.Page
-import geb.Module
 
 class CourseListPage extends Page { 
 	static url = "course/list"

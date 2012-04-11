@@ -94,6 +94,16 @@
 	 						
 	 						<div class="teamname">
 	 							<g:link action="edit" id="${team.id}">${fieldValue(bean: team, field: "name")}</g:link>
+
+									<trinkets:collapsibleDiv title="Comments">
+										<g:if test="${team.comments == null}">
+											There are no comments for this group.	
+										</g:if>
+										<g:else>
+											${team.comments}
+										</g:else>
+									</trinkets:collapsibleDiv>
+
 	 						</div>
 	 						
 	 						<ul class="students" id="g${team.id}">

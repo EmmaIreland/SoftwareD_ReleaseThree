@@ -102,7 +102,6 @@
 								</g:each>
 							
 								<br></br>
-								<g:link controller="team" action="list" params="${[project: projectInstance.id]}"><h3>Manage Members</h3></g:link>
 								<div style="text-align: right;">
 									<g:link class="edit" controller="team" action="edit" id="${team.id}"><h2>${'Edit Group'}</h2></g:link>
 									
@@ -111,7 +110,9 @@
 							</trinkets:collapsibleDiv>
 						</g:each>
 					</div>
-				
+					<div style="text-align: right;">
+						<g:link controller="team" action="list" params="${[project: projectInstance.id]}"><h3>Manage Groups</h3></g:link>
+					</div>
 			</g:if>	
 			<g:else>
 				<h2><g:link controller="team" action="list" params="${[project: projectInstance.id]}">No groups made. Click here to add groups</g:link></h2>

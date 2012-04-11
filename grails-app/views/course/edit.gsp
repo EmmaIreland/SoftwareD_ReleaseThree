@@ -74,24 +74,7 @@
                                 <td valign="top" class="value ${hasErrors(bean: courseInstance, field: 'owner', 'errors')}">
                                     <g:select name="owner.id" from="${survey.Person.list()}" optionKey="id" value="${courseInstance?.owner?.id}"  />
                                 </td>
-                            </tr>
-                        
-                            <tr class="prop">
-                                <td valign="top" class="name">
-                                  <label for="enrollments"><g:message code="course.enrollments.label" default="Enrollments" /></label>
-                                </td>
-                                <td valign="top" class="value ${hasErrors(bean: courseInstance, field: 'enrollments', 'errors')}">
-                                    
-<ul>
-<g:each in="${courseInstance?.enrollments?}" var="e">
-    <li><g:link controller="enrollment" action="show" id="${e.id}">${e?.encodeAsHTML()}</g:link></li>
-</g:each>
-</ul>
-<g:link controller="enrollment" action="create" params="['course.id': courseInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'enrollment.label', default: 'Enrollment')])}</g:link>
-
-                                </td>
-                            </tr>
-                        
+                            </tr>             
                         </tbody>
                     </table>
                 </div>

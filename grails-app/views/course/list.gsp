@@ -28,16 +28,13 @@
 
 				<div id="${course.id}">
 					<br>
-					<h2>
-					<g:link action="show" id="${course.id}">
-							${fieldValue(bean: course, field: "abbreviation")}:${fieldValue(bean: course, field: "name")}
-					</g:link>
-					</h2>
+					<h2>${fieldValue(bean: course, field: "abbreviation")}:${fieldValue(bean: course, field: "name")}</h2>
 					<h3>
 						${fieldValue(bean: course, field: "term")}
 						${course.year}
 					</h3>
-					<br> <b>Course Instructor: ${course?.owner}
+					<br> <b>Course Instructor: <g:link controller="person" action="show" id="${course.owner.id}">${fieldValue(bean: course, field: "owner")}
+					</g:link>
 					</b> <br>
 					<br>
 

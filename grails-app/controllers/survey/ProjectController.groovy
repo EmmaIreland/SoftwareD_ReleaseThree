@@ -91,7 +91,7 @@ class ProjectController {
         if (projectInstance) {
             try {
                 projectInstance.delete(flush: true)
-                flash.message = makeMessage('default.deleted.message', params.name)
+                flash.message = makeMessage('default.deleted.message', projectInstance.name)
                 redirect(action: listString)
             }
             catch (org.springframework.dao.DataIntegrityViolationException e) {

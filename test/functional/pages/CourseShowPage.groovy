@@ -6,7 +6,7 @@ class CourseShowPage extends Page {
     static url = "course/show"
     
     static at = {
-	title =~ /Course Show/
+	title =~ /Show Course/
     }
     
     static content = {

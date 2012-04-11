@@ -6,9 +6,11 @@ import pages.CourseCreatePage
 
 class CoursePageSpec extends GebReportingSpec {
     
-    def "Course create should go to course show"() {
+    def "course create should go to course show"() {
 	when:
-	to CourseCreatePate
+	to CourseCreatePage
+	courseAbbreviationBox.value("SA")
+	courseNameBox.value("Some Name")
 	courseCreateButton.click()
 	
 	then:

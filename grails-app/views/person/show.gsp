@@ -54,7 +54,7 @@
                             <td valign="top" style="text-align: left;" class="value">
                                 <ul>
                                 <g:each in="${personInstance.memberships.team}" var="m">
-                                    <li><g:link controller="team" action="show" id="${m.id}">${m?.encodeAsHTML()}</g:link></li>
+                                    <li><g:link controller="project" action="show" id="${m.project.id}">${m?.encodeAsHTML()}</g:link></li>
                                 </g:each>
                                 </ul>
                             </td>

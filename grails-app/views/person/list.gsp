@@ -45,7 +45,7 @@
                                 			<g:each in="${personInstance.memberships.team}" var="m">
                                 				<ul>
                              		       			<ul>
-                              		      				<li><g:link controller="team" action="show" id="${m.id}">${m?.encodeAsHTML()}</g:link></li>
+                              		      				<li><g:link controller="project" action="show" id="${m.project.id}">${m?.encodeAsHTML()}</g:link></li>
                               		      			</ul>
                               		      		</ul>
                                 			</g:each>

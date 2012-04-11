@@ -53,4 +53,22 @@ class HomePageSpec extends GebReportingSpec {
 	at QuestionListPage
     }
     
+    def "can reach the survey list page"(){
+	when:
+	to HomePage
+	surveysButton().click()
+	
+	then:
+	at SurveyListPage
+    }
+    
+    
+    def "can reach the project list page"(){
+	when:
+	to HomePage
+	projectsButton().click()
+	
+	then:
+	at ProjectListPage
+    }
 }

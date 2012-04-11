@@ -126,7 +126,7 @@ class TeamController {
             teamInstance.properties = params
             if (!teamInstance.hasErrors() && teamInstance.save(flush: true)) {
                 flash.message = makeMessage('default.updated.message', teamInstance.name)
-                redirect(action: showString, id: teamInstance.id)
+                redirect(controller: 'project', action: showString, id: teamInstance.project.id)
             }
             else {
                 render(view: editString, model: [teamInstance: teamInstance])

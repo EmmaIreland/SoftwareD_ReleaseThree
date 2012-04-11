@@ -90,7 +90,7 @@
 		
 							<div id="${team.id}">
 								<h2>Comments:</h2>
-								<p>${team.comments}</p>
+								<p><trinkets:makeHTMLNewlines text="${team.comments}" /></p>
 								<br></br>
 							
 								<h2>Members:</h2>
@@ -103,7 +103,7 @@
 							
 								<br></br>
 								<div style="text-align: right;">
-									<g:link class="edit" controller="team" action="edit" id="${team.id}"><h2>${'Edit Group'}</h2></g:link>
+									<g:link class="edit" controller="team" action="edit" id="${team.id}"><h2>Edit Comments</h2></g:link>
 									
 								</div>
 							</div>

@@ -33,6 +33,10 @@ class TrinketsTagLib {
 """
    }
    
+   def makeHTMLNewlines = { attrs, body ->
+       out << ifNullBlank(attrs['text']).toString().replace('\n', '<br/>')
+   }
+   
    /**
     * Renders a div that can be collapsed
     * 

@@ -83,6 +83,9 @@
             
             <g:if test="${projectInstance.teams.size() != 0}">
            	 	<h1>Groups in ${projectInstance.name}:</h1>
+           	 	<div style="text-align: right;">
+						<g:link controller="team" action="list" params="${[project: projectInstance.id]}"><h3>Manage Groups</h3></g:link>
+				</div>
            	 	<div class="demo">
 					
 						<g:each in="${projectInstance.teams.sort{it.name}}" var="team">
@@ -110,9 +113,7 @@
 							</trinkets:collapsibleDiv>
 						</g:each>
 					</div>
-					<div style="text-align: right;">
-						<g:link controller="team" action="list" params="${[project: projectInstance.id]}"><h3>Manage Groups</h3></g:link>
-					</div>
+					
 			</g:if>	
 			<g:else>
 				<h2><g:link controller="team" action="list" params="${[project: projectInstance.id]}">No groups made. Click here to add groups</g:link></h2>

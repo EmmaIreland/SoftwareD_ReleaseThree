@@ -73,9 +73,9 @@ function equalizeGroupHeights() {
 }
 
 function equalizeGroupWidths() {
-//	var groupWidths = $.makeArray($(".group")).map(getInnerWidth);
-//	var studentWidths = $.makeArray($(".student")).map(getInnerWidth);
-//	$(".group").css("width", Math.max(arrMax(groupWidths), arrMax(studentWidths)));
+	var groupWidths = $.makeArray($(".group")).map(getInnerWidth);
+	var studentWidths = $.makeArray($(".student")).map(getInnerWidth);
+	$(".group").css("width", Math.max(arrMax(groupWidths), arrMax(studentWidths)));
 }
 
 function getInnerWidth(x) {

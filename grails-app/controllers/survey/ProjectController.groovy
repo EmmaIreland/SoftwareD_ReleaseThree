@@ -40,23 +40,23 @@ class ProjectController {
     def show = {
 	def projectInstance = Project.get(params.id)
 	def numUnassignedStudents = getUnassignedStudents(projectInstance.course, projectInstance).size()
-	if (!projectInstance) {
-	    flash.message =  makeMessage(defaultNotFoundMessage, params.id)
-	    redirect(action: listString)
+	if (projectInstance) {
+            [projectInstance: projectInstance, numUnassignedStudents: numUnassignedStudents]
 	}
 	else {
-	    [projectInstance: projectInstance, numUnassignedStudents: numUnassignedStudents]
+            flash.message =  makeMessage(defaultNotFoundMessage, params.id)
+            redirect(action: listString)
 	}
     }
 
     def edit = {
 	def projectInstance = Project.get(params.id)
-	if (!projectInstance) {
-	    flash.message = makeMessage(defaultNotFoundMessage, params.id)
-	    redirect(action: listString)
+	if (projectInstance) {
+            return [projectInstance: projectInstance]
 	}
 	else {
-	    return [projectInstance: projectInstance]
+            flash.message = makeMessage(defaultNotFoundMessage, params.id)
+            redirect(action: listString)
 	}
     }
 

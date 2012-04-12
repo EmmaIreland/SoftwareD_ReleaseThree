@@ -11,6 +11,7 @@ class SurveyController {
     def createString = 'create'
     def showString = 'show'
     def defaultNotFoundMessage = 'default.not.found.message'
+	def failOnError = [failOnError: true]
 
     static allowedMethods = [save: post, update: post, delete: post, preview: post]
 
@@ -59,21 +60,21 @@ class SurveyController {
 		break
 	    case 'checkbox':
 		def choices = removeEmptyElements(params.cbChoices)
-		questionInstance = new CheckboxQuestion(prompt: params.cbPrompt, choices: choices).save(failOnError: true)
+		questionInstance = new CheckboxQuestion(prompt: params.cbPrompt, choices: choices).save(failOnError)
 		break
 	    case 'multipleChoice':
 		def choices = removeEmptyElements(params.mcChoices)
-		questionInstance = new MultipleChoiceQuestion(prompt: params.mcPrompt, choices: choices).save(failOnError: true)
+		questionInstance = new MultipleChoiceQuestion(prompt: params.mcPrompt, choices: choices).save(failOnError)
 		break
 	    case 'shortResponse':
-		questionInstance = new ShortTextQuestion(prompt: params.stPrompt).save(failOnError: true)
+		questionInstance = new ShortTextQuestion(prompt: params.stPrompt).save(failOnError)
 		break
 	    case 'longResponse':
-		questionInstance = new LongTextQuestion(prompt: params.ltPrompt).save(failOnError: true)
+		questionInstance = new LongTextQuestion(prompt: params.ltPrompt).save(failOnError)
 		break
 	}
 	surveyInstance.addToQuestions(questionInstance)
-	surveyInstance.save(failOnError: true)
+	surveyInstance.save(failOnError)
 	render questionInstance as JSON
     }
 
@@ -127,10 +128,10 @@ class SurveyController {
 	switch(question.templateName) {
 	    case 'Long':
 	    case 'Short':
-		answer = new TextAnswer(response: serverResponse, person: person, question: question).save(failOnError: true)
+		answer = new TextAnswer(response: serverResponse, person: person, question: question).save(failOnError)
 		break
 	    case 'MultipleChoice':
-		answer = new MultipleChoiceAnswer(responseIndex: serverResponse, person: person, question: question).save(failOnError: true)
+		answer = new MultipleChoiceAnswer(responseIndex: serverResponse, person: person, question: question).save(failOnError)
 		break
 	    case 'Checkbox':
 		def responseMap = [:]
@@ -146,7 +147,7 @@ class SurveyController {
 		    responseMap[index] = serverResponse.contains(index)
 		}
 		answer = new CheckboxAnswer(responses: responseMap, person: person, question: question)
-		answer.save(failOnError: true)
+		answer.save(failOnError)
 		break
 	    default:
 		break

@@ -83,8 +83,15 @@
             
             <g:if test="${projectInstance.teams.size() != 0}">
            	 	<h1>Groups in ${projectInstance.name}:</h1>
-           	 	<div style="text-align: right;">
-						<g:link controller="team" action="list" params="${[project: projectInstance.id]}"><h3>Manage Groups</h3></g:link>
+           	 	<div id="projectNotes">
+	           	 	<g:if test="${numUnassignedStudents > 0}">
+	           	 		<div style="text-align: left; float: left">
+	           	 			<h3><font color="red">Number of Students Unassigned to Groups: ${numUnassignedStudents}</font></h3>
+	           	 		</div>
+	           	 	</g:if>
+	           	 	<div style="text-align: right;">
+							<g:link controller="team" action="list" params="${[project: projectInstance.id]}"><h3>Manage Groups</h3></g:link>
+					</div>
 				</div>
            	 	<div class="demo">
 					

@@ -44,6 +44,7 @@ class BootStrap {
                 ['Annabel', 'Lee', 'annabel@poe.org'],
                 ['Phou', 'Lee', 'phou@lee.me'],
                 ['Scott', 'Steffes', 'scott@steffes.me']
+		
             ].each { person -> softwareDesignPeople.add(buildPerson(person)) }
             softwareDesignPeople.each { it.save(failOnError: true) }
             softwareDesignPeople.each { enrollPerson it, softwareDesign }
@@ -55,7 +56,18 @@ class BootStrap {
                 ['Bill', 'Gates', 'bill@microsoft.com'],
                 ['George', 'Bush', 'george@bush.com'],
                 ['Joevin', 'Einertyosin', 'joevin@einertyosin.org'],
-                ['Reed', 'Wallace', 'reed@wallace.me']
+                ['Reed', 'Wallace', 'reed@wallace.me'],
+		['Adrian', 'Schiller', 'imsocool@seriously.nah'],
+		['Denard', 'Span', 'span@twins.com'],
+		['Jamie', 'Carroll', 'carroll@twins.com'],
+		['Joe','Mauer','mauer@twins.com'],
+		['Justin','Morneau','morneau@twins.com'],
+		['Josh','Willingham','willingham@twins.com'],
+		['Ryan','Doumit','dournit@twins.com'],
+		['Danny','Valencia','valencia@twins.com'],
+		['Chris','Parmelee','parmelee@twins.com'],
+		['Alexi','Casilla','casilla@twins.com']
+		
             ].each { person -> introToComputingPeople.add(buildPerson(person)) }
             introToComputingPeople.each { it.save(failOnError: true) }
             introToComputingPeople.each { enrollPerson it, introToComputing }

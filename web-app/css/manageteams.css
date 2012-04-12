@@ -2,6 +2,10 @@
 	list-style-type: none;
 }
 
+#unassignedStudents {
+	padding: 12px 0px 12px 0px;
+}
+
 .draggable {
 	z-index: 1000;
 	cursor: move;

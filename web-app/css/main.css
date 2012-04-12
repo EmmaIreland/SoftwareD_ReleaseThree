@@ -6,7 +6,7 @@ html * {
 /* GENERAL */
 
 body {
-    background: #e4e4e4;
+    background: #f0f0f0;
     color: #222;
     font: 11px verdana, arial, helvetica, sans-serif;
 }
@@ -278,7 +278,7 @@ th.desc a {
 /* DIALOG */
 
 .dialog {
-	background-color: #ddd;
+	background-color: #ccc;
 	border-radius: 6px 6px 0px 0px;
 	width: 480px;
 }

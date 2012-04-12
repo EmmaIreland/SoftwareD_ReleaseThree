@@ -8,6 +8,8 @@ class EnrollmentController {
     def createString = 'create'
     def showString = 'show'
     def defaultNotFoundMessage = 'default.not.found.message'
+	def flush = [flush: true]
+	
 
     static allowedMethods = [save: 'POST', update: 'POST', delete: 'POST']
 
@@ -39,12 +41,12 @@ class EnrollmentController {
         def personInstance
         if (params?.name != null) {
             personInstance = new Person(params)
-            personInstance.save(flush: true)
+            personInstance.save(flush)
         }
 
         def enrollmentInstance = personInstance ? new Enrollment(person: personInstance,
 			course: Course.get(params.course.id)) : new Enrollment(params)
-        if (enrollmentInstance.save(flush: true)) {
+        if (enrollmentInstance.save(flush)) {
             redirect(controller: 'enrollment', action: createString, params:['course.id': enrollmentInstance.course.id])
         }
         else {
@@ -90,7 +92,7 @@ class EnrollmentController {
                 }
             }
             enrollmentInstance.properties = params
-            if (!enrollmentInstance.hasErrors() && enrollmentInstance.save(flush: true)) {
+            if (!enrollmentInstance.hasErrors() && enrollmentInstance.save(flush)) {
                 flash.message = makeMessage('default.updated.message', enrollmentInstance.id)
                 redirect(action: showString, id: enrollmentInstance.id)
             }
@@ -106,14 +108,14 @@ class EnrollmentController {
 
     def delete = {
         def enrollmentInstance = Enrollment.get(params.id)
-        enrollmentInstance.delete(flush: true)
+        enrollmentInstance.delete(flush)
         render('Success')
     }
     
     def deleteByPerson = {
         def course = Course.get(params.courseId)
         def person = Person.get(params.personId)
-        Enrollment.findByCourseAndPerson(course, person).delete(flush: true)
+        Enrollment.findByCourseAndPerson(course, person).delete(flush)
     }
 
     private makeMessage(code, enrollmentId) {

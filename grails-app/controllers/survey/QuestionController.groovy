@@ -8,7 +8,7 @@ class QuestionController {
 	def createString = 'create'
 	def showString = 'show'
 	def defaultNotFoundMessage = 'default.not.found.message'
-	
+	def flush = [flush: true]	
 
     static allowedMethods = [save: post, update: post, delete: post]
 
@@ -56,7 +56,7 @@ class QuestionController {
                 }
             }
             questionInstance.properties = params
-            if (!questionInstance.hasErrors() && questionInstance.save(flush: true)) {
+            if (!questionInstance.hasErrors() && questionInstance.save(flush)) {
                 flash.message = makeMessage('default.updated.message', questionInstance.id)
                 redirect(action: showString, id: questionInstance.id)
             }
@@ -82,7 +82,7 @@ class QuestionController {
                     break
                 }
             }
-            questionInstance.delete(flush: true)
+            questionInstance.delete(flush)
         }
         render('Success.')
     }

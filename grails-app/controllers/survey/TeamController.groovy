@@ -9,6 +9,8 @@ class TeamController {
 	def createString = 'create'
 	def showString = 'show'
 	def defaultNotFoundMessage = 'default.not.found.message'
+	def flush = [flush: true]
+	def failOnError = [failOnError: true]
 
     static allowedMethods = [save: post, update: post, delete: post, changeMember: post]
 
@@ -53,7 +55,7 @@ class TeamController {
 
     def save = {
         def teamInstance = new Team(params)
-        if (teamInstance.save(flush: true)) {
+        if (teamInstance.save(flush)) {
             redirect(action: listString, params: [project: teamInstance.project.id])
         }
         else {
@@ -67,7 +69,7 @@ class TeamController {
             def numGroups = Integer.parseInt(params.num_groups)
             def newGroups = []
             numGroups.times() {
-                newGroups << new Team(name: "Group ${genericGroupNum++}", project: project).save(flush:true)
+                newGroups << new Team(name: "Group ${genericGroupNum++}", project: project).save(flush)
             }
             
             if (params.random == 'on') {
@@ -81,7 +83,7 @@ class TeamController {
                 newGroups.eachWithIndex() { group, index ->
                     (smallGroupSize + (index < numLargeGroups ? 1 : 0)).times() {
                         def person = unassignedStudents.remove(rand.nextInt(unassignedStudents.size()))
-                        new Membership(team: group, member: person).save(flush:true)
+                        new Membership(team: group, member: person).save(flush)
                     }
                 }
             }
@@ -124,7 +126,7 @@ class TeamController {
                 }
             }
             teamInstance.properties = params
-            if (!teamInstance.hasErrors() && teamInstance.save(flush: true)) {
+            if (!teamInstance.hasErrors() && teamInstance.save(flush)) {
                 flash.message = makeMessage('default.updated.message', teamInstance.name)
                 redirect(controller: 'project', action: showString, id: teamInstance.project.id)
             }
@@ -141,7 +143,7 @@ class TeamController {
     def delete = {
         def teamInstance = Team.get(params.id)
         if (teamInstance) {
-                teamInstance.delete(flush: true)
+                teamInstance.delete(flush)
                 render('Success.')
         }
     }
@@ -153,11 +155,11 @@ class TeamController {
         if (params.o_id?.isNumber() && params.o_id != '0') {
             def oldTeam = Team.get(params.o_id)
             def oldMembership = Membership.findByTeamAndMember(oldTeam, personInstance)
-            oldMembership.delete(flush:true, failOnError:true)
+            oldMembership.delete(flush, failOnError)
         }
         
         if (teamInstance) { 
-            new Membership(team: teamInstance, member: personInstance).save(failOnError:true)
+            new Membership(team: teamInstance, member: personInstance).save(failOnError)
         }
        
         render('')

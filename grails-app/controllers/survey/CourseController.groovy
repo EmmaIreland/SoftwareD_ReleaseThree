@@ -9,6 +9,7 @@ class CourseController {
     def showString = 'show'
     static allowedMethods = [save: post, update: post, delete: post]
     static listMap = [action: 'list']
+	def flush = [flush: true]
 
     def index = {
         redirect(action: listString, params: params)
@@ -27,7 +28,7 @@ class CourseController {
 
     def save = {
         def courseInstance = new Course(params)
-        if (courseInstance.save(flush: true)) {
+        if (courseInstance.save(flush)) {
             flash.message = makeMessage('default.created.message', params.name)
             redirect(action: showString, id: courseInstance.id)
         }
@@ -76,7 +77,7 @@ class CourseController {
                 }
             }
             courseInstance.properties = params
-            if (!courseInstance.hasErrors() && courseInstance.save(flush: true)) {
+            if (!courseInstance.hasErrors() && courseInstance.save(flush)) {
                 flash.message = makeMessage('default.updated.message', params.name)
                 redirect(action: listString, id: courseInstance.id)
             }
@@ -94,7 +95,7 @@ class CourseController {
         def courseInstance = Course.get(params.id)
         if (courseInstance) {
             try {
-                courseInstance.delete(flush: true)
+                courseInstance.delete(flush)
                 flash.message = 'Course Deleted'
                 redirect(listMap)
             }

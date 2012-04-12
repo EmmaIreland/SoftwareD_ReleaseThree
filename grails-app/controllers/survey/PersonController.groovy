@@ -8,6 +8,7 @@ class PersonController {
     def createString = 'create'
     def showString = 'show'
     def defaultNotFoundMessage = 'default.not.found.message'
+	def flush = [flush: true]
     
     def authenticationService
 
@@ -30,7 +31,7 @@ class PersonController {
 
     def save = {
         def personInstance = new Person(params)
-        if (personInstance.save(flush: true)) {
+        if (personInstance.save(flush)) {
             flash.message = makeMessage('default.created.message', personInstance.name)
             redirect(action: showString, id: personInstance.id)
         }
@@ -73,7 +74,7 @@ class PersonController {
                 }
             }
             personInstance.properties = params
-            if (!personInstance.hasErrors() && personInstance.save(flush: true)) {
+            if (!personInstance.hasErrors() && personInstance.save(flush)) {
                 flash.message = makeMessage('default.updated.message', personInstance.toString())
                 redirect(action: showString, id: personInstance.id)
             }
@@ -91,7 +92,7 @@ class PersonController {
         def personInstance = Person.get(params.id)
         if (personInstance) {
             try {
-                personInstance.delete(flush: true)
+                personInstance.delete(flush)
                 flash.message = makeMessage('default.deleted.message', personInstance.toString())
                 redirect(action: listString)
             }

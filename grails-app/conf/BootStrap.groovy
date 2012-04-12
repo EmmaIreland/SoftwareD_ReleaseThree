@@ -8,6 +8,7 @@ class BootStrap {
         
         if (Person.count() == 0) { //GrailsUtil.environment != 'production') {
 			def failOnError = [failOnError: true]
+			def springString = 'Spring'			
 			
             Person admin = new Person(name: 'Sid Anderson', password: 'shiboleet',
 				email: 'sid@anderson.net', isAdmin: true).save(failOnError)
@@ -17,9 +18,9 @@ class BootStrap {
 				email: 'lamberty@morris.umn.edu').save(failOnError)
             
             Course softwareDesign = new Course(abbreviation:'CSCI 3601', name:'Software Design',
-				 term:'Spring',year: 2012, owner: nic).save(failOnError)
+				 term: springString,year: 2012, owner: nic).save(failOnError)
             Course introToComputing = new Course(abbreviation:'CSCI 1001', name:'Intro to the Computing World',
-				 term:'Spring',year: 2013, owner: kkLamberty).save(failOnError)
+				 term: springString,year: 2013, owner: kkLamberty).save(failOnError)
             
             def defaultPassword = 'password'
             def buildPerson = { person -> new Person(name: person[0] + ' ' + person[1],
@@ -40,10 +41,10 @@ class BootStrap {
                 ['Michael', 'Rislow', 'michael@rislow.me'],
                 ['Kevin', 'Viratyosin', 'kevin@viratyosin.me'],
                 ['Matt', 'Cotter', 'matt@cotter.me'],
-                ['Steve', 'Jungst', 'steve@jungst.me'],
+                ['Steven', 'Jungst', 'steve@jungst.me'],
                 ['Steve', 'Jobs', 'steve@apple.com'],
                 ['Edgar', 'Poe', 'eap@poe.org'],
-                ['Annabel', 'Lee', 'annabel@poe.org'],
+                ['Annabel', 'Leef', 'annabel@poe.org'],
                 ['Phou', 'Lee', 'phou@lee.me'],
                 ['Scott', 'Steffes', 'scott@steffes.me']
 		
@@ -54,7 +55,7 @@ class BootStrap {
             def introToComputingPeople = []
             [
                 ['James', 'Aronson', 'james@aronson.me'],
-                ['Darcey', 'Aronson', 'darcey@aronson.me'],
+                ['Darcey', 'Aronsone', 'darcey@aronsone.me'],
                 ['Bill', 'Gates', 'bill@microsoft.com'],
                 ['George', 'Bush', 'george@bush.com'],
                 ['Joevin', 'Einertyosin', 'joevin@einertyosin.org'],
@@ -67,7 +68,7 @@ class BootStrap {
 		['Josh','Willingham','willingham@twins.com'],
 		['Ryan','Doumit','dournit@twins.com'],
 		['Danny','Valencia','valencia@twins.com'],
-		['Chris','Parmelee','parmelee@twins.com'],
+		['Christie','Parmelee','parmelee@twins.com'],
 		['Alexi','Casilla','casilla@twins.com']
 		
             ].each { person -> introToComputingPeople.add(buildPerson(person)) }
@@ -88,7 +89,7 @@ class BootStrap {
                         
 	    ShortTextQuestion whatStoriesFinished = new ShortTextQuestion(prompt:'What stories did you complete?').save(failOnError)
 	    MultipleChoiceQuestion teamGrade = new MultipleChoiceQuestion(prompt:'What grade would you give your group?',
-				 choices:['A', 'B', 'C', 'D', 'F']).save(failOnError: true)
+				 choices:['A', 'B', 'C', 'D', 'F']).save(failOnError)
 	    LongTextQuestion desribeExperience = new LongTextQuestion(prompt:'Describe your group experience:').save(failOnError)
 		
            

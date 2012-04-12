@@ -120,7 +120,9 @@ class TeamController {
                 def version = params.version.toLong()
                 if (teamInstance.version > version) {
                     
-                    teamInstance.errors.rejectValue('version', 'default.optimistic.locking.failure', [message(code: 'team.label', default: 'Team')] as Object[], 'Another user has updated this Team while you were editing')
+                    teamInstance.errors.rejectValue('version', 'default.optimistic.locking.failure',
+						 [message(code: 'team.label', default: 'Team')] as Object[],
+						  'Another user has updated this Team while you were editing')
                     render(view: editString, model: [teamInstance: teamInstance])
                     return
                 }

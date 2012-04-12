@@ -23,23 +23,23 @@ class QuestionController {
 
     def show = {
         def questionInstance = Question.get(params.id)
-        if (!questionInstance) {
-            flash.message = makeMessage(defaultNotFoundMessage, params.id)
-            redirect(action: listString)
+        if (questionInstance) {
+			[questionInstance: questionInstance]
         }
         else {
-            [questionInstance: questionInstance]
+			flash.message = makeMessage(defaultNotFoundMessage, params.id)
+			redirect(action: listString)
         }
     }
 
     def edit = {
         def questionInstance = Question.get(params.id)
-        if (!questionInstance) {
-            flash.message = makeMessage(defaultNotFoundMessage, params.id)
-            redirect(action: listString)
+        if (questionInstance) {
+			return [questionInstance: questionInstance]
         }
         else {
-            return [questionInstance: questionInstance]
+			flash.message = makeMessage(defaultNotFoundMessage, params.id)
+			redirect(action: listString)
         }
     }
 
@@ -50,7 +50,9 @@ class QuestionController {
                 def version = params.version.toLong()
                 if (questionInstance.version > version) {
                     
-                    questionInstance.errors.rejectValue('version', 'default.optimistic.locking.failure', [message(code: 'question.label', default: 'Question')] as Object[], 'Another user has updated this Question while you were editing')
+                    questionInstance.errors.rejectValue('version', 'default.optimistic.locking.failure',
+						 [message(code: 'question.label', default: 'Question')] as Object[],
+						  'Another user has updated this Question while you were editing')
                     render(view: editString, model: [questionInstance: questionInstance])
                     return
                 }

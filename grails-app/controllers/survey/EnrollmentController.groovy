@@ -46,7 +46,8 @@ class EnrollmentController {
         def enrollmentInstance = personInstance ? new Enrollment(person: personInstance,
 			course: Course.get(params.course.id)) : new Enrollment(params)
         if (enrollmentInstance.save(flush)) {
-            redirect(controller: 'enrollment', action: createString, params:['course.id': enrollmentInstance.course.id])
+            redirect(controller: 'enrollment', action: createString,
+				 params:['course.id': enrollmentInstance.course.id])
         }
         else {
             enrollmentInstance.errors.rejectValue('person', 'enrollment.person.unique')
@@ -56,23 +57,23 @@ class EnrollmentController {
 
     def show = {
         def enrollmentInstance = Enrollment.get(params.id)
-        if (!enrollmentInstance) {
-            flash.message = makeMessage(defaultNotFoundMessage, params.id)
-            redirect(action: listString)
+        if (enrollmentInstance) {
+			[enrollmentInstance: enrollmentInstance]
         }
         else {
-            [enrollmentInstance: enrollmentInstance]
+			flash.message = makeMessage(defaultNotFoundMessage, params.id)
+			redirect(action: listString)
         }
     }
 
     def edit = {
         def enrollmentInstance = Enrollment.get(params.id)
-        if (!enrollmentInstance) {
-            flash.message = makeMessage(defaultNotFoundMessage, params.id)
-            redirect(action: listString)
+        if (enrollmentInstance) {
+			return [enrollmentInstance: enrollmentInstance]
         }
         else {
-            return [enrollmentInstance: enrollmentInstance]
+			flash.message = makeMessage(defaultNotFoundMessage, params.id)
+			redirect(action: listString)
         }
     }
 

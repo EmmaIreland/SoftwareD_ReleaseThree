@@ -6,6 +6,7 @@ class AuthenticationService {
     
     static transactional = true
     
+	@Override
     def serviceMethod() {
 
     }

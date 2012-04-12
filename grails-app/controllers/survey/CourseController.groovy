@@ -56,12 +56,12 @@ class CourseController {
 
     def edit = {
         def courseInstance = Course.get(params.id)
-        if (!courseInstance) {
-            flash.message = makeMessage(defaultNotFoundMessage, params.name)
-            redirect(listMap)
+        if (courseInstance) {
+			return courseMap(courseInstance)
         }
         else {
-            return courseMap(courseInstance)
+			flash.message = makeMessage(defaultNotFoundMessage, params.name)
+			redirect(listMap)
         }
     }
 

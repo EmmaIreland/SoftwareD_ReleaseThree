@@ -7,23 +7,25 @@ class BootStrap {
     def init = { servletContext ->
         
         if (Person.count() == 0) { //GrailsUtil.environment != 'production') {
+			def failOnError = [failOnError: true]
+			
             Person admin = new Person(name: 'Sid Anderson', password: 'shiboleet',
-				email: 'sid@anderson.net', isAdmin: true).save(failOnError: true)
+				email: 'sid@anderson.net', isAdmin: true).save(failOnError)
             Person nic = new Person(name: 'Nic McPhee', password: 'thomas', 
-				email: 'mcphee@morris.umn.edu').save(failOnError: true)
+				email: 'mcphee@morris.umn.edu').save(failOnError)
             Person kkLamberty = new Person(name: 'KK Lamberty', password: 'spencer',
-				email: 'lamberty@morris.umn.edu').save(failOnError: true)
+				email: 'lamberty@morris.umn.edu').save(failOnError)
             
             Course softwareDesign = new Course(abbreviation:'CSCI 3601', name:'Software Design',
-				 term:'Spring',year: 2012, owner: nic).save(failOnError: true)
+				 term:'Spring',year: 2012, owner: nic).save(failOnError)
             Course introToComputing = new Course(abbreviation:'CSCI 1001', name:'Intro to the Computing World',
-				 term:'Spring',year: 2013, owner: kkLamberty).save(failOnError:true)
+				 term:'Spring',year: 2013, owner: kkLamberty).save(failOnError)
             
             def defaultPassword = 'password'
             def buildPerson = { person -> new Person(name: person[0] + ' ' + person[1],
 				password: defaultPassword, email: person[2]) }
             def enrollPerson = { person, course -> new Enrollment(person: person,
-				course: course).save(failOnError: true) }
+				course: course).save(failOnError) }
             
             def softwareDesignPeople = []
             [
@@ -46,7 +48,7 @@ class BootStrap {
                 ['Scott', 'Steffes', 'scott@steffes.me']
 		
             ].each { person -> softwareDesignPeople.add(buildPerson(person)) }
-            softwareDesignPeople.each { it.save(failOnError: true) }
+            softwareDesignPeople.each { it.save(failOnError) }
             softwareDesignPeople.each { enrollPerson it, softwareDesign }
             
             def introToComputingPeople = []
@@ -69,25 +71,25 @@ class BootStrap {
 		['Alexi','Casilla','casilla@twins.com']
 		
             ].each { person -> introToComputingPeople.add(buildPerson(person)) }
-            introToComputingPeople.each { it.save(failOnError: true) }
+            introToComputingPeople.each { it.save(failOnError) }
             introToComputingPeople.each { enrollPerson it, introToComputing }
             
             Project releaseOne = new Project(name: 'Release One', description: 'Students do cool things',
-				 course: softwareDesign, dueDate: new Date().next()).save(failOnError: true)
-            Team teamAwesome = new Team(name: 'Team Awesome', project: releaseOne).save(failOnError: true)
-            Team teamHumble = new Team(name: 'Team Humble', project: releaseOne).save(failOnError: true)
+				 course: softwareDesign, dueDate: new Date().next()).save(failOnError)
+            Team teamAwesome = new Team(name: 'Team Awesome', project: releaseOne).save(failOnError)
+            Team teamHumble = new Team(name: 'Team Humble', project: releaseOne).save(failOnError)
             
             for (i in 0..3) {
-                new Membership(team: teamAwesome, member: softwareDesignPeople[i]).save(failOnError: true)
+                new Membership(team: teamAwesome, member: softwareDesignPeople[i]).save(failOnError)
             }
             for (i in 6..10) {
-                new Membership(team: teamHumble, member: softwareDesignPeople[i]).save(failOnError: true)
+                new Membership(team: teamHumble, member: softwareDesignPeople[i]).save(failOnError)
             } // TODO: make these for loops w/o duplication
                         
-	    ShortTextQuestion whatStoriesFinished = new ShortTextQuestion(prompt:'What stories did you complete?').save(failOnError: true)
+	    ShortTextQuestion whatStoriesFinished = new ShortTextQuestion(prompt:'What stories did you complete?').save(failOnError)
 	    MultipleChoiceQuestion teamGrade = new MultipleChoiceQuestion(prompt:'What grade would you give your group?',
 				 choices:['A', 'B', 'C', 'D', 'F']).save(failOnError: true)
-	    LongTextQuestion desribeExperience = new LongTextQuestion(prompt:'Describe your group experience:').save(failOnError: true)
+	    LongTextQuestion desribeExperience = new LongTextQuestion(prompt:'Describe your group experience:').save(failOnError)
 		
            
             def scootsSurveyQuestions = [
@@ -108,8 +110,8 @@ class BootStrap {
 			Survey scootsSurvey = new Survey(title: 'Scoot\'s Finest Survey', dueDate: new Date().next(),
 				questions: scootsSurveyQuestions, project: releaseOne)
 			
-			surveyReleaseOne.save(failOnError: true)
-			scootsSurvey.save(failOnError: true)
+			surveyReleaseOne.save(failOnError)
+			scootsSurvey.save(failOnError)
         }
     }
     

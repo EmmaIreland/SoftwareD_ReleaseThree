@@ -20,21 +20,21 @@ class TeamController {
 
     def list = {
         def projectInstance = Project.get(params.project)
-        if (!projectInstance) {
-            params.max = Math.min(params.max ? params.int('max') : 10, 100)
-            [teamInstanceList: Team.list(params), teamInstanceTotal: Team.count()]
-        }
-        else {
+        if (projectInstance) {
             def courseInstance = projectInstance.course
             def courseHasStudents = courseInstance.enrollments.size() > 0
             def projectHasTeams = projectInstance.teams.size() > 0
-            def unassignedStudents = getUnassignedStudents(courseInstance, projectInstance)   
+            def unassignedStudents = getUnassignedStudents(courseInstance, projectInstance)
              render(view: 'manageteams',
-		    model: [courseInstance: courseInstance,
-			    projectInstance: projectInstance,
-			    unassignedStudents: unassignedStudents,
-			    courseHasStudents: courseHasStudents,
-			    projectHasTeams: projectHasTeams])
+                    model: [courseInstance: courseInstance,
+                            projectInstance: projectInstance,
+                            unassignedStudents: unassignedStudents,
+                            courseHasStudents: courseHasStudents,
+                            projectHasTeams: projectHasTeams])
+        }
+        else {
+            params.max = Math.min(params.max ? params.int('max') : 10, 100)
+            [teamInstanceList: Team.list(params), teamInstanceTotal: Team.count()]
         }
     }
 
@@ -91,23 +91,23 @@ class TeamController {
 
     def show = {
         def teamInstance = Team.get(params.id)
-        if (!teamInstance) {
-            flash.message = makeMessage(defaultNotFoundMessage, params.id)
-            redirect(action: listString)
+        if (teamInstance) {
+            [teamInstance: teamInstance]
         }
         else {
-            [teamInstance: teamInstance]
+            flash.message = makeMessage(defaultNotFoundMessage, params.id)
+            redirect(action: listString)
         }
     }
    
     def edit = {
         def teamInstance = Team.get(params.id)
-        if (!teamInstance) {
-            flash.message = makeMessage(defaultNotFoundMessage, params.id)
-            redirect(action: listString)
+        if (teamInstance) {
+            return [teamInstance: teamInstance]
         }
         else {
-            return [teamInstance: teamInstance]
+            flash.message = makeMessage(defaultNotFoundMessage, params.id)
+            redirect(action: listString)
         }
     }
 

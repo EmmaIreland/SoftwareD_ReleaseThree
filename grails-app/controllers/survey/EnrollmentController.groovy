@@ -31,7 +31,8 @@ class EnrollmentController {
 
         enrollmentInstance.properties = params
 
-        return [enrollmentInstance: enrollmentInstance, availableStudents: availableStudents.sort {it.name}, hasAvailableStudents: (availableStudents.size() > 0)]
+        return [enrollmentInstance: enrollmentInstance, availableStudents: availableStudents.sort {it.name},
+			hasAvailableStudents: (availableStudents.size() > 0)]
     }
 
     def save = {
@@ -41,7 +42,8 @@ class EnrollmentController {
             personInstance.save(flush: true)
         }
 
-        def enrollmentInstance = personInstance ? new Enrollment(person: personInstance, course: Course.get(params.course.id)) : new Enrollment(params)
+        def enrollmentInstance = personInstance ? new Enrollment(person: personInstance,
+			course: Course.get(params.course.id)) : new Enrollment(params)
         if (enrollmentInstance.save(flush: true)) {
             redirect(controller: 'enrollment', action: createString, params:['course.id': enrollmentInstance.course.id])
         }
@@ -80,7 +82,9 @@ class EnrollmentController {
                 def version = params.version.toLong()
                 if (enrollmentInstance.version > version) {
 
-                    enrollmentInstance.errors.rejectValue('version', 'default.optimistic.locking.failure', [message(code: 'enrollment.label', default: 'Enrollment')] as Object[], 'Another user has updated this Enrollment while you were editing')
+                    enrollmentInstance.errors.rejectValue('version', 'default.optimistic.locking.failure',
+						 [message(code: 'enrollment.label', default: 'Enrollment')] as Object[],
+						  'Another user has updated this Enrollment while you were editing')
                     render(view: editString, model: [enrollmentInstance: enrollmentInstance])
                     return
                 }

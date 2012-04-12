@@ -7,16 +7,23 @@ class BootStrap {
     def init = { servletContext ->
         
         if (Person.count() == 0) { //GrailsUtil.environment != 'production') {
-            Person admin = new Person(name: 'Sid Anderson', password: 'shiboleet', email: 'sid@anderson.net', isAdmin: true).save(failOnError: true)
-            Person nic = new Person(name: 'Nic McPhee', password: 'thomas', email: 'mcphee@morris.umn.edu').save(failOnError: true)
-            Person kkLamberty = new Person(name: 'KK Lamberty', password: 'spencer', email: 'lamberty@morris.umn.edu').save(failOnError: true)
+            Person admin = new Person(name: 'Sid Anderson', password: 'shiboleet',
+				email: 'sid@anderson.net', isAdmin: true).save(failOnError: true)
+            Person nic = new Person(name: 'Nic McPhee', password: 'thomas', 
+				email: 'mcphee@morris.umn.edu').save(failOnError: true)
+            Person kkLamberty = new Person(name: 'KK Lamberty', password: 'spencer',
+				email: 'lamberty@morris.umn.edu').save(failOnError: true)
             
-            Course softwareDesign = new Course(abbreviation:'CSCI 3601', name:'Software Design', term:'Spring',year: 2012, owner: nic).save(failOnError: true)
-            Course introToComputing = new Course(abbreviation:'CSCI 1001', name:'Intro to the Computing World', term:'Spring',year: 2013, owner: kkLamberty).save(failOnError:true)
+            Course softwareDesign = new Course(abbreviation:'CSCI 3601', name:'Software Design',
+				 term:'Spring',year: 2012, owner: nic).save(failOnError: true)
+            Course introToComputing = new Course(abbreviation:'CSCI 1001', name:'Intro to the Computing World',
+				 term:'Spring',year: 2013, owner: kkLamberty).save(failOnError:true)
             
             def defaultPassword = 'password'
-            def buildPerson = { person -> new Person(name: person[0] + ' ' + person[1], password: defaultPassword, email: person[2]) }
-            def enrollPerson = { person, course -> new Enrollment(person: person, course: course).save(failOnError: true) }
+            def buildPerson = { person -> new Person(name: person[0] + ' ' + person[1],
+				password: defaultPassword, email: person[2]) }
+            def enrollPerson = { person, course -> new Enrollment(person: person,
+				course: course).save(failOnError: true) }
             
             def softwareDesignPeople = []
             [
@@ -53,7 +60,8 @@ class BootStrap {
             introToComputingPeople.each { it.save(failOnError: true) }
             introToComputingPeople.each { enrollPerson it, introToComputing }
             
-            Project releaseOne = new Project(name: 'Release One', description: 'Students do cool things', course: softwareDesign, dueDate: new Date().next()).save(failOnError: true)
+            Project releaseOne = new Project(name: 'Release One', description: 'Students do cool things',
+				 course: softwareDesign, dueDate: new Date().next()).save(failOnError: true)
             Team teamAwesome = new Team(name: 'Team Awesome', project: releaseOne).save(failOnError: true)
             Team teamHumble = new Team(name: 'Team Humble', project: releaseOne).save(failOnError: true)
             
@@ -65,7 +73,8 @@ class BootStrap {
             } // TODO: make these for loops w/o duplication
                         
 	    ShortTextQuestion whatStoriesFinished = new ShortTextQuestion(prompt:'What stories did you complete?').save(failOnError: true)
-	    MultipleChoiceQuestion teamGrade = new MultipleChoiceQuestion(prompt:'What grade would you give your group?', choices:['A', 'B', 'C', 'D', 'F']).save(failOnError: true)
+	    MultipleChoiceQuestion teamGrade = new MultipleChoiceQuestion(prompt:'What grade would you give your group?',
+				 choices:['A', 'B', 'C', 'D', 'F']).save(failOnError: true)
 	    LongTextQuestion desribeExperience = new LongTextQuestion(prompt:'Describe your group experience:').save(failOnError: true)
 		
            
@@ -75,14 +84,17 @@ class BootStrap {
                 new LongTextQuestion(prompt: 'And how d\'you feel \'bout that?'),
                 new ShortTextQuestion(prompt: 'If you were an animal, what animal would you be?'),
                 new MultipleChoiceQuestion(prompt: 'What\'s your favorite range in the visible light spectrum? (Choices are given by wavelength in nm.)',
-                    choices: ['380-450 (violet)', '450-475 (blue)', '476-495 (cyan)', '495-570 (green)', '570-590 (yellow)', '590-620 (orange)', '620-750 (red)', '760+ (infrared)']),
+                    choices: ['380-450 (violet)', '450-475 (blue)', '476-495 (cyan)', '495-570 (green)',
+						'570-590 (yellow)', '590-620 (orange)', '620-750 (red)', '760+ (infrared)']),
                 new ShortTextQuestion(prompt: 'What is your favorite vowel-less word?'),
                 new LongTextQuestion(prompt: 'Tell me a story.'),
                 new CheckboxQuestion(prompt: 'Do you love me?', choices: ['Yes', 'More than yes (wink, wink)'])
             ]
 			
-			Survey surveyReleaseOne = new Survey(title: 'Survey for Release One', dueDate: new Date().next(), questions: [whatStoriesFinished, teamGrade, desribeExperience], project: releaseOne)
-			Survey scootsSurvey = new Survey(title: 'Scoot\'s Finest Survey', dueDate: new Date().next(), questions: scootsSurveyQuestions, project: releaseOne)
+			Survey surveyReleaseOne = new Survey(title: 'Survey for Release One', dueDate: new Date().next(),
+				questions: [whatStoriesFinished, teamGrade, desribeExperience], project: releaseOne)
+			Survey scootsSurvey = new Survey(title: 'Scoot\'s Finest Survey', dueDate: new Date().next(),
+				questions: scootsSurveyQuestions, project: releaseOne)
 			
 			surveyReleaseOne.save(failOnError: true)
 			scootsSurvey.save(failOnError: true)

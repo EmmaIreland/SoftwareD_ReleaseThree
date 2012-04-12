@@ -80,23 +80,23 @@ class SurveyController {
     def show = {
 	def surveyInstance = Survey.get(params.id)
 	def existingQuestions = Question.findAll()
-	if (!surveyInstance) {
-	    flash.message = makeMessage(defaultNotFoundMessage, params.id)
-	    redirect(action: listString)
+	if (surveyInstance) {
+            [surveyInstance: surveyInstance, existingQuestions: existingQuestions]
 	}
 	else {
-	    [surveyInstance: surveyInstance, existingQuestions: existingQuestions]
+            flash.message = makeMessage(defaultNotFoundMessage, params.id)
+            redirect(action: listString)
 	}
     }
 
     def preview = {
 	def surveyInstance = Survey.get(params.id)
-	if (!surveyInstance) {
-	    flash.message = makeMessage(defaultNotFoundMessage, params.id)
-	    redirect(action: listString)
+	if (surveyInstance) {
+            [surveyInstance: surveyInstance]
 	}
 	else {
-	    [surveyInstance: surveyInstance]
+            flash.message = makeMessage(defaultNotFoundMessage, params.id)
+            redirect(action: listString)
 	}
     }
 
@@ -168,12 +168,12 @@ class SurveyController {
 
     def edit = {
 	def surveyInstance = Survey.get(params.id)
-	if (!surveyInstance) {
-	    flash.message = makeMessage(defaultNotFoundMessage, params.id)
-	    redirect(action: listString)
+	if (surveyInstance) {
+            return [surveyInstance: surveyInstance]
 	}
 	else {
-	    return [surveyInstance: surveyInstance]
+            flash.message = makeMessage(defaultNotFoundMessage, params.id)
+            redirect(action: listString)
 	}
     }
 

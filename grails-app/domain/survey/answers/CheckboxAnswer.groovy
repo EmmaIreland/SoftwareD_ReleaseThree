@@ -10,10 +10,10 @@ class CheckboxAnswer extends Answer {
     }
     
     String toString() {
-        def toReturn = "Checkbox: "
+        def toReturn = 'Checkbox: '
         responses.each { key, value ->
             if (value) {
-                toReturn += question.choices[key] + " "
+                toReturn += question.choices[key] + ' '
             }
         }
         toReturn

@@ -2,15 +2,14 @@ package survey
 
 class EnrollmentController {
 
-    static post = 'POST'
+	def defaultNotFoundMessage = 'default.not.found.message'
     def listString = 'list'
     def editString = 'edit'
     def createString = 'create'
+	static post = 'POST'
     def showString = 'show'
-    def defaultNotFoundMessage = 'default.not.found.message'
 	def flush = [flush: true]
 	
-
     static allowedMethods = [save: post, update: post, delete: post]
 
     def index = {

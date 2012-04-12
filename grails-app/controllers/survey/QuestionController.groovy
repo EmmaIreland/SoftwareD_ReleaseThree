@@ -2,11 +2,11 @@ package survey
 
 class QuestionController {
 	
+	def editString = 'edit'
+	def showString = 'show'
 	static post = 'POST'
 	def listString = 'list'
-	def editString = 'edit'
 	def createString = 'create'
-	def showString = 'show'
 	def defaultNotFoundMessage = 'default.not.found.message'
 	def flush = [flush: true]	
 

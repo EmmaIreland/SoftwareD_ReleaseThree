@@ -2,14 +2,14 @@ package survey
 
 class ProjectController {
 
+	def flush = [flush: true]
+	def editString = 'edit'
     static post = 'POST'
     def listString = 'list'
-    def editString = 'edit'
     def createString = 'create'
     def showString = 'show'
     def defaultNotFoundMessage = 'default.not.found.message'
-	def flush = [flush: true]
-
+	
     static allowedMethods = [save: post, update: post, delete: post]
 
     def index = {

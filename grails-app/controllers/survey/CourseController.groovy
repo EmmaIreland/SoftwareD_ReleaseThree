@@ -7,8 +7,9 @@ class CourseController {
     def editString = 'edit'
     def createString = 'create'
     def showString = 'show'
+	def defaultNotFoundMessage = 'default.not.found.message'
     static allowedMethods = [save: post, update: post, delete: post]
-    static listMap = [action: 'list']
+    def listMap = [action: listString]
 	def flush = [flush: true]
 
     def index = {
@@ -40,7 +41,7 @@ class CourseController {
     def show = {
         def courseInstance = Course.get(params.id)
         if (!courseInstance) {
-            flash.message = makeMessage('default.not.found.message', params.name)
+            flash.message = makeMessage(defaultNotFoundMessage, params.name)
             redirect(listMap)
         }
         else {
@@ -56,7 +57,7 @@ class CourseController {
     def edit = {
         def courseInstance = Course.get(params.id)
         if (!courseInstance) {
-            flash.message = makeMessage('default.not.found.message', params.name)
+            flash.message = makeMessage(defaultNotFoundMessage, params.name)
             redirect(listMap)
         }
         else {
@@ -71,7 +72,8 @@ class CourseController {
                 def version = params.version.toLong()
                 if (courseInstance.version > version) {
 
-                    courseInstance.errors.rejectValue('version', 'default.optimistic.locking.failure', [label] as Object[], 'Another user has updated this Course while you were editing')
+                    courseInstance.errors.rejectValue('version', 'default.optimistic.locking.failure',
+						 [label] as Object[], 'Another user has updated this Course while you were editing')
                     render(view: editString, model: courseMap(courseInstance))
                     return
                 }
@@ -86,7 +88,7 @@ class CourseController {
             }
         }
         else {
-            flash.message = makeMessage('default.not.found.message', params.name)
+            flash.message = makeMessage(defaultNotFoundMessage, params.name)
             redirect(listMap)
         }
     }
@@ -100,12 +102,12 @@ class CourseController {
                 redirect(listMap)
             }
             catch (org.springframework.dao.DataIntegrityViolationException e) {
-                flash.message = makeMessage('default.not.deleted.message', params.name)
+                flash.message = makeMessage(defaultNotFoundMessage, params.name)
                 redirect(action: showString, id: params.id)
             }
         }
         else {
-            flash.message = makeMessage('default.not.found.message', params.name)
+            flash.message = makeMessage(defaultNotFoundMessage, params.name)
             redirect(listMap)
         }
     }

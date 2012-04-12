@@ -11,7 +11,7 @@ class EnrollmentController {
 	def flush = [flush: true]
 	
 
-    static allowedMethods = [save: 'POST', update: 'POST', delete: 'POST']
+    static allowedMethods = [save: post, update: post, delete: post]
 
     def index = {
         redirect(action: listString, params: params)

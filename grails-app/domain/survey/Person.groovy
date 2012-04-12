@@ -12,7 +12,7 @@ class Person {
     static constraints = {
         name(blank: false)
         email(email: true, blank:false, unique: true)
-	password(nullable: true) // TODO make blank false and size constraint, true now for tests
+	password(blank: false) // TODO make blank false and size constraint, true now for tests
     }
     
     String toString() {

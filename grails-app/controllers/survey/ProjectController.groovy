@@ -8,6 +8,7 @@ class ProjectController {
     def createString = 'create'
     def showString = 'show'
     def defaultNotFoundMessage = 'default.not.found.message'
+	def flush = [flush: true]
 
     static allowedMethods = [save: post, update: post, delete: post]
 
@@ -28,7 +29,7 @@ class ProjectController {
 
     def save = {
 	def projectInstance = new Project(params)
-	if (projectInstance.save(flush: true)) {
+	if (projectInstance.save(flush)) {
 	    flash.message = makeMessage('default.created.message', params.name)
 	    redirect(action: showString, id: projectInstance.id)
 	}
@@ -73,7 +74,7 @@ class ProjectController {
 		}
 	    }
 	    projectInstance.properties = params
-	    if (!projectInstance.hasErrors() && projectInstance.save(flush: true)) {
+	    if (!projectInstance.hasErrors() && projectInstance.save(flush)) {
 		flash.message = makeMessage('default.updated.message', projectInstance.name)
 		redirect(action: showString, id: projectInstance.id)
 	    }
@@ -91,7 +92,7 @@ class ProjectController {
 	def projectInstance = Project.get(params.id)
 	if (projectInstance) {
 	    try {
-		projectInstance.delete(flush: true)
+		projectInstance.delete(flush)
 		flash.message = makeMessage('default.deleted.message', projectInstance.name)
 		redirect(action: listString)
 	    }

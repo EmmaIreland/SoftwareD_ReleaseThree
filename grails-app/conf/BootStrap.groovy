@@ -12,7 +12,7 @@ class BootStrap {
             Person kkLamberty = new Person(name: 'KK Lamberty', password: 'spencer', email: 'lamberty@morris.umn.edu').save(failOnError: true)
             
             Course softwareDesign = new Course(abbreviation:'CSCI 3601', name:'Software Design', term:'Spring',year: 2012, owner: nic).save(failOnError: true)
-            Course introToComputing = new Course(abbreviation:'CSCI 1001', name:'Intro to the Computing World', term:'Spring',year: 2012, owner: kkLamberty).save(failOnError:true)
+            Course introToComputing = new Course(abbreviation:'CSCI 1001', name:'Intro to the Computing World', term:'Spring',year: 2013, owner: kkLamberty).save(failOnError:true)
             
             def defaultPassword = 'password'
             def buildPerson = { person -> new Person(name: person[0] + ' ' + person[1], password: defaultPassword, email: person[2]) }
@@ -64,9 +64,9 @@ class BootStrap {
                 new Membership(team: teamHumble, member: softwareDesignPeople[i]).save(failOnError: true)
             } // TODO: make these for loops w/o duplication
                         
-	    ShortTextQuestion whatStoriesFinished = new ShortTextQuestion(prompt:"What stories did you complete?").save(failOnError: true)
-	    MultipleChoiceQuestion teamGrade = new MultipleChoiceQuestion(prompt:"What grade would you give your group?", choices:["A", "B", "C", "D", "F"]).save(failOnError: true)
-	    LongTextQuestion desribeExperience = new LongTextQuestion(prompt:"Describe your group experience:").save(failOnError: true)
+	    ShortTextQuestion whatStoriesFinished = new ShortTextQuestion(prompt:'What stories did you complete?').save(failOnError: true)
+	    MultipleChoiceQuestion teamGrade = new MultipleChoiceQuestion(prompt:'What grade would you give your group?', choices:['A', 'B', 'C', 'D', 'F']).save(failOnError: true)
+	    LongTextQuestion desribeExperience = new LongTextQuestion(prompt:'Describe your group experience:').save(failOnError: true)
 		
            
             def scootsSurveyQuestions = [

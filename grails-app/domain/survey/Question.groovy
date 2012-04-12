@@ -30,7 +30,6 @@ class Question {
 	for(i in allSurveys){
 	    if(i.questions.contains(this)){
 		return i
-		break
 	    }
 	}
 

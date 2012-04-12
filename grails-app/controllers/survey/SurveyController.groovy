@@ -112,14 +112,14 @@ class SurveyController {
 	
 
 	questions.each { question ->
-	    def serverResponse = params["" + question.id]
+	    def serverResponse = params['' + question.id]
 	    if (serverResponse == null) {
 		createAnswer(question, personInstance, [])
 	    } else {
 		createAnswer(question, personInstance, serverResponse)
 	    }
 	}
-	redirect(controller: "person", action: "show", id:personInstance.id)
+	redirect(controller: 'person', action: 'show', id:personInstance.id)
     }
 
     private createAnswer(question, person, serverResponse) {

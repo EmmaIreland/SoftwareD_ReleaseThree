@@ -25,7 +25,7 @@ environments {
     }
     production {
         dataSource {
-            dbCreate = 'update'
+            dbCreate = 'create-drop' // 'update'
             url = 'jdbc:hsqldb:file:cevinsCyqulistsDb;shutdown=true'
         }
     }

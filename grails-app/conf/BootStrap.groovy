@@ -6,7 +6,7 @@ class BootStrap {
 
     def init = { servletContext ->
         
-        if (true /* Person.count() == 0 */) { //GrailsUtil.environment != 'production') {
+        if (Person.count() == 0) { //GrailsUtil.environment != 'production') {
 			def failOnError = [failOnError: true]
 			def springString = 'Spring'			
 			
